@@ -10,21 +10,23 @@ var Article = function(raw) {
 Article.prototype.daysSincePublished = function() {
   var msDiff = today - this.published;
   var dayDiff = Math.floor(msDiff / 8.64e7);
-  if (dayDiff > 1) {
-    return dayDiff + ' days ago';
+  if (dayDiff === 0) {
+    return ', published today';
+  } else if (dayDiff === 1) {
+    return ', published yesterday';
   } else {
-    return dayDiff + ' day ago';
+    return ', published ' + dayDiff + ' days ago';
   }
 };
 
 Article.prototype.toHTML = function() {
-  return '<article>' + 
-    '<h1>' + this.title + '</h1>' +
-    '<h3>By <a href="' + this.authorUrl +'">' + this.author + '</a>, ' +
-    'published ' + this.daysSincePublished() + '</h3>' +
-    this.body +
-    '<h6>Category: ' + this.category + '</h6>' +
-    '</article>';
+  $template = $('#template').clone().removeAttr('id');
+  $template.find('.post-title').html(this.title);
+  $template.find('.post-subtitle').html('By <a href="' + this.authorUrl +'">' + this.author + '</a>' + this.daysSincePublished());
+  $template.find('.post-body').html(this.body);
+  $template.find('.post-category').html('Category: ' + this.category);
+  
+  $('main').append($template);
 };
 
 var blog = {};
