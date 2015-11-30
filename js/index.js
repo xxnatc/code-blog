@@ -1,6 +1,11 @@
-blog.articles = [];
+var today = Date.parse(new Date());
 
-var post1 = new Article(blog.rawData[0]);
-blog.articles.push(post1);
-console.log(blog.articles[0].toHTML());
-$('main').html(blog.articles[0].toHTML());
+// import content and write to HTML
+blog.articles = [];
+blog.content = '';
+for (var i = 0; i < blog.rawData.length; i++) {
+  var post = new Article(blog.rawData[i]);
+  blog.articles.push(post);
+  blog.content += blog.articles[i].toHTML();
+}
+$('main').html(blog.content);
