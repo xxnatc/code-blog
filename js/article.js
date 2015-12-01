@@ -20,7 +20,7 @@ Article.prototype.daysSincePublished = function() {
 };
 
 Article.prototype.toHTML = function() {
-  var $template = $('#template').clone().removeAttr('id');
+  var $template = $('#template').clone().removeAttr('id class');
   $template.find('.post-title').html(this.title);
   $template.find('.post-subtitle').html('By <a href="' + this.authorUrl +'">' + this.author + '</a>' + this.daysSincePublished());
   $template.find('.post-body').html(this.body);

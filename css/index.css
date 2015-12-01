@@ -8,3 +8,7 @@ article div.post-body img {
   max-width: 500px;
   max-height: 500px;
 }
+
+.hidden {
+  display: none;
+}
