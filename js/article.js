@@ -26,5 +26,5 @@ Article.prototype.toHTML = function() {
   $template.find('.post-body').html(this.body);
   $template.find('.post-category').html('Category: ' + this.category);
   
-  $('#blog-posts').append($template);
+  $('#home').append($template);
 };

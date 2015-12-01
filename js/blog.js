@@ -1,5 +1,4 @@
 var blog = {};
-
 blog.articles = [];
 
 // import content from blogArticles.js
@@ -30,7 +29,7 @@ blog.previewArticles = function() {
   $('article p:not(:first-child)').hide();
 
   // listen for click
-  $('#blog-posts').on('click', '.post-read-on', function(event) {
+  $('#home').on('click', '.post-read-on', function(event) {
     event.preventDefault();
     $(this).parent().find('p').show();
     $(this).hide();
