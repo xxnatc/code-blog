@@ -1,0 +1,10 @@
+header h1 {
+  font-weight: bold;
+  font-size: 4em;
+  text-align: center;
+}
+
+article div.post-body img {
+  max-width: 500px;
+  max-height: 500px;
+}
