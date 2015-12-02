@@ -69,7 +69,7 @@ blog.showFilters = function() {
       $('article:not(:first-child)').show();
     } else {
       $('article:visible').hide();
-      $('article:hidden').find('.post-subtitle:contains("' + text + '")').parent().show();
+      $('article:hidden').find('.post-subtitle:contains(' + text + ')').parent().show();
     }
     // reset the other dropdown to prevent multiple selections
     $('select:last-child').find('option[value=reset]').attr('selected', true);
@@ -84,7 +84,7 @@ blog.showFilters = function() {
       $('article:not(:first-child)').show();
     } else {
       $('article:visible').hide();
-      $('article:hidden').find('.post-category:contains("' + text + '")').parent().show();
+      $('article:hidden').find('.post-category:contains(' + text + ')').parent().show();
     }
 
     $('select:first-child').find('option[value=reset]').attr('selected', true);
