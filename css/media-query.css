@@ -8,7 +8,7 @@
     display: none;
   }
 
-  /* nav tab */
+  /* nav tabs: primary nav */
   nav#primary-nav {
     padding-bottom: 0px;
     display: block;
@@ -42,10 +42,10 @@
     padding: 50px 60px;
   }
   header.jumbotron h1 {
-    margin: 20px 0px 10px 0px;
+    margin: 20px 0px 0px 0px;
   }
 
-  /* nav tab */
+  /* nav tabs: primary nav */
   nav#primary-nav li span.glyphicon {
     display: block;
     margin: 0px auto 3px auto;
@@ -56,6 +56,12 @@
   nav#primary-nav li a {
     padding: 12px 0px 6px 0px;
   }
+
+  /* blog filter nav */
+  nav#blog-filter {
+    text-align: right;
+  }
+
 
 }
 

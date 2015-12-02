@@ -17,7 +17,7 @@ header.jumbotron h3 {
   position: relative;
 }
 
-/* nav tab */
+/* nav tabs: primary nav */
 nav#primary-nav {
   display: none;
   background-color: #337ab7;
@@ -45,16 +45,23 @@ nav#primary-nav li.active a {
   color: #555;
 }
 
-/* blog */
+/* blog filter nav */
 nav#blog-filter {
-  text-align: right;
+  text-align: center;
   padding-top: 18px;
+  line-height: 1.8em;
 }
 
+/* blog posts */
 article {
   clear: both;
 }
 
+/* read on buttons */
+article button.btn-default:hover {
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+}
 article button span.glyphicon {
   font-size: 0.8em;
 }
@@ -72,17 +79,14 @@ img.pull-left {
   margin: 1.5% 0;
 }
 
-
 /* sticky footer */
 html {
   position: relative;
   min-height: 100%;
 }
-
 body {
   margin-bottom: 60px;
 }
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -91,7 +95,6 @@ body {
   text-align: center;
   background-color: #EEE;
 }
-
 .footer p {
   margin-top: 20px;
 }
