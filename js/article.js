@@ -9,7 +9,7 @@ var Article = function(raw) {
 
 Article.prototype.daysSincePublished = function() {
   var msDiff = Date.parse(new Date()) - this.published;
-  var dayDiff = Math.floor(msDiff / 8.64e7);
+  var dayDiff = Math.round(msDiff / 8.64e7);
   if (dayDiff === 0) {
     return ', published today';
   } else if (dayDiff === 1) {
