@@ -63,13 +63,15 @@ blog.showFilters = function() {
   // left menu: filter by author
   $('select:first-child').on('change', function(event) {
     event.preventDefault();
-    // hide all posts without matching criterion
+    // show only posts with matching criterion
     var text = $(this).find('option:selected').text();
-    $('article:not(:first-child)').show();
-    if ($(this).find('option:selected').attr('value') !== 'reset') {
-      $('article .post-subtitle:not(:contains(' + text + '))').parent().hide();
+    if ($(this).find('option:selected').attr('value') === 'reset') {
+      $('article:not(:first-child)').show();
+    } else {
+      $('article:visible').hide();
+      $('article:hidden').find('.post-subtitle:contains("' + text + '")').parent().show();
     }
-    // prevent multiple selections
+    // reset the other dropdown to prevent multiple selections
     $('select:last-child').find('option[value=reset]').attr('selected', true);
   });
 
@@ -78,9 +80,11 @@ blog.showFilters = function() {
     event.preventDefault();
 
     var text = $(this).find('option:selected').text();
-    $('article:not(:first-child)').show();
-    if ($(this).find('option:selected').attr('value') !== 'reset') {
-      $('article h6:not(:contains("' + text + '"))').parent().hide();
+    if ($(this).find('option:selected').attr('value') === 'reset') {
+      $('article:not(:first-child)').show();
+    } else {
+      $('article:visible').hide();
+      $('article:hidden').find('.post-category:contains("' + text + '")').parent().show();
     }
 
     $('select:first-child').find('option[value=reset]').attr('selected', true);
