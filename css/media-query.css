@@ -1,0 +1,65 @@
+/* ===== Small devices (tablets, 768px and up) ===== */
+@media (min-width: 768px) {
+  /* jumbotron */
+  .container .jumbotron {
+    padding: 30px 40px;
+  }
+  header.jumbotron h3 {
+    display: none;
+  }
+
+  /* nav tab */
+  nav#primary-nav {
+    padding-bottom: 0px;
+    display: block;
+  }
+  nav#primary-nav li:not(.active) a:hover {
+    background-color: #5bc0de;
+    color: #333;
+  }
+  nav#primary-nav li a {
+    border: 0px;
+    padding: 12px 0px;
+  }
+
+  /* blog post images */
+  article div.post-body img {
+    max-width: 50%;
+    max-height: 400px;
+  }
+  img.pull-right {
+    margin: 12px 0px 12px 12px;
+  }
+  img.pull-left { 
+    margin: 12px 12px 12px 0px;
+  }
+}
+
+/* ===== Medium devices (desktops, 992px and up) ===== */
+@media (min-width: 992px) {
+  /* jumbotron */
+  .container .jumbotron {
+    padding: 50px 60px;
+  }
+  header.jumbotron h1 {
+    margin: 20px 0px 10px 0px;
+  }
+
+  /* nav tab */
+  nav#primary-nav li span.glyphicon {
+    display: block;
+    margin: 0px auto 3px auto;
+  }
+  nav#primary-nav {
+    padding: 0px 10%;
+  }
+  nav#primary-nav li a {
+    padding: 12px 0px 6px 0px;
+  }
+
+}
+
+/*  ===== Large devices (large desktops, 1200px and up) ===== */
+@media (min-width: 1200px) {
+
+}
