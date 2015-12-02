@@ -66,7 +66,7 @@ blog.showFilters = function() {
     // show only posts with matching criterion
     var text = $(this).find('option:selected').text();
     if ($(this).find('option:selected').attr('value') === 'reset') {
-      $('article:not(:first-child)').show();
+      $('article:not(:first-child)').fadeIn();
     } else {
       $('article:visible').hide();
       $('article:hidden').find('.post-subtitle:contains(' + text + ')').parent().show();
@@ -81,7 +81,7 @@ blog.showFilters = function() {
 
     var text = $(this).find('option:selected').text();
     if ($(this).find('option:selected').attr('value') === 'reset') {
-      $('article:not(:first-child)').show();
+      $('article:not(:first-child)').fadeIn();
     } else {
       $('article:visible').hide();
       $('article:hidden').find('.post-category:contains(' + text + ')').parent().show();

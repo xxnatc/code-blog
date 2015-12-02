@@ -13,7 +13,7 @@ util.navigate = function() {
     event.preventDefault();
     util.resetPage();
     $(this).attr('class', 'active');
-    $('#' + $(this).data('content')).show();
+    $('#' + $(this).data('content')).fadeIn();
   });
   // set default tab: home
   $('.nav-tabs li:first').trigger('click');
