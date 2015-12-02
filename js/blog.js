@@ -18,7 +18,7 @@ blog.sortArticles = function() {
   });
 };
 
-// display blog posts on home page
+// write blog posts to DOM
 blog.populate = function() {
   for (var i = 0; i < blog.rawData.length; i++) {
     blog.articles[i].toHTML();
@@ -32,8 +32,8 @@ blog.previewArticles = function() {
 
   $('#home').on('click', '.post-read-on', function(event) {
     event.preventDefault();
-    $(this).parent().find('p').show();
     $(this).hide();
+    $(this).parent().find('p').slideDown();
   });
 };
 
