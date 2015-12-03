@@ -2,6 +2,7 @@
 .container .jumbotron {
   border-radius: 0px;
   margin-bottom: 0px;
+  padding-top: 18px;
   background-color: #337ab7;
   color: white;
 }
@@ -57,10 +58,14 @@ article {
   clear: both;
 }
 
+article a:hover {
+  color: #3CC8C3;
+}
+
 /* read on buttons */
 article button.btn-default:hover {
-  background-color: #5bc0de;
-  border-color: #5bc0de;
+  background-color: #3CC8C3;
+  border-color: #3CC8C3;
 }
 article button span.glyphicon {
   font-size: 0.8em;

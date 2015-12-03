@@ -13,8 +13,11 @@
     padding-bottom: 0px;
     display: block;
   }
+  nav#primary-nav li.active a {
+    border-top: 3px solid #34B7B3;
+  }
   nav#primary-nav li:not(.active) a:hover {
-    background-color: #5bc0de;
+    background-color: #3CC8C3;
     color: #333;
   }
   nav#primary-nav li a {
@@ -39,6 +42,11 @@
 @media (min-width: 992px) {
   /* jumbotron */
   .container .jumbotron {
+    background-color: #337ab7;
+    background: -webkit-linear-gradient(#34B7B3, #337ab7); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#34B7B3, #337ab7); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#34B7B3, #337ab7); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#34B7B3, #337ab7); /* Standard syntax */
     padding: 50px 60px;
   }
   header.jumbotron h1 {
