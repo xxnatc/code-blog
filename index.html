@@ -9,7 +9,20 @@
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <link rel="stylesheet" type="text/css" href="css/media-query.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+  <script id="post-template" type="text/x-handlebars-template">
+    <article>
+      <hr />
+      <h1 class="post-title">{{{title}}}</h1>
+      <h4 class="post-subtitle">By <a href="{{authorURL}}">{{author}}</a>{{daysPub}}</h4>
+      <div class="post-body">{{{body}}}</div>
+      <button class="post-read-on btn btn-default">
+        Read on <span class="glyphicon glyphicon-menu-right"></span>
+      </button>
+      <h6 class="post-category">Category: {{category}}</h6>
+    </article>
+  </script>
 </head>
 
 <body>
@@ -46,17 +59,6 @@
         </select>
       </nav>
       
-      <!-- template for blog post -->
-      <article id="template" class="hidden">
-        <hr />
-        <h1 class="post-title"></h1>
-        <h4 class="post-subtitle"></h4>
-        <div class="post-body"></div>
-        <button class="post-read-on btn btn-default">
-          Read on <span class="glyphicon glyphicon-menu-right"></span>
-        </button>
-        <h6 class="post-category"></h6>
-      </article>
     </section>
 
     <section id="about">
