@@ -1,42 +1,87 @@
 /* jumbotron */
 .container .jumbotron {
   border-radius: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
+  padding-top: 18px;
   background-color: #337ab7;
   color: white;
 }
-
-header h1 {
+header.jumbotron h1 {
   font-weight: bold;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+header.jumbotron h3 {
+  text-align: right;
+  margin: 0px;
+  position: relative;
 }
 
-/* nav tab */
-ul.nav-tabs li {
+/* nav tabs: primary nav */
+nav#primary-nav {
+  display: none;
+  background-color: #337ab7;
+  padding: 0px 12px 6px 12px;
+}
+nav#primary-nav li {
   text-align: center;
 }
-
-.nav li a {
-  padding: 10px 18px 8px 18px;
-}
-
-ul.nav-tabs li span.glyphicon {
+nav#primary-nav li span.glyphicon {
   font-size: 1.2em;
+  display: inline;
+  margin-right: 6px;
+}
+nav#primary-nav li a {
+  padding: 10px 18px 8px 18px;
+  vertical-align: middle;
+}
+nav#primary-nav li:not(.active) a {
+  color: white;
+}
+nav#primary-nav li a:active {
+  color: #337ab7;
+}
+nav#primary-nav li.active a {
+  color: #555;
 }
 
-/* blog */
+/* blog filter nav */
 nav#blog-filter {
-  text-align: right;
+  text-align: center;
   padding-top: 18px;
+  line-height: 1.8em;
 }
 
+/* blog posts */
+article {
+  clear: both;
+}
+
+article a:hover {
+  color: #3CC8C3;
+}
+
+/* read on buttons */
+article button.btn-default:hover {
+  background-color: #3CC8C3;
+  border-color: #3CC8C3;
+}
 article button span.glyphicon {
   font-size: 0.8em;
 }
 
+/* blog post images */
 article div.post-body img {
-  max-width: 500px;
-  max-height: 500px;
+  max-width: 100%;
+}
+img.pull-right {
+  clear: right;
+  margin: 1.5% 0;
+}
+img.pull-left {
+  clear: left;
+  margin: 1.5% 0;
 }
 
 /* sticky footer */
@@ -44,11 +89,9 @@ html {
   position: relative;
   min-height: 100%;
 }
-
 body {
   margin-bottom: 60px;
 }
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -57,10 +100,7 @@ body {
   text-align: center;
   background-color: #EEE;
 }
-
 .footer p {
   margin-top: 20px;
 }
-
-
 

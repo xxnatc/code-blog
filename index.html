@@ -8,26 +8,30 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="css/media-query.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 <body>
-   
+  
   <main class="container">
     <header class="jumbotron">
+      <h3 id="ham-menu">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      </h3>
       <h1>The Inevitable Oxford Comma</h1>
     </header>
 
-    <nav role="navigation">
-      <ul class="nav nav-tabs">
+    <nav role="navigation" id="primary-nav">
+      <ul class="nav nav-tabs nav-justified">
         <li role="presentation" data-content="home">
-          <a href="#"><span class="glyphicon glyphicon-home"></span><br />Home</a>
+          <a href="#"><span class="glyphicon glyphicon-home"></span>Home</a>
         </li>
         <li role="presentation" data-content="about">
-          <a href="#"><span class="glyphicon glyphicon-user"></span><br />About</a>
+          <a href="#"><span class="glyphicon glyphicon-user"></span>About</a>
         </li>
         <li role="presentation" data-content="contact">
-          <a href="#"><span class="glyphicon glyphicon-briefcase"></span><br />Contact</a>
+          <a href="#"><span class="glyphicon glyphicon-briefcase"></span>Contact</a>
         </li>
       </ul>
     </nav>
@@ -44,6 +48,7 @@
       
       <!-- template for blog post -->
       <article id="template" class="hidden">
+        <hr />
         <h1 class="post-title"></h1>
         <h4 class="post-subtitle"></h4>
         <div class="post-body"></div>
@@ -51,7 +56,6 @@
           Read on <span class="glyphicon glyphicon-menu-right"></span>
         </button>
         <h6 class="post-category"></h6>
-        <hr />
       </article>
     </section>
 

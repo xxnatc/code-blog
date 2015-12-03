@@ -7,4 +7,5 @@ Code-blog is a static blog site that imports its content from `js/blogArticles.j
 This project utilizes the following: 
 - [Normalize.css](http://necolas.github.io/normalize.css/) by Nicolas Gallagher and Jonathan Neal
 - [Bootstrap](http://getbootstrap.com/) CSS
+- [Glyphicons](http://glyphicons.com/)
 - [jQuery](http://jquery.com/)
