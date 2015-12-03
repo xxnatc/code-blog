@@ -53,6 +53,10 @@ nav#blog-filter {
   line-height: 1.8em;
 }
 
+section..non-default {
+  display: none;
+}
+
 /* blog posts */
 article {
   clear: both;
