@@ -19,14 +19,14 @@ util.navigate = function() {
   $('.nav-tabs li:first').trigger('click');
 };
 
+// set up event listener to hamburger menu
 util.navigateHam = function() {
   $('#ham-menu').on('click', function(event) {
     event.preventDefault();
     $('#primary-nav').slideToggle();
     console.log('click');
   });
-
-}
+};
 
 $(function() {
   util.navigate();
