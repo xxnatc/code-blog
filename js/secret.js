@@ -16,4 +16,8 @@ $('#preview-button').on('click', function(event) {
   newArticle.toHTML();
 
   $('#article-json').val(JSON.stringify(prop));
+
+  $('pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
 });
