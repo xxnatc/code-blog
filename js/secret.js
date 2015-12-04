@@ -14,4 +14,6 @@ $('#preview-button').on('click', function(event) {
   var newArticle = new Article(prop);
   $('#home').children().remove();
   newArticle.toHTML();
+
+  $('#article-json').val(JSON.stringify(prop));
 });
