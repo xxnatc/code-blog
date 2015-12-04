@@ -1,0 +1,123 @@
+/* ========== JUMBOTRON ========== */
+#site-header {
+  border-radius: 0px;
+  margin-bottom: 0px;
+  padding-top: 18px;
+}
+#site-header h1 {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+@media (min-width: 768px) {
+  #site-header {
+    padding: 30px 40px;
+  }
+}
+
+@media (min-width: 992px) {
+  #site-header {
+    padding: 50px 60px;
+  }
+  #site-header h1 {
+    margin: 20px 0px 0px 0px;
+  }
+}  
+
+/* ========== HAMBURGER NAV ========== */
+#ham-menu {
+  position: relative;
+  text-align: right;
+  margin: 0px;
+}
+
+@media (min-width: 768px) {
+  #ham-menu {
+    display: none;
+  }
+}
+
+/* ========== PRIMARY NAV ========== */
+#primary-nav {
+  display: none;
+  padding: 0px 12px 6px 12px;
+}
+.primary-nav-tabs {
+  text-align: center;
+  padding: 10px 18px 8px 18px;
+  vertical-align: middle;
+}
+.primary-nav-tabs .glyphicon {
+  font-size: 1.2em;
+  display: inline;
+  margin-right: 6px;
+}
+
+@media (min-width: 768px) {
+  #primary-nav {
+    padding-bottom: 0px;
+    display: block;
+  }
+  .primary-nav-tabs {
+    border: 0px;
+    padding: 12px 0px;
+  }
+}
+
+@media (min-width: 992px) {
+  #primary-nav {
+    padding: 0px 10%;
+  }
+  .primary-nav-tabs {
+    padding: 12px 0px 6px 0px;
+  }  
+  .primary-nav-tabs .glyphicon {
+    display: block;
+    margin: 0px auto 3px auto;
+  }
+}
+
+/* ========== BLOG POST FILTER NAV ========== */
+#blog-filter {
+  text-align: center;
+  padding-top: 18px;
+  line-height: 1.8em;
+}
+
+@media (min-width: 992px) {
+  #blog-filter {
+    text-align: right;
+  }
+}
+
+/* ========== IMAGES ========== */
+.post-body img {
+  max-width: 100%;
+}
+.pull-right {
+  clear: right;
+  margin: 1.5% 0;
+}
+.pull-left {
+  clear: left;
+  margin: 1.5% 0;
+}
+
+@media (min-width: 768px) {
+  .post-body img {
+    max-width: 50%;
+    max-height: 400px;
+  }
+  .pull-right {
+    margin: 12px 0px 12px 12px;
+  }
+  .pull-left { 
+    margin: 12px 12px 12px 0px;
+  }
+}
+
+.btn-default .glyphicon {
+  font-size: 0.8em;
+}
