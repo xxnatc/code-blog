@@ -1,23 +1,40 @@
-$('#preview-button').on('click', function(event) {
-  event.preventDefault();
+var editor = {};
 
-  var prop = {};
-  prop.title = $('#article-title').val();
-  prop.author = $('#article-author').val();
-  prop.authorUrl = $('#article-author-url').val();
-  prop.category = $('#article-category').val();
-  prop.publishedOn = new Date();
+editor.preview = function() {
+  editor.prop = {};
 
-  $articleBody = $('#article-body').val();
-  prop.body = marked($articleBody);
+  $('form').on('keyup mouseup', function(event) {
+    event.preventDefault();
 
-  var newArticle = new Article(prop);
-  $('#home').children().remove();
-  newArticle.toHTML();
+    editor.prop.title = $('#article-title').val();
+    editor.prop.category = $('#article-category').val();
+    editor.prop.author = $('#article-author').val();    
+    editor.prop.authorUrl = $('#article-author-url').val();
+    // editor.prop.publishedOn = (new Date()).toISOString().substring(0,10);
+    editor.prop.publishedOn = new Date();
+    editor.prop.body = marked($('#article-body').val());
 
-  $('#article-json').val(JSON.stringify(prop));
+    $('#home').children().remove();
+    var newArticle = new Article(editor.prop);
+    newArticle.toHTML();
 
-  $('pre code').each(function(i, block) {
-    hljs.highlightBlock(block);
+    $('#article-json').val(JSON.stringify(editor.prop));
+
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
   });
+};
+
+editor.clear = function() {
+  $('#clear-button').on('click', function() {
+    $('form').find('input[type=text], textarea').val('');
+    $('form').trigger('mouseup');
+  });
+}
+
+$(function() {
+  editor.preview();
+  editor.clear();
 });
+
