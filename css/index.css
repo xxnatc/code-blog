@@ -1,59 +1,59 @@
 /* jumbotron */
-.container .jumbotron {
+#site-header {
   border-radius: 0px;
   margin-bottom: 0px;
   padding-top: 18px;
   background-color: #337ab7;
   color: white;
 }
-header.jumbotron h1 {
+#site-header h1 {
   font-weight: bold;
   text-align: center;
   margin-top: 10px;
   margin-bottom: 0px;
 }
-header.jumbotron h3 {
+#ham-menu {
   text-align: right;
   margin: 0px;
   position: relative;
 }
 
 /* nav tabs: primary nav */
-nav#primary-nav {
+#primary-nav {
   display: none;
   background-color: #337ab7;
   padding: 0px 12px 6px 12px;
 }
-nav#primary-nav li {
+.primary-nav-tabs {
   text-align: center;
+  padding: 10px 18px 8px 18px;
+  vertical-align: middle;
 }
-nav#primary-nav li span.glyphicon {
+.primary-nav-tabs .glyphicon {
   font-size: 1.2em;
   display: inline;
   margin-right: 6px;
 }
-nav#primary-nav li a {
-  padding: 10px 18px 8px 18px;
-  vertical-align: middle;
-}
-nav#primary-nav li:not(.active) a {
+#primary-nav :not(.active) .primary-nav-tabs {
   color: white;
 }
-nav#primary-nav li a:active {
-  color: #337ab7;
-}
-nav#primary-nav li.active a {
+#primary-nav .active .primary-nav-tabs {
   color: #555;
+}
+#primary-nav li:not(.active) .primary-nav-tabs:hover {
+  background-color: #3CC8C3;
+  border-color: #3CC8C3;
+  color: #333;
 }
 
 /* blog filter nav */
-nav#blog-filter {
+#blog-filter {
   text-align: center;
   padding-top: 18px;
   line-height: 1.8em;
 }
 
-section..non-default {
+.non-default {
   display: none;
 }
 
@@ -62,28 +62,28 @@ article {
   clear: both;
 }
 
-article a:hover {
+a:hover {
   color: #3CC8C3;
 }
 
 /* read on buttons */
-article button.btn-default:hover {
+.btn-default:hover {
   background-color: #3CC8C3;
   border-color: #3CC8C3;
 }
-article button span.glyphicon {
+.btn-default .glyphicon {
   font-size: 0.8em;
 }
 
 /* blog post images */
-article div.post-body img {
+.post-body img {
   max-width: 100%;
 }
-img.pull-right {
+.pull-right {
   clear: right;
   margin: 1.5% 0;
 }
-img.pull-left {
+.pull-left {
   clear: left;
   margin: 1.5% 0;
 }
@@ -104,7 +104,7 @@ body {
   text-align: center;
   background-color: #EEE;
 }
-.footer p {
+.footer-text {
   margin-top: 20px;
 }
 

@@ -1,39 +1,39 @@
 /* ===== Small devices (tablets, 768px and up) ===== */
 @media (min-width: 768px) {
   /* jumbotron */
-  .container .jumbotron {
+  #site-header {
     padding: 30px 40px;
   }
-  header.jumbotron h3 {
+  #ham-menu {
     display: none;
   }
 
   /* nav tabs: primary nav */
-  nav#primary-nav {
+  #primary-nav {
     padding-bottom: 0px;
     display: block;
   }
-  nav#primary-nav li.active a {
+  #primary-nav .active .primary-nav-tabs {
     border-top: 3px solid #34B7B3;
   }
-  nav#primary-nav li:not(.active) a:hover {
+  #primary-nav li:not(.active) .primary-nav-tabs:hover {
     background-color: #3CC8C3;
     color: #333;
   }
-  nav#primary-nav li a {
+  .primary-nav-tabs {
     border: 0px;
     padding: 12px 0px;
   }
 
   /* blog post images */
-  article div.post-body img {
+  .post-body img {
     max-width: 50%;
     max-height: 400px;
   }
-  img.pull-right {
+  .pull-right {
     margin: 12px 0px 12px 12px;
   }
-  img.pull-left { 
+  .pull-left { 
     margin: 12px 12px 12px 0px;
   }
 }
@@ -41,7 +41,7 @@
 /* ===== Medium devices (desktops, 992px and up) ===== */
 @media (min-width: 992px) {
   /* jumbotron */
-  .container .jumbotron {
+  #site-header {
     background-color: #337ab7;
     background: -webkit-linear-gradient(#34B7B3, #337ab7); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#34B7B3, #337ab7); /* For Opera 11.1 to 12.0 */
@@ -49,24 +49,24 @@
     background: linear-gradient(#34B7B3, #337ab7); /* Standard syntax */
     padding: 50px 60px;
   }
-  header.jumbotron h1 {
+  #site-header h1 {
     margin: 20px 0px 0px 0px;
   }
 
   /* nav tabs: primary nav */
-  nav#primary-nav li span.glyphicon {
+  #primary-nav {
+    padding: 0px 10%;
+  }
+  .primary-nav-tabs {
+    padding: 12px 0px 6px 0px;
+  }
+  .primary-nav-tabs .glyphicon {
     display: block;
     margin: 0px auto 3px auto;
   }
-  nav#primary-nav {
-    padding: 0px 10%;
-  }
-  nav#primary-nav li a {
-    padding: 12px 0px 6px 0px;
-  }
 
   /* blog filter nav */
-  nav#blog-filter {
+  #blog-filter {
     text-align: right;
   }
 
