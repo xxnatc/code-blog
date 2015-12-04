@@ -1,0 +1,36 @@
+/* ========== PRIMARY NAV BEHAVIOR ========== */
+#primary-nav :not(.active) .primary-nav-tabs {
+  color: white;
+}
+#primary-nav .active .primary-nav-tabs {
+  color: #555;
+}
+#primary-nav li:not(.active) .primary-nav-tabs:hover {
+  background-color: #3CC8C3;
+  border-color: #3CC8C3;
+  color: #333;
+}
+
+@media (min-width: 768px) {
+  #primary-nav .active .primary-nav-tabs {
+    border-top: 3px solid #34B7B3;
+  }
+  #primary-nav li:not(.active) .primary-nav-tabs:hover {
+    background-color: #3CC8C3;
+    color: #333;
+  }
+}
+
+/* ========== DEFAULT DISPLAY ========== */
+.non-default {
+  display: none;
+}
+
+/* ========== BUTTON & LINKS BEHAVIOR ========== */
+a:hover {
+  color: #3CC8C3;
+}
+.btn-default:hover {
+  background-color: #3CC8C3;
+  border-color: #3CC8C3;
+}

@@ -1,0 +1,26 @@
+/* ========== JUMBOTRON & PRIMARY NAV ========== */
+#site-header {
+  background-color: #337ab7;
+  color: white;
+}
+#primary-nav {
+  background-color: #337ab7;
+}
+
+@media (min-width: 992px) {
+  #site-header {
+    background-color: #337ab7;
+    background: -webkit-linear-gradient(#34B7B3, #337ab7);
+    background: -o-linear-gradient(#34B7B3, #337ab7); 
+    background: -moz-linear-gradient(#34B7B3, #337ab7); 
+    background: linear-gradient(#34B7B3, #337ab7); 
+  }
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background-color: #EEE;
+}
+.footer-text {
+  margin-top: 20px;
+}
