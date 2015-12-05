@@ -32,3 +32,12 @@
 .hljs {
   background-color: transparent;
 }
+
+#json-area {
+  background-color: #6EBF6E;
+}
+
+.warning {
+  color: #d9534f;
+}
+
