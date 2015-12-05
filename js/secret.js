@@ -18,8 +18,6 @@ editor.preview = function() {
     var newArticle = new Article(editor.prop);
     newArticle.toHTML();
 
-    $('#article-json').val(JSON.stringify(editor.prop));
-
     $('pre code').each(function(i, block) {
       hljs.highlightBlock(block);
     });
@@ -30,11 +28,21 @@ editor.clear = function() {
   $('#clear-button').on('click', function() {
     $('form').find('input[type=text], textarea').val('');
     $('form').trigger('mouseup');
+    $('#home').children().remove();
+    $('#article-json').show().text('');
   });
-}
+};
+
+editor.generateJSON = function() {
+  $('#gen-code-button').on('click', function(event) {
+    event.preventDefault();
+    // $('#article-json').val(JSON.stringify(editor.prop));
+    $('#article-json').show().text(JSON.stringify(editor.prop));  
+  });
+};
 
 $(function() {
   editor.preview();
   editor.clear();
+  editor.generateJSON();
 });
-
