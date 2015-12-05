@@ -29,7 +29,7 @@ editor.clear = function() {
     $('form').find('input[type=text], textarea').val('');
     $('form').trigger('mouseup');
     $('#home').children().remove();
-    $('#article-json').show().text('');
+    $('#article-json').text('');
   });
 };
 
@@ -37,7 +37,8 @@ editor.generateJSON = function() {
   $('#gen-code-button').on('click', function(event) {
     event.preventDefault();
     // $('#article-json').val(JSON.stringify(editor.prop));
-    $('#article-json').show().text(JSON.stringify(editor.prop));  
+    $('#article-json').show().text(JSON.stringify(editor.prop));
+    $(location).attr('href', '#article-json'); 
   });
 };
 
