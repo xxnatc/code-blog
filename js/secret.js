@@ -44,11 +44,11 @@ editor.checkNonEmpty = function() {
     $(selector).before('<span class="warning">This is a required field</span>');
     nonEmpty = false;
   };
-  if (!editor.post.title)     {  giveErrorMsg('#article-title');  }
-  if (!editor.post.author)    {  giveErrorMsg('#article-author');  }
-  if (!editor.post.authorUrl) {  giveErrorMsg('#article-author-url');  }
-  if (!editor.post.body)      {  giveErrorMsg('#article-body');  }
-  if (!editor.post.category)  {  giveErrorMsg('#article-category');  }
+  if (!editor.post.title) { giveErrorMsg('#article-title'); }
+  if (!editor.post.author) { giveErrorMsg('#article-author'); }
+  if (!editor.post.authorUrl) { giveErrorMsg('#article-author-url'); }
+  if (!editor.post.body) { giveErrorMsg('#article-body'); }
+  if (!editor.post.category) { giveErrorMsg('#article-category'); }
   return nonEmpty;
 };
 
