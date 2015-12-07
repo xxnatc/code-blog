@@ -44,9 +44,10 @@
   display: none;
   padding: 0px 12px 6px 12px;
 }
-.primary-nav-tabs {
+#primary-nav .primary-nav-tabs {
   text-align: center;
   padding: 10px 18px 8px 18px;
+  border: 0px;
   vertical-align: middle;
 }
 .primary-nav-tabs .glyphicon {
@@ -60,8 +61,7 @@
     padding-bottom: 0px;
     display: block;
   }
-  .primary-nav-tabs {
-    border: 0px;
+  #primary-nav .primary-nav-tabs {
     padding: 12px 0px;
   }
 }
@@ -70,7 +70,7 @@
   #primary-nav {
     padding: 0px 10%;
   }
-  .primary-nav-tabs {
+  #primary-nav .primary-nav-tabs {
     padding: 12px 0px 6px 0px;
   }  
   .primary-nav-tabs .glyphicon {
@@ -96,13 +96,13 @@
 .post-body img {
   max-width: 100%;
 }
-.pull-right {
+.post-body .pull-right {
   clear: right;
-  margin: 1.5% 0;
+  margin: 1% 0 1% 1.5%;
 }
-.pull-left {
+.post-body .pull-left {
   clear: left;
-  margin: 1.5% 0;
+  margin: 1% 1.5% 1% 0;
 }
 
 @media (min-width: 768px) {
@@ -110,14 +110,21 @@
     max-width: 50%;
     max-height: 400px;
   }
-  .pull-right {
+  .post-body .pull-right {
     margin: 12px 0px 12px 12px;
   }
-  .pull-left { 
+  .post-body .pull-left { 
     margin: 12px 12px 12px 0px;
   }
 }
 
 .btn-default .glyphicon {
   font-size: 0.8em;
+}
+
+#form-area, #json-area {
+  padding-top: 0px;
+}
+.row-editor {
+  margin-top: 24px;
 }

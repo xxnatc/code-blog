@@ -24,3 +24,20 @@
 .footer-text {
   margin-top: 20px;
 }
+
+#preview-area h2 {
+  color: #337ab7;
+}
+
+.hljs {
+  background-color: transparent;
+}
+
+#json-area {
+  background-color: #6EBF6E;
+}
+
+.warning {
+  color: #d9534f;
+}
+
