@@ -10,7 +10,7 @@ blog.importArticles = function() {
   // no cache in local storage
     blog.importFromRemote();
   } else {
-    var eTagCache = localStorage.getItem('etag');
+    var eTagCache = localStorage.etag;
     var eTagRemote = '';
     $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
       eTagRemote = xhr.getResponseHeader('etag');
@@ -45,7 +45,7 @@ blog.importFromRemote = function() {
     blog.processRawData(data);
     // update local storage with updated data
     localStorage.setItem('raw-data', JSON.stringify(blog.articles));
-    localStorage.setItem('etag', xhr.getResponseHeader('etag'));
+    localStorage.etag = xhr.getResponseHeader('etag');
   })
   .done(function() {
     // initiate blog
@@ -85,7 +85,7 @@ blog.populate = function() {
 };
 
 // display up to the first paragraph of each post,
-// toggle the rest when 'Read on'/"Collpase" button is clicked
+// toggle the rest when 'Read on' or 'Collpase' button is clicked
 blog.previewArticles = function() {
   $('.post-body').children().not('p:first-of-type, :header:first-of-type').hide();
   $('.post-collapse').hide();
