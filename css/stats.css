@@ -2,20 +2,18 @@
   text-align: center;
 }
 
-
 .stats-num h2 {
   font-family: 'Lora', serif;
   margin-top: 10px;
   font-size: 3em;
 }
 
-
-
 @media (min-width: 768px) {
   .stats-num {
     display: flex;
     justify-content: center;
   }
+  
   .stats-num .panel {
     margin: 1%;
   }
