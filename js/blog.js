@@ -6,7 +6,7 @@ blog.listCategory = [];
 // import content from remote server or cache in local storage
 blog.importArticles = function() {
   var rawDataCache = localStorage.getItem('raw-data');
-  if (!rawDataCache) {  
+  if (!rawDataCache) {
     // no cache in local storage
     blog.importFromRemote();
     console.log('Import raw data: Cache miss, no cache found.');
@@ -51,11 +51,13 @@ blog.importFromRemote = function() {
     localStorage.setItem('etag', xhr.getResponseHeader('etag'));
   })
   .done(function() {
-    // initiate blog
     blog.sortArticles();
     blog.showFilters();
-    blog.getTemplate();
-  });  
+    // initiate blog
+    if ($(location).attr('pathname') == '/') {
+      blog.getTemplate();
+    }
+  });
 };
 
 // import raw data from local storage
@@ -65,7 +67,9 @@ blog.loadFromCache = function(rawDataCache) {
   // initiate blog
   blog.sortArticles();
   blog.showFilters();
-  blog.getTemplate();
+  if ($(location).attr('pathname') == '/') {
+    blog.getTemplate();
+  }
 };
 
 // grab blog post template and call function to print articles to page
@@ -168,7 +172,7 @@ blog.showFilters = function() {
     $('select:first-child').find('option[value=reset]').attr('selected', true);
   });
 };
-
-$(function() {
-  blog.importArticles();
-});
+//
+// $(function() {
+//   blog.importArticles();
+// });

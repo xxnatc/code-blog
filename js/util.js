@@ -1,6 +1,6 @@
 var util = {};
 
-// reset tabs to inactive and hide all sections  
+// reset tabs to inactive and hide all sections
 util.resetPage = function() {
   $('.nav-tabs li').removeAttr('class');
   $('section').hide();
@@ -35,7 +35,7 @@ util.navigateHam = function() {
   });
 };
 
-$(function() {
-  util.navigate();
-  util.navigateHam();
-});
+// $(function() {
+//   util.navigate();
+//   util.navigateHam();
+// });
