@@ -5,10 +5,21 @@ blog.listCategory = [];
 
 // import content from blogArticles.js
 blog.importArticles = function() {
-  for (var i = 0; i < blog.rawData.length; i++) {
-    var post = new Article(blog.rawData[i]);
-    blog.articles.push(post);
-  }
+  $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
+    console.log(xhr.getResponseHeader('etag'));
+    
+    for (var i = 0; i < data.length; i++) {
+      if (!data[i].body) {
+        data[i].body = marked(data[i].markdown);
+      }
+      var post = new Article(data[i]);
+      blog.articles.push(post);
+    }
+  }).done(function() {
+    blog.sortArticles();
+    blog.showFilters();
+    blog.getTemplate();
+  });
 };
 
 // sorting all posts such that latest post appears on top
@@ -32,7 +43,7 @@ blog.getTemplate = function() {
 
 // write blog posts to DOM
 blog.populate = function() {
-  for (var i = 0; i < blog.rawData.length; i++) {
+  for (var i = 0; i < blog.articles.length; i++) {
     blog.articles[i].toHTML();
   };
 };
@@ -40,11 +51,11 @@ blog.populate = function() {
 // display just the first paragraph of each post,
 // showing the rest only when the 'Read on' button is pressed
 blog.previewArticles = function() {
-  $('article p:not(:first-child)').hide();
+  $('.post-body').children().not('p:first-of-type, :header:first-of-type').hide();
 
   $('#home').on('click', '.post-read-on', function(event) {
     event.preventDefault();
-    $(this).hide();
+    $(this).html('Collapse ');
     $(this).parent().find('p').slideDown();
   });
 };
@@ -108,11 +119,11 @@ $(function() {
   var today = new Date();
   // import & sort through raw data
   blog.importArticles();
-  blog.sortArticles();
+  // blog.sortArticles();
 
   // print to page
-  blog.getTemplate();
+  // blog.getTemplate();
   
   // create and show filter options
-  blog.showFilters();
+  // blog.showFilters();
 });

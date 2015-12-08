@@ -18,7 +18,7 @@ editor.preview = function() {
     var newArticle = new Article(editor.post);
     newArticle.toHTML();
     $('.post-body~button').hide();
-    
+
     // syntax highlighting for code blocks
     $('pre code').each(function(i, block) {
       hljs.highlightBlock(block);
@@ -73,10 +73,17 @@ editor.generateJSON = function() {
   });
 };
 
-$(function() {
-  blog.getTemplate();
+// grab blog post template and call function to listen to changes
+editor.getTemplate = function() {
+  $.get('../template/post-template.handlebars', function(data) {
+    Article.prototype.template = Handlebars.compile(data);
+  }).done(function() {
+    editor.preview();
+    editor.clear();
+    editor.generateJSON();
+  });
+};
 
-  editor.preview();
-  editor.clear();
-  editor.generateJSON();
+$(function() {
+  editor.getTemplate();  
 });
