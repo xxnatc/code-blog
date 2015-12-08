@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Inevitable Oxford Comma</title>
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/atelier-cave-light.min.css">
+  <link rel="stylesheet" type="text/css" href="css/layout.css">
+  <link rel="stylesheet" type="text/css" href="css/module.css">
+  <link rel="stylesheet" type="text/css" href="css/state.css">
+  <link rel="stylesheet" type="text/css" href="css/theme.css">
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+  <!-- jQuery fallback -->
+  <script type="text/javascript">if (!window.jQuery) { document.write('<script src="/vendor/js/jquery-2.1.4.min.js"><\/script>'); }</script>
+  <!-- Handlebars fallback -->
+  <script type="text/javascript">if (!window.jQuery) { document.write('<script src="/vendor/js/handlebars-v4.0.5.js"><\/script>'); }</script>
+  <!-- Bootstrap fallback -->
+  <script>
+    $(function() {
+      if($('body').css('color') != 'rgb(51, 51, 51)') {
+        $("head").prepend('<link rel="stylesheet" href="/vendor/css/bootstrap.min.css">'); }});
+  </script>
+</head>
+
+<body>
+  <main class="container">
+    <header id="site-header" class="jumbotron">
+      <h3 id="ham-menu">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      </h3>
+      <h1>The Inevitable Oxford Comma</h1>
+    </header>
+
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted footer-text">Made for Code Fellow 301</p>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+  <script type="text/javascript" src="js/article.js"></script>
+  <script type="text/javascript" src="js/blog.js"></script>
+  <script type="text/javascript" src="js/stats.js"></script>
+</body>
+</html>
