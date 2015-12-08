@@ -7,22 +7,25 @@ blog.listCategory = [];
 blog.importArticles = function() {
   var rawDataCache = localStorage.getItem('raw-data');
   if (!rawDataCache) {  
-  // no cache in local storage
+    // no cache in local storage
     blog.importFromRemote();
+    console.log('Import raw data: Cache miss, no cache found.');
   } else {
-    var eTagCache = localStorage.etag;
+    var eTagCache = localStorage.getItem('etag');
     var eTagRemote = '';
     $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
       eTagRemote = xhr.getResponseHeader('etag');
-      console.log(eTagCache);
-      console.log(eTagRemote);
+      console.log('eTag from cache: ' + eTagCache);
+      console.log('eTag from server: ' + eTagRemote);
     }).done(function() {
       if (eTagCache == eTagRemote) {
         // cache is up to date
         blog.loadFromCache(rawDataCache);
+        console.log('Import raw data: Cache hit, data loading from cache.');
       } else {
         // cache is outdated
         blog.importFromRemote();
+        console.log('Import raw data: Cache outdated, loading from server');
       }
     });
   }
@@ -45,7 +48,7 @@ blog.importFromRemote = function() {
     blog.processRawData(data);
     // update local storage with updated data
     localStorage.setItem('raw-data', JSON.stringify(blog.articles));
-    localStorage.etag = xhr.getResponseHeader('etag');
+    localStorage.setItem('etag', xhr.getResponseHeader('etag'));
   })
   .done(function() {
     // initiate blog
