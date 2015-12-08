@@ -1,8 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Lora:700,700italic);
+
 /* ========== JUMBOTRON & PRIMARY NAV ========== */
 #site-header {
   background-color: #337ab7;
   color: white;
+  font-family: 'Lora', serif;
 }
+
 #primary-nav {
   background-color: #337ab7;
 }
@@ -17,6 +21,13 @@
   }
 }
 
+.post-title {
+  font-family: 'Lora', serif;
+}
+.post-body h1, .post-body h2 {
+  font-size: 1.75em;
+}
+
 /* ========== FOOTER ========== */
 .footer {
   background-color: #EEE;
@@ -25,12 +36,9 @@
   margin-top: 20px;
 }
 
+/* ========== ARTICLE EDITOR ========== */
 #preview-area h2:first-child {
   color: #337ab7;
-}
-
-.hljs {
-  background-color: transparent;
 }
 
 #json-area {
@@ -40,4 +48,9 @@
 .warning {
   color: #d9534f;
 }
+
+.hljs {
+  background-color: transparent;
+}
+
 
