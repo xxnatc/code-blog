@@ -18,6 +18,22 @@ blog.sortArticles = function() {
   });
 };
 
+// grab blog post template and create .toHTML() for article objects
+blog.getTemplate = function() {
+  $.ajax({
+    url: '../template/post-template.handlebars',
+    success: function(data) {
+      Article.prototype.template = Handlebars.compile(data);
+      
+      Article.prototype.toHTML = function() {
+        var compiledHTML = this.template(this);
+        $('#home').append(compiledHTML);
+      };
+    },
+    async: false
+  });
+};
+
 // write blog posts to DOM
 blog.populate = function() {
   for (var i = 0; i < blog.rawData.length; i++) {
@@ -90,20 +106,3 @@ blog.showFilters = function() {
     $('select:first-child').find('option[value=reset]').attr('selected', true);
   });
 };
-
-// initiate blog
-$(function() {
-  var today = new Date();
-  // import & sort through raw data
-  blog.importArticles();
-  blog.sortArticles();
-
-  // print to page
-  blog.populate();
-
-  // truncate posts to the first paragraph
-  blog.previewArticles();
-
-  // create and show filter options
-  blog.showFilters();
-});

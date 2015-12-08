@@ -17,6 +17,8 @@ editor.preview = function() {
     $('#home').children().remove();
     var newArticle = new Article(editor.post);
     newArticle.toHTML();
+    $('.post-body~button').hide();
+    
     // syntax highlighting for code blocks
     $('pre code').each(function(i, block) {
       hljs.highlightBlock(block);
@@ -72,6 +74,8 @@ editor.generateJSON = function() {
 };
 
 $(function() {
+  blog.getTemplate();
+
   editor.preview();
   editor.clear();
   editor.generateJSON();
