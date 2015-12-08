@@ -35,7 +35,6 @@ blog.processRawData = function(data) {
       data[i].body = marked(data[i].markdown);
     }
     var post = new Article(data[i]);
-    console.log(data[i]);
     blog.articles.push(post);
   }
 };
