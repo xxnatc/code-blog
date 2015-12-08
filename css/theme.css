@@ -25,7 +25,7 @@
   margin-top: 20px;
 }
 
-#preview-area h2 {
+#preview-area h2:first-child {
   color: #337ab7;
 }
 

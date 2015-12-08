@@ -49,6 +49,7 @@ blog.importFromRemote = function() {
     localStorage.setItem('etag', xhr.getResponseHeader('etag'));
   })
   .done(function() {
+    // initiate blog
     blog.sortArticles();
     blog.showFilters();
     blog.getTemplate();
@@ -59,7 +60,7 @@ blog.importFromRemote = function() {
 blog.loadFromCache = function(rawDataCache) {
   var data = JSON.parse(rawDataCache);
   blog.processRawData(data);
-
+  // initiate blog
   blog.sortArticles();
   blog.showFilters();
   blog.getTemplate();
@@ -84,15 +85,24 @@ blog.populate = function() {
   };
 };
 
-// display just the first paragraph of each post,
-// showing the rest only when the 'Read on' button is pressed
+// display up to the first paragraph of each post,
+// toggle the rest when 'Read on'/"Collpase" button is clicked
 blog.previewArticles = function() {
   $('.post-body').children().not('p:first-of-type, :header:first-of-type').hide();
+  $('.post-collapse').hide();
 
   $('#home').on('click', '.post-read-on', function(event) {
     event.preventDefault();
-    $(this).html('Collapse <span class="glyphicon glyphicon-triangle-up"></span>');
-    $(this).parent().find('p').slideDown();
+    $(this).hide();
+    $(this).siblings('.post-body').children().slideDown();
+    $(this).siblings('button').show();
+  });
+
+  $('#home').on('click', '.post-collapse', function(event) {
+    event.preventDefault();
+    $(this).hide();
+    $(this).siblings('.post-body').children().not('p:first-of-type, :header:first-of-type').slideUp();
+    $(this).siblings('button').show();
   });
 };
 
@@ -157,16 +167,6 @@ blog.showFilters = function() {
   });
 };
 
-// initiate blog
 $(function() {
-  var today = new Date();
-  // import & sort through raw data
   blog.importArticles();
-  // blog.sortArticles();
-
-  // print to page
-  // blog.getTemplate();
-  
-  // create and show filter options
-  // blog.showFilters();
 });
