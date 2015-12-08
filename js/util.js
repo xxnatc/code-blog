@@ -14,9 +14,16 @@ util.navigate = function() {
     util.resetPage();
     $(this).attr('class', 'active');
     $('#' + $(this).data('content')).fadeIn();
+    localStorage.setItem('tab-position', $(this).data('content'));
   });
   // set default tab: home
-  $('.nav-tabs li:first').trigger('click');
+  var tabCache = localStorage.getItem('tab-position');
+  if (!tabCache) {
+    $('.nav-tabs li[data-content=home]').trigger('click');
+  } else {
+    $('.nav-tabs li[data-content=' + tabCache + ']').trigger('click');
+    console.log($('.nav-tabs').data('content'));
+  }
 };
 
 // set up event listener to hamburger menu

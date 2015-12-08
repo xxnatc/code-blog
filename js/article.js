@@ -3,6 +3,7 @@ var Article = function(raw) {
   this.category = raw.category;
   this.author = raw.author;
   this.authorUrl = raw.authorUrl;
+  this.publishedOn = raw.publishedOn;
   this.published = Date.parse(raw.publishedOn);
   this.body = raw.body;
   this.daysPub = function() {
@@ -19,8 +20,6 @@ var Article = function(raw) {
 };
 
 Article.prototype.toHTML = function() {
-  var template = $('#post-template').html();
-  var compiledTemplate = Handlebars.compile(template);
-  var compiledHTML = compiledTemplate(this);
+  var compiledHTML = this.template(this);
   $('#home').append(compiledHTML);
 };

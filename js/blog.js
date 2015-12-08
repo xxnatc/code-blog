@@ -3,37 +3,115 @@ blog.articles = [];
 blog.listAuthor = [];
 blog.listCategory = [];
 
-// import content from blogArticles.js
+// import content from remote server or cache in local storage
 blog.importArticles = function() {
-  for (var i = 0; i < blog.rawData.length; i++) {
-    var post = new Article(blog.rawData[i]);
+  var rawDataCache = localStorage.getItem('raw-data');
+  if (!rawDataCache) {  
+    // no cache in local storage
+    blog.importFromRemote();
+    console.log('Import raw data: Cache miss, no cache found.');
+  } else {
+    var eTagCache = localStorage.getItem('etag');
+    var eTagRemote = '';
+    $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
+      eTagRemote = xhr.getResponseHeader('etag');
+      console.log('eTag from cache: ' + eTagCache);
+      console.log('eTag from server: ' + eTagRemote);
+    }).done(function() {
+      if (eTagCache == eTagRemote) {
+        // cache is up to date
+        blog.loadFromCache(rawDataCache);
+        console.log('Import raw data: Cache hit, data loading from cache.');
+      } else {
+        // cache is outdated
+        blog.importFromRemote();
+        console.log('Import raw data: Cache outdated, loading from server');
+      }
+    });
+  }
+};
+
+// create instances of article object from raw data
+blog.processRawData = function(data) {
+  for (var i = 0; i < data.length; i++) {
+    if (!data[i].body) {
+      data[i].body = marked(data[i].markdown);
+    }
+    var post = new Article(data[i]);
     blog.articles.push(post);
   }
+};
+
+// import raw data from server, then start building blog
+blog.importFromRemote = function() {
+  $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
+    blog.processRawData(data);
+    // update local storage with updated data
+    localStorage.setItem('raw-data', JSON.stringify(blog.articles));
+    localStorage.setItem('etag', xhr.getResponseHeader('etag'));
+  })
+  .done(function() {
+    // initiate blog
+    blog.sortArticles();
+    blog.showFilters();
+    blog.getTemplate();
+  });  
+};
+
+// import raw data from local storage
+blog.loadFromCache = function(rawDataCache) {
+  var data = JSON.parse(rawDataCache);
+  blog.processRawData(data);
+  // initiate blog
+  blog.sortArticles();
+  blog.showFilters();
+  blog.getTemplate();
+};
+
+// grab blog post template and call function to print articles to page
+blog.getTemplate = function() {
+  $.get('../template/post-template.handlebars', function(data) {
+    Article.prototype.template = Handlebars.compile(data);
+  }).done(function() {
+    // print to page
+    blog.populate();
+    // truncate posts to the first paragraph
+    blog.previewArticles();
+  });
+};
+
+// write blog posts to DOM by calling .toHTML() on each article
+blog.populate = function() {
+  for (var i = 0; i < blog.articles.length; i++) {
+    blog.articles[i].toHTML();
+  };
+};
+
+// display up to the first paragraph of each post,
+// toggle the rest when 'Read on' or 'Collpase' button is clicked
+blog.previewArticles = function() {
+  $('.post-body').children().not('p:first-of-type, :header:first-of-type').hide();
+  $('.post-collapse').hide();
+
+  $('#home').on('click', '.post-read-on', function(event) {
+    event.preventDefault();
+    $(this).hide();
+    $(this).siblings('.post-body').children().slideDown();
+    $(this).siblings('button').show();
+  });
+
+  $('#home').on('click', '.post-collapse', function(event) {
+    event.preventDefault();
+    $(this).hide();
+    $(this).siblings('.post-body').children().not('p:first-of-type, :header:first-of-type').slideUp();
+    $(this).siblings('button').show();
+  });
 };
 
 // sorting all posts such that latest post appears on top
 blog.sortArticles = function() {
   blog.articles.sort(function(a, b) {
     return b.published - a.published;
-  });
-};
-
-// write blog posts to DOM
-blog.populate = function() {
-  for (var i = 0; i < blog.rawData.length; i++) {
-    blog.articles[i].toHTML();
-  };
-};
-
-// display just the first paragraph of each post,
-// showing the rest only when the 'Read on' button is pressed
-blog.previewArticles = function() {
-  $('article p:not(:first-child)').hide();
-
-  $('#home').on('click', '.post-read-on', function(event) {
-    event.preventDefault();
-    $(this).hide();
-    $(this).parent().find('p').slideDown();
   });
 };
 
@@ -91,19 +169,6 @@ blog.showFilters = function() {
   });
 };
 
-// initiate blog 
 $(function() {
-  var today = new Date();
-  // import & sort through raw data
   blog.importArticles();
-  blog.sortArticles();
-  
-  // print to page
-  blog.populate();
-
-  // truncate posts to the first paragraph
-  blog.previewArticles();
-
-  // create and show filter options
-  blog.showFilters();
 });

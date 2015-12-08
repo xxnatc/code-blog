@@ -30,7 +30,7 @@
 a:hover {
   color: #3CC8C3;
 }
-.post-read-on:hover {
+.post-read-on:hover, .post-collapse:hover {
   background-color: #3CC8C3;
   border-color: #3CC8C3;
 }
