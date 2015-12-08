@@ -18,19 +18,15 @@ blog.sortArticles = function() {
   });
 };
 
-// grab blog post template and create .toHTML() for article objects
+// grab blog post template and call function to print articles to page
 blog.getTemplate = function() {
-  $.ajax({
-    url: '../template/post-template.handlebars',
-    success: function(data) {
-      Article.prototype.template = Handlebars.compile(data);
-      
-      Article.prototype.toHTML = function() {
-        var compiledHTML = this.template(this);
-        $('#home').append(compiledHTML);
-      };
-    },
-    async: false
+  $.get('../template/post-template.handlebars', function(data) {
+    Article.prototype.template = Handlebars.compile(data);
+  }).done(function() {
+    // print to page
+    blog.populate();
+    // truncate posts to the first paragraph
+    blog.previewArticles();
   });
 };
 
@@ -106,3 +102,17 @@ blog.showFilters = function() {
     $('select:first-child').find('option[value=reset]').attr('selected', true);
   });
 };
+
+// initiate blog
+$(function() {
+  var today = new Date();
+  // import & sort through raw data
+  blog.importArticles();
+  blog.sortArticles();
+
+  // print to page
+  blog.getTemplate();
+  
+  // create and show filter options
+  blog.showFilters();
+});

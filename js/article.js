@@ -18,3 +18,7 @@ var Article = function(raw) {
   };
 };
 
+Article.prototype.toHTML = function() {
+  var compiledHTML = this.template(this);
+  $('#home').append(compiledHTML);
+};
