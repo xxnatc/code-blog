@@ -13,6 +13,7 @@
   <link rel="stylesheet" type="text/css" href="css/module.css">
   <link rel="stylesheet" type="text/css" href="css/state.css">
   <link rel="stylesheet" type="text/css" href="css/theme.css">
+  <link rel="stylesheet" type="text/css" href="css/stats.css">
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
@@ -40,19 +41,22 @@
 
     <h1 class="text-center">Vanity Stats!</h1>
 
-    <div class="row">
-      <div id="num-articles" class="col-sm-4 col-xs-6 panel panel-default">
+    <div class="row stats-num">
+      <div id="num-articles" class="col-sm-3 col-xs-6 panel panel-default">
       </div>
-      <div id="num-authors" class="col-sm-4 col-xs-6 panel panel-default">
+      <div id="num-authors" class="col-sm-3 col-xs-6 panel panel-default">
       </div>
-      <div id="num-words" class="col-sm-4 col-xs-12 panel panel-default">
+      <div id="num-words" class="col-sm-3 col-xs-12 panel panel-default">
       </div>
     </div>
 
-    <div class="row">
-      <div id="avg-overall" class="col-sm-6 panel panel-default">
+    <div class="row stats-num">
+      <div id="avg-overall" class="col-md-5 col-sm-8 panel panel-default">
       </div>
-      <div id="avg-authors" class="col-sm-6 panel panel-default">
+    </div>
+
+    <div class="row stats-num">
+      <div id="avg-authors" class="col-md-6 col-sm-8 panel panel-default">
       </div>
     </div>
 
