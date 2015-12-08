@@ -3,30 +3,66 @@ blog.articles = [];
 blog.listAuthor = [];
 blog.listCategory = [];
 
-// import content from blogArticles.js
+// import content from remote server or cache in local storage
 blog.importArticles = function() {
-  $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
-    console.log(xhr.getResponseHeader('etag'));
-    
-    for (var i = 0; i < data.length; i++) {
-      if (!data[i].body) {
-        data[i].body = marked(data[i].markdown);
+  var rawDataCache = localStorage.getItem('raw-data');
+  if (!rawDataCache) {  
+  // no cache in local storage
+    blog.importFromRemote();
+  } else {
+    var eTagCache = localStorage.getItem('etag');
+    var eTagRemote = '';
+    $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
+      eTagRemote = xhr.getResponseHeader('etag');
+      console.log(eTagCache);
+      console.log(eTagRemote);
+    }).done(function() {
+      if (eTagCache == eTagRemote) {
+        // cache is up to date
+        blog.loadFromCache(rawDataCache);
+      } else {
+        // cache is outdated
+        blog.importFromRemote();
       }
-      var post = new Article(data[i]);
-      blog.articles.push(post);
+    });
+  }
+};
+
+// create instances of article object from raw data
+blog.processRawData = function(data) {
+  for (var i = 0; i < data.length; i++) {
+    if (!data[i].body) {
+      data[i].body = marked(data[i].markdown);
     }
-  }).done(function() {
+    var post = new Article(data[i]);
+    console.log(data[i]);
+    blog.articles.push(post);
+  }
+};
+
+// import raw data from server, then start building blog
+blog.importFromRemote = function() {
+  $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
+    blog.processRawData(data);
+    // update local storage with updated data
+    localStorage.setItem('raw-data', JSON.stringify(blog.articles));
+    localStorage.setItem('etag', xhr.getResponseHeader('etag'));
+  })
+  .done(function() {
     blog.sortArticles();
     blog.showFilters();
     blog.getTemplate();
-  });
+  });  
 };
 
-// sorting all posts such that latest post appears on top
-blog.sortArticles = function() {
-  blog.articles.sort(function(a, b) {
-    return b.published - a.published;
-  });
+// import raw data from local storage
+blog.loadFromCache = function(rawDataCache) {
+  var data = JSON.parse(rawDataCache);
+  blog.processRawData(data);
+
+  blog.sortArticles();
+  blog.showFilters();
+  blog.getTemplate();
 };
 
 // grab blog post template and call function to print articles to page
@@ -41,7 +77,7 @@ blog.getTemplate = function() {
   });
 };
 
-// write blog posts to DOM
+// write blog posts to DOM by calling .toHTML() on each article
 blog.populate = function() {
   for (var i = 0; i < blog.articles.length; i++) {
     blog.articles[i].toHTML();
@@ -55,8 +91,15 @@ blog.previewArticles = function() {
 
   $('#home').on('click', '.post-read-on', function(event) {
     event.preventDefault();
-    $(this).html('Collapse ');
+    $(this).html('Collapse <span class="glyphicon glyphicon-triangle-up"></span>');
     $(this).parent().find('p').slideDown();
+  });
+};
+
+// sorting all posts such that latest post appears on top
+blog.sortArticles = function() {
+  blog.articles.sort(function(a, b) {
+    return b.published - a.published;
   });
 };
 
