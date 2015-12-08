@@ -22,7 +22,6 @@ util.navigate = function() {
     $('.nav-tabs li[data-content=home]').trigger('click');
   } else {
     $('.nav-tabs li[data-content=' + tabCache + ']').trigger('click');
-    console.log($('.nav-tabs').data('content'));
   }
 };
 
