@@ -33,3 +33,14 @@ util.navigateHam = function() {
     console.log('click');
   });
 };
+
+var helper = {};
+helper.clearCache = function() {
+  webDB.execute(
+    'DROP TABLE articles;',
+    function() {
+      localStorage.removeItem('etag');
+      console.log('Cache all cleared');
+    }
+  );
+};
