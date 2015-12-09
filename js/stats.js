@@ -1,11 +1,12 @@
 var stats = {};
 
 stats.displayStats = function() {
+  console.log('Initiatizing stats');
   stats.showTotalArticles();
   stats.showTotalAuthors();
   // execute word count
   stats.countAll();
-  
+
   stats.showTotalWords();
   stats.showAvgOverall();
   stats.showAvgPerAuthor();
@@ -61,11 +62,15 @@ stats.avgWordsPerAuthor = function() {
   blog.listAuthor.forEach(stats.wordsPerAuthor);
 };
 
+stats.listWordCountAuthor = [];  // keep track of calculated value, this array is not used
 stats.wordsPerAuthor = function(element, index, array) {
-  var wpa = blog.listAuthorIndex[index].reduce(function(acc, current) {
+  var articleIndex = blog.listAuthorIndex[index];
+  var sumPerAuthor = articleIndex.reduce(function(acc, current) {
     return acc + stats.listWordCount[current];
   }, 0);
-  stats.appendPerAuthor(blog.listAuthor[index], wpa);
+  var avgPerAuthor = (sumPerAuthor / articleIndex.length).toFixed(2);
+  stats.listWordCountAuthor.push(avgPerAuthor);
+  stats.appendPerAuthor(blog.listAuthor[index], avgPerAuthor);
 };
 
 stats.appendPerAuthor = function(author, count) {

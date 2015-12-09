@@ -15,7 +15,7 @@ blog.importArticles = function() {
   } else {
     var eTagCache = localStorage.getItem('etag');
     var eTagRemote = '';
-    $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
+    $.getJSON('js/hackerIpsum.json', function(data, textStatus, xhr) {
       eTagRemote = xhr.getResponseHeader('etag');
       console.log('eTag from cache: ' + eTagCache);
       console.log('eTag from server: ' + eTagRemote);
@@ -46,7 +46,7 @@ blog.processRawData = function(data) {
 
 // import raw data from server, then start building blog
 blog.importFromRemote = function() {
-  $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
+  $.getJSON('js/hackerIpsum.json', function(data, textStatus, xhr) {
     blog.processRawData(data);
     // update local storage with updated data
     localStorage.setItem('raw-data', JSON.stringify(blog.articles));
@@ -55,6 +55,7 @@ blog.importFromRemote = function() {
   .done(function() {
     blog.sortArticles();
     blog.showFilters();
+    console.log('Import from server completed.');
     // initiate blog
     if ($(location).attr('pathname') == '/') {
       blog.getTemplate();
@@ -69,6 +70,7 @@ blog.loadFromCache = function(rawDataCache) {
   // initiate blog
   blog.sortArticles();
   blog.showFilters();
+  console.log('Loading from cache completed.');
   if ($(location).attr('pathname') == '/') {
     blog.getTemplate();
   }
