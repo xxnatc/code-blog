@@ -4,6 +4,7 @@ blog.listAuthor = [];
 blog.listCategory = [];
 blog.listAuthorIndex = [];
 blog.listCategoryIndex = [];
+blog.importUrl = 'data/hackerIpsum.json';
 
 // import content from remote server or cache in local storage
 blog.importArticles = function() {
@@ -15,7 +16,7 @@ blog.importArticles = function() {
   } else {
     var eTagCache = localStorage.getItem('etag');
     var eTagRemote = '';
-    $.getJSON('js/hackerIpsum.json', function(data, textStatus, xhr) {
+    $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
       eTagRemote = xhr.getResponseHeader('etag');
       console.log('eTag from cache: ' + eTagCache);
       console.log('eTag from server: ' + eTagRemote);
@@ -46,7 +47,7 @@ blog.processRawData = function(data) {
 
 // import raw data from server, then start building blog
 blog.importFromRemote = function() {
-  $.getJSON('js/hackerIpsum.json', function(data, textStatus, xhr) {
+  $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
     blog.processRawData(data);
     // update local storage with updated data
     localStorage.setItem('raw-data', JSON.stringify(blog.articles));
