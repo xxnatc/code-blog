@@ -1,9 +1,11 @@
 # code-blog
 _Assignment for Code Fellows 301_
 
-Code-blog is a single-page blog that imports its content from `js/blogArticles.js`. Users can filter blog posts by authors or categories.
+Code-blog is a single-page blog that imports its content from `js/hackerIpsum.json`. Users can filter blog posts by authors or categories.
 
-There is also a secret page for author to add content. The page takes styling in markdown format and displays a preview instantly. It can also convert the data to a JSON string for use in `js/blogArticles.js`.
+A page (`stats.html`) has been added to calculate vanity metrics. It displays numbers including total author, article, and word count.
+
+There is also a editor page (`secret.html`) for author to add content. The page takes styling in markdown format and displays a preview instantly. It can also convert the data to a JSON string for use in the raw data file.
 
 ## Credits
 ##### Individuals
