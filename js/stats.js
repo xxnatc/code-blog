@@ -53,11 +53,16 @@ stats.countAll = function() {
 };
 
 stats.countArticle = function(article) {
-  return article.body.split(' ').length;
+  return article.body.split(/\s/).filter(stats.excludeAttr).length;
+};
+
+// account for extra word caused by counting an attribute
+// (marked.js inserts an id for headers, this filter will eliminate that concern)
+stats.excludeAttr = function(segment) {
+  return !segment.startsWith('="', 2);
 };
 
 /* ==================== word count per author ==================== */
-
 stats.avgWordsPerAuthor = function() {
   blog.listAuthor.forEach(stats.wordsPerAuthor);
 };
