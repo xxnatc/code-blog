@@ -32,8 +32,10 @@ stats.showTotalWords = function() {
 };
 
 stats.showAvgOverall = function() {
-  var $headline = $('<h3>Average length of article</h3>');
-  var $number = $('<h2>' + stats.listWordCount.reduce(stats.sum) / blog.articles.length + ' words</h2>');
+  var $headline = $('<h3>Average article length</h3>');
+  var $number = $('<h2>'
+    + (stats.listWordCount.reduce(stats.sum) / blog.articles.length).toFixed(2)
+    + ' words</h2>');
   $('#avg-overall').append([$headline, $number]);
 };
 
