@@ -6,6 +6,7 @@ var Article = function(raw) {
   this.publishedOn = raw.publishedOn;
   this.published = Date.parse(raw.publishedOn);
   this.markdown = raw.markdown;
+  this.dbId = raw.id;
   this.daysPub = function() {
     var msDiff = Date.parse(new Date()) - this.published;
     var dayDiff = Math.round(msDiff / 8.64e7);
