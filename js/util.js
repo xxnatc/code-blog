@@ -1,6 +1,6 @@
 var util = {};
 
-// reset tabs to inactive and hide all sections  
+// reset tabs to inactive and hide all sections
 util.resetPage = function() {
   $('.nav-tabs li').removeAttr('class');
   $('section').hide();
@@ -22,7 +22,6 @@ util.navigate = function() {
     $('.nav-tabs li[data-content=home]').trigger('click');
   } else {
     $('.nav-tabs li[data-content=' + tabCache + ']').trigger('click');
-    console.log($('.nav-tabs').data('content'));
   }
 };
 
@@ -35,7 +34,7 @@ util.navigateHam = function() {
   });
 };
 
-$(function() {
-  util.navigate();
-  util.navigateHam();
-});
+// $(function() {
+//   util.navigate();
+//   util.navigateHam();
+// });

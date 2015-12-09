@@ -2,18 +2,20 @@ var blog = {};
 blog.articles = [];
 blog.listAuthor = [];
 blog.listCategory = [];
+blog.listAuthorIndex = [];
+blog.listCategoryIndex = [];
 
 // import content from remote server or cache in local storage
 blog.importArticles = function() {
   var rawDataCache = localStorage.getItem('raw-data');
-  if (!rawDataCache) {  
+  if (!rawDataCache) {
     // no cache in local storage
     blog.importFromRemote();
     console.log('Import raw data: Cache miss, no cache found.');
   } else {
     var eTagCache = localStorage.getItem('etag');
     var eTagRemote = '';
-    $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
+    $.getJSON('js/hackerIpsum.json', function(data, textStatus, xhr) {
       eTagRemote = xhr.getResponseHeader('etag');
       console.log('eTag from cache: ' + eTagCache);
       console.log('eTag from server: ' + eTagRemote);
@@ -44,18 +46,21 @@ blog.processRawData = function(data) {
 
 // import raw data from server, then start building blog
 blog.importFromRemote = function() {
-  $.getJSON('js/hackerIpsumMin.json', function(data, textStatus, xhr) {
+  $.getJSON('js/hackerIpsum.json', function(data, textStatus, xhr) {
     blog.processRawData(data);
     // update local storage with updated data
     localStorage.setItem('raw-data', JSON.stringify(blog.articles));
     localStorage.setItem('etag', xhr.getResponseHeader('etag'));
   })
   .done(function() {
-    // initiate blog
     blog.sortArticles();
     blog.showFilters();
-    blog.getTemplate();
-  });  
+    console.log('Import from server completed.');
+    // initiate blog
+    if ($(location).attr('pathname') == '/') {
+      blog.getTemplate();
+    }
+  });
 };
 
 // import raw data from local storage
@@ -65,7 +70,10 @@ blog.loadFromCache = function(rawDataCache) {
   // initiate blog
   blog.sortArticles();
   blog.showFilters();
-  blog.getTemplate();
+  console.log('Loading from cache completed.');
+  if ($(location).attr('pathname') == '/') {
+    blog.getTemplate();
+  }
 };
 
 // grab blog post template and call function to print articles to page
@@ -116,11 +124,15 @@ blog.sortArticles = function() {
 };
 
 // generate a list of filter options, then populate dropdown menu
-blog.createFilters = function(list, selectId, prop) {
+blog.createFilters = function(list, listIndex, selectId, prop) {
   for (var i = 0; i < blog.articles.length; i++) {
-    var temp = blog.articles[i][prop];
-    if (list.indexOf(temp) < 0) {
-      list.push(temp);
+    var item = blog.articles[i][prop];
+    var itemIndex = list.indexOf(item);
+    if (itemIndex < 0) {
+      list.push(item);
+      listIndex.push([i]);
+    } else {
+      listIndex[itemIndex].push(i);
     }
   }
 
@@ -135,8 +147,8 @@ blog.createFilters = function(list, selectId, prop) {
 // create specific filters and start event listeners for each dropdown;
 // the event listeners prevent user from selecting multiple criteria
 blog.showFilters = function() {
-  blog.createFilters(blog.listAuthor, '#filter-by-author', 'author');
-  blog.createFilters(blog.listCategory, '#filter-by-category', 'category');
+  blog.createFilters(blog.listAuthor, blog.listAuthorIndex, '#filter-by-author', 'author');
+  blog.createFilters(blog.listCategory, blog.listCategoryIndex, '#filter-by-category', 'category');
 
   // left menu: filter by author
   $('select:first-child').on('change', function(event) {
@@ -168,7 +180,7 @@ blog.showFilters = function() {
     $('select:first-child').find('option[value=reset]').attr('selected', true);
   });
 };
-
-$(function() {
-  blog.importArticles();
-});
+//
+// $(function() {
+//   blog.importArticles();
+// });
