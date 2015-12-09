@@ -4,7 +4,34 @@ blog.listAuthor = [];
 blog.listCategory = [];
 blog.listAuthorIndex = [];
 blog.listCategoryIndex = [];
-blog.importUrl = 'data/hackerIpsum.json';
+blog.importUrl = 'data/hackerIpsumMin.json';
+
+// grab blog post template and call function to load article data
+blog.loadTemplate = function() {
+  $.get('template/post-template.handlebars', function(data) {
+    Article.prototype.template = Handlebars.compile(data);
+  }).done(function() {
+    $.ajax({
+      type: 'HEAD',
+      url: blog.importUrl,
+      success: blog.fetchArticles
+    });
+  });
+};
+
+// process eTag
+blog.fetchArticles = function(data, textStatus, xhr) {
+  var eTagCache = localStorage.getItem('etag');
+  var eTagRemote = xhr.getResponseHeader('etag');
+  if (eTagCache != eTagRemote) {
+    console.log('Import raw data: Cache miss');
+    
+  } else {
+    console.log('Import raw data: Cache hit!');
+
+  }
+
+};
 
 // import content from remote server or cache in local storage
 blog.importArticles = function() {
