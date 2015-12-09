@@ -55,7 +55,7 @@ stats.countAll = function() {
 };
 
 stats.countArticle = function(article) {
-  return article.body.split(/\s/).filter(stats.excludeAttr).length;
+  return article.body.split(/\s+/).filter(stats.excludeAttr).length;
 };
 
 // account for extra word caused by counting an attribute
