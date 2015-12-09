@@ -43,12 +43,11 @@ blog.fetchArticles = function(data, textStatus, xhr) {
 blog.fetchFromJSON = function() {
   $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
     data.forEach(function(element, index, array) {
-      blog.loadIntoBlogObj(element);
       blog.insertArticleToDB(element);
+      // blog.loadIntoBlogObj(element);
     });
   }).done(function() {
-    blog.populate();
-    blog.previewArticles();
+    blog.fetchFromDB();
   });
 };
 
@@ -58,8 +57,13 @@ blog.fetchFromDB = function() {
     'SELECT * FROM articles',
     function(result) {
       result.forEach(blog.loadIntoBlogObj);
+      blog.init();
     }
   );
+};
+
+blog.init = function() {
+  blog.sortArticles();
   blog.populate();
   blog.previewArticles();
 };
@@ -77,89 +81,6 @@ blog.insertArticleToDB = function(article) {
   );
 };
 
-
-// import content from remote server or cache in local storage
-// blog.importArticles = function() {
-//   var rawDataCache = localStorage.getItem('raw-data');
-//   if (!rawDataCache) {
-//     // no cache in local storage
-//     blog.importFromRemote();
-//     console.log('Import raw data: Cache miss, no cache found.');
-//   } else {
-//     var eTagCache = localStorage.getItem('etag');
-//     var eTagRemote = '';
-//     $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
-//       eTagRemote = xhr.getResponseHeader('etag');
-//       console.log('eTag from cache: ' + eTagCache);
-//       console.log('eTag from server: ' + eTagRemote);
-//     }).done(function() {
-//       if (eTagCache == eTagRemote) {
-//         // cache is up to date
-//         blog.loadFromCache(rawDataCache);
-//         console.log('Import raw data: Cache hit, data loading from cache.');
-//       } else {
-//         // cache is outdated
-//         blog.importFromRemote();
-//         console.log('Import raw data: Cache outdated, loading from server');
-//       }
-//     });
-//   }
-// };
-
-// create instances of article object from raw data
-// blog.processRawData = function(data) {
-//   for (var i = 0; i < data.length; i++) {
-//     if (!data[i].body) {
-//       data[i].body = marked(data[i].markdown);
-//     }
-//     var post = new Article(data[i]);
-//     blog.articles.push(post);
-//   }
-// };
-
-// import raw data from server, then start building blog
-// blog.importFromRemote = function() {
-//   $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
-//     blog.processRawData(data);
-//     // update local storage with updated data
-//     localStorage.setItem('raw-data', JSON.stringify(blog.articles));
-//     localStorage.setItem('etag', xhr.getResponseHeader('etag'));
-//   })
-//   .done(function() {
-//     blog.sortArticles();
-//     blog.showFilters();
-//     console.log('Import from server completed.');
-//     // initiate blog
-//     if ($(location).attr('pathname') == '/') {
-//       blog.getTemplate();
-//     }
-//   });
-// };
-
-// import raw data from local storage
-// blog.loadFromCache = function(rawDataCache) {
-//   var data = JSON.parse(rawDataCache);
-//   blog.processRawData(data);
-//   // initiate blog
-//   blog.sortArticles();
-//   blog.showFilters();
-//   console.log('Loading from cache completed.');
-//   if ($(location).attr('pathname') == '/') {
-//     blog.getTemplate();
-//   }
-// };
-
-// grab blog post template and call function to print articles to page
-// blog.getTemplate = function() {
-//   $.get('../template/post-template.handlebars', function(data) {
-//     Article.prototype.template = Handlebars.compile(data);
-//   }).done(function() {
-//     // print to page
-//     blog.populate();
-//     // truncate posts to the first paragraph
-//     blog.previewArticles();
-//   });
-// };
 
 // write blog posts to DOM by calling .toHTML() on each article
 blog.populate = function() {
@@ -253,7 +174,3 @@ blog.showFilters = function() {
     $('select:first-child').find('option[value=reset]').attr('selected', true);
   });
 };
-//
-// $(function() {
-//   blog.importArticles();
-// });

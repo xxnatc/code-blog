@@ -20,6 +20,7 @@ var Article = function(raw) {
 };
 
 Article.prototype.toHTML = function() {
+  this.body = marked(this.markdown);
   var compiledHTML = this.template(this);
   $('#home').append(compiledHTML);
 };

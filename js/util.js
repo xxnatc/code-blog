@@ -33,8 +33,3 @@ util.navigateHam = function() {
     console.log('click');
   });
 };
-
-// $(function() {
-//   util.navigate();
-//   util.navigateHam();
-// });
