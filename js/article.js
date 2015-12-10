@@ -7,9 +7,9 @@ var Article = function(raw) {
   this.published = Date.parse(raw.publishedOn);
   this.markdown = raw.markdown;
   this.dbId = raw.id;
+  this.msDiff = Date.parse(new Date()) - this.published;
   this.daysPub = function() {
-    var msDiff = Date.parse(new Date()) - this.published;
-    var dayDiff = Math.round(msDiff / 8.64e7);
+    var dayDiff = Math.round(this.msDiff / 8.64e7);
     if (dayDiff === 0) {
       return ', published today';
     } else if (dayDiff === 1) {
@@ -21,7 +21,9 @@ var Article = function(raw) {
 };
 
 Article.prototype.toHTML = function() {
-  this.body = marked(this.markdown);
-  var compiledHTML = this.template(this);
-  $('#home').append(compiledHTML);
+  if (this.msDiff >= 0 || util.getQuery('admin')) {
+    this.body = marked(this.markdown);
+    var compiledHTML = this.template(this);
+    $('#home').append(compiledHTML);
+  }
 };

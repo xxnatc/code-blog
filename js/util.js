@@ -31,8 +31,8 @@ util.handleNav = function() {
   }
 };
 
-// return a value stored in a given key from browser query string.
-util.getParameterByKey = function (key) {
+// return a value stored in a given key from browser query string
+util.getQuery = function (key) {
   var match = RegExp('[?&]' + key + '=([^&]*)').exec(window.location.search);
   return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 };
