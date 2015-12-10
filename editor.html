@@ -38,18 +38,8 @@
       <h1>The Inevitable Oxford Comma</h1>
     </header>
 
-    <nav role="navigation" id="primary-nav">
-      <ul class="nav nav-tabs nav-justified">
-        <li role="presentation" data-content="home">
-          <a href="#" class="primary-nav-tabs"><span class="glyphicon glyphicon-home"></span>Home</a>
-        </li>
-        <li role="presentation" data-content="about">
-          <a href="#" class="primary-nav-tabs"><span class="glyphicon glyphicon-user"></span>About</a>
-        </li>
-        <li role="presentation" data-content="contact">
-          <a href="#" class="primary-nav-tabs"><span class="glyphicon glyphicon-briefcase"></span>Contact</a>
-        </li>
-      </ul>
+    <nav id="back-home-nav">
+      <button class="btn btn-default">Back to home</button>
     </nav>
 
     <div class="row row-editor">
@@ -72,8 +62,8 @@
             <input type="text" id="article-author-url" class="form-control" placeholder="URL" required>
           </div>
           <div class="form-group">
-            <label for="article-body">Content</label>
-            <textarea id="article-body" class="form-control" rows="8"></textarea>
+            <label for="article-markdown">Content</label>
+            <textarea id="article-markdown" class="form-control" rows="15"></textarea>
             <p class="help-block">Markdown styling is supported.</p>
           </div>
           <div class="form-group">
@@ -117,6 +107,8 @@
   </footer>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+  <script type="text/javascript" src="vendor/js/html5sql.js"></script>
+  <script type="text/javascript" src="js/webdb.js"></script>
   <script type="text/javascript" src="js/article.js"></script>
   <script type="text/javascript" src="js/blog.js"></script>
   <script type="text/javascript" src="js/util.js"></script>

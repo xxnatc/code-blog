@@ -15,9 +15,9 @@
   #site-header {
     background-color: #337ab7;
     background: -webkit-linear-gradient(#34B7B3, #337ab7);
-    background: -o-linear-gradient(#34B7B3, #337ab7); 
-    background: -moz-linear-gradient(#34B7B3, #337ab7); 
-    background: linear-gradient(#34B7B3, #337ab7); 
+    background: -o-linear-gradient(#34B7B3, #337ab7);
+    background: -moz-linear-gradient(#34B7B3, #337ab7);
+    background: linear-gradient(#34B7B3, #337ab7);
   }
 }
 
@@ -37,7 +37,7 @@
 }
 
 /* ========== ARTICLE EDITOR ========== */
-#preview-area h2:first-child {
+#preview-area>h2 {
   color: #337ab7;
 }
 
@@ -52,5 +52,3 @@
 .hljs {
   background-color: transparent;
 }
-
-

@@ -22,7 +22,7 @@ util.handleNav = function() {
     $('#primary-nav').slideToggle();
     console.log('click');
   });
-  // set default tab: home
+  // set nav tab 
   var tabCache = localStorage.getItem('tab-position');
   if (!tabCache) {
     $('.nav-tabs li[data-content=home]').trigger('click');
