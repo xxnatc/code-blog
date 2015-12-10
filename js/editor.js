@@ -80,13 +80,30 @@ editor.backToHome = function() {
 };
 
 editor.saveChanges = function() {
-  $('#save-button').on('click', function() {
+  $('#save-button').on('click', function(event) {
+    event.preventDefault();
     webDB.execute([{
       'sql': 'UPDATE articles SET title = ?, author = ?, authorUrl = ?, publishedOn = ?, markdown = ?, category = ? WHERE id = ?',
       'data': [editor.post.title, editor.post.author, editor.post.authorUrl, editor.post.publishedOn, editor.post.markdown, editor.post.category, editor.post.id]
     }]);
+    editor.generateJSON();
+  });
+};
 
-    
+editor.generateJSON = function() {
+  webDB.execute(
+    'SELECT * FROM articles;',
+    function(result) {
+      console.log(result);
+      $('#article-json').text(JSON.stringify(result));
+    }
+  );
+  $('#form-area').hide();
+  $('#json-area').fadeIn();
+
+  $('#return-button').on('click', function() {
+    $('#json-area').hide();
+    $('#form-area').fadeIn();
   });
 };
 
