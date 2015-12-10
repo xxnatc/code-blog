@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Inevitable Oxford Comma</title>
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/atelier-cave-light.min.css">
+  <link rel="stylesheet" type="text/css" href="css/layout.css">
+  <link rel="stylesheet" type="text/css" href="css/module.css">
+  <link rel="stylesheet" type="text/css" href="css/state.css">
+  <link rel="stylesheet" type="text/css" href="css/theme.css">
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+  <!-- jQuery fallback -->
+  <script type="text/javascript">if (!window.jQuery) { document.write('<script src="/vendor/js/jquery-2.1.4.min.js"><\/script>'); }</script>
+  <!-- Handlebars fallback -->
+  <script type="text/javascript">if (!window.jQuery) { document.write('<script src="/vendor/js/handlebars-v4.0.5.js"><\/script>'); }</script>
+  <!-- Bootstrap fallback -->
+  <script>
+    $(function() {
+      if($('body').css('color') != 'rgb(51, 51, 51)') {
+        $("head").prepend('<link rel="stylesheet" href="/vendor/css/bootstrap.min.css">'); }});
+  </script>
+</head>
+
+<body>
+  <main class="container">
+    <header id="site-header" class="jumbotron">
+      <h3 id="ham-menu">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      </h3>
+      <h1>The Inevitable Oxford Comma</h1>
+    </header>
+
+    <nav role="navigation" id="primary-nav">
+      <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" data-content="home">
+          <a href="#" class="primary-nav-tabs"><span class="glyphicon glyphicon-home"></span>Home</a>
+        </li>
+        <li role="presentation" data-content="about">
+          <a href="#" class="primary-nav-tabs"><span class="glyphicon glyphicon-user"></span>About</a>
+        </li>
+        <li role="presentation" data-content="contact">
+          <a href="#" class="primary-nav-tabs"><span class="glyphicon glyphicon-briefcase"></span>Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="row row-editor">
+      <!-- left module -->
+      <section id="form-area" class="col-md-5 well">
+        <h2 class="text-center">
+          <span class="glyphicon glyphicon-pencil"></span> Edit post
+        </h2>
+        <form>
+          <div class="form-group">
+            <label for="article-title">Article Title</label>
+            <input type="text" id="article-title" class="form-control" placeholder="Title" required>
+          </div>
+          <div class="form-group">
+            <label for="article-author">Author Name</label>
+            <input type="text" id="article-author" class="form-control" placeholder="Author" required>
+          </div>
+          <div class="form-group">
+            <label for="article-author-url">Author Link</label>
+            <input type="text" id="article-author-url" class="form-control" placeholder="URL" required>
+          </div>
+          <div class="form-group">
+            <label for="article-body">Content</label>
+            <textarea id="article-body" class="form-control" rows="8"></textarea>
+            <p class="help-block">Markdown styling is supported.</p>
+          </div>
+          <div class="form-group">
+            <label for="article-category">Blog category</label>
+            <input type="text" id="article-category" class="form-control" placeholder="Category" required>
+          </div>
+        </form>
+
+        <button id="gen-code-button" class="btn btn-success">Save changes</button>
+        <button id="clear-button" class="btn btn-danger pull-right">Delete article</button>
+      </section>
+
+      <section id="json-area" class="col-md-5 non-default well">
+        <h2 class="text-center">
+          <span class="glyphicon glyphicon-bullhorn"></span> Publish your story
+        </h2>
+        <p>Your story is ready to be posted! Copy and the following code and paste it into your raw data file.</p>
+        <button id="return-button" class="btn btn-default">
+          <span class="glyphicon glyphicon-triangle-left"></span>  Back to editor
+        </button><br /><br />
+        <pre id="article-json" class="pre-scrollable"></pre>
+      </section>
+      <!-- end left module -->
+
+      <!-- right module -->
+      <section id="preview-area" class="col-md-7">
+        <h2 class="text-center">
+          <span class="glyphicon glyphicon-eye-open"></span> Live preview
+        </h2>
+        <div id="home"></div>
+      </section>
+      <!-- end right module -->
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted footer-text">Made for Code Fellow 301</p>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+  <script type="text/javascript" src="js/article.js"></script>
+  <script type="text/javascript" src="js/blog.js"></script>
+  <script type="text/javascript" src="js/util.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
+  <script type="text/javascript" src="js/editor.js"></script>
+</body>
+</html>
