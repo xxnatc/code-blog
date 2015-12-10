@@ -64,7 +64,7 @@ helper.rd = function(shortcut) {
     goTo('?admin=true');
     break;
   case 'e':
-    goTo('/editor.html');
+    goTo('/editor.html?id=');
     break;
   case 'st':
     goTo('/stats.html');
