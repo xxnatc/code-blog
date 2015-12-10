@@ -84,10 +84,6 @@ blog.init = function() {
 };
 
 blog.handleAdmin = function() {
-  if (!util.getQuery('admin')) {
-    $('.post-edit').hide();
-  }
-
   $('#home').on('click', '.post-edit', function(event) {
     event.preventDefault();
     var dbId = $(this).data('dbid');

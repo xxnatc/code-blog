@@ -47,3 +47,11 @@ helper.clearCache = function() {
     }
   );
 };
+
+Handlebars.registerHelper('if_admin', function (block) {
+  if (util.getQuery('admin')) {
+    return block.fn(this);
+  } else {
+    return block.inverse(this);
+  }
+});
