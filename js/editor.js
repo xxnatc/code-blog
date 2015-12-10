@@ -73,11 +73,24 @@ editor.saveChanges = function() {
   });
 };
 
+editor.deletePost = function() {
+  $('#delete-button').on('click', function() {
+    webDB.execute([{
+      'sql': 'DELETE FROM articles WHERE id = ?',
+      'data': [editor.post.id]
+    }], function() {
+      editor.post = {};
+      editor.autofill(editor.post);
+    });
+  });
+};
+
 $(function() {
   webDB.init();
   editor.loadTemplate();
   editor.livePreview();
   editor.loadArticle();
   editor.saveChanges();
+  editor.deletePost();
   editor.backToHome();
 });
