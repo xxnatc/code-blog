@@ -80,8 +80,20 @@ blog.init = function() {
   blog.populate();
   blog.previewArticles();
   blog.showFilters();
+  blog.handleAdmin();
 };
 
+blog.handleAdmin = function() {
+  if (!util.getQuery('admin')) {
+    $('.post-edit').hide();
+  }
+
+  $('#home').on('click', '.post-edit', function(event) {
+    event.preventDefault();
+    var dbId = $(this).data('dbid');
+    console.log(dbId);
+  });
+};
 
 // write blog posts to DOM by calling .toHTML() on each article
 blog.populate = function() {
