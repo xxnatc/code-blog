@@ -19,14 +19,15 @@ editor.loadArticle = function() {
 };
 
 editor.autofill = function(article) {
+  console.log(article);
   $('#article-title').val(article.title);
   $('#article-author').val(article.author);
   $('#article-author-url').val(article.authorUrl);
   $('#article-markdown').val(article.markdown);
   $('#article-category').val(article.category);
+  editor.post = article;
   $('form').trigger('mouseup');
 };
-
 
 editor.livePreview = function() {
   $('form').on('keyup mouseup', function(event) {
@@ -57,9 +58,26 @@ editor.livePreview = function() {
   });
 };
 
+editor.backToHome = function() {
+  $('#back-home-button').on('click', function() {
+    $(location).attr('href', '/index.html');
+  });
+};
+
+editor.saveChanges = function() {
+  $('#save-button').on('click', function() {
+    webDB.execute([{
+      'sql': 'UPDATE articles SET title = ?, author = ?, authorUrl = ?, publishedOn = ?, markdown = ?, category = ? WHERE id = ?',
+      'data': [editor.post.title, editor.post.author, editor.post.authorUrl, editor.post.publishedOn, editor.post.markdown, editor.post.category, editor.post.id]
+    }]);
+  });
+};
+
 $(function() {
   webDB.init();
   editor.loadTemplate();
   editor.livePreview();
   editor.loadArticle();
+  editor.saveChanges();
+  editor.backToHome();
 });
