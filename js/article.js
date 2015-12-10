@@ -21,7 +21,7 @@ var Article = function(raw) {
 };
 
 Article.prototype.toHTML = function() {
-  if (this.msDiff >= 0 || util.getQuery('admin')) {
+  if (this.msDiff >= 0 || util.getQuery('admin') || $(location).attr('pathname') === '/editor.html') {
     this.body = marked(this.markdown);
     var compiledHTML = this.template(this);
     $('#home').append(compiledHTML);

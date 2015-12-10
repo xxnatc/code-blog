@@ -25,9 +25,10 @@ editor.autofill = function(article) {
   $('#article-author-url').val(article.authorUrl);
   $('#article-markdown').val(article.markdown);
   $('#article-category').val(article.category);
+  $('#article-sch-date').val(article.publishedOn);
   editor.post = article;
-  $('form').trigger('mouseup');
   editor.determinePubDate();
+  $('form').trigger('mouseup');
 };
 
 editor.livePreview = function() {
@@ -40,7 +41,7 @@ editor.livePreview = function() {
     editor.post.markdown = $('#article-markdown').val();
     editor.post.body = marked(editor.post.markdown);
     editor.post.category = $('#article-category').val();
-
+    editor.post.publishedOn = $('#article-sch-date').val();
 
     // generate article preview in right-hand module
     $('#home').children().remove();
@@ -61,10 +62,10 @@ editor.livePreview = function() {
 
 editor.determinePubDate = function() {
   // display default value for published articles
-  $('#article-sch-date').val(editor.post.publishedOn).parent().hide();
 
   $('#article-published').on('change', function() {
-    $('#article-sch-date').parent().fadeToggle();
+    // $('#article-sch-date').parent().fadeToggle();
+    $('#article-sch-date').attr('disabled', !$('#article-sch-date').attr('disabled'));
     if (!$('#article-published').attr('checked')) {
       editor.post.publishedOn = $('#article-sch-date').val();
     }
