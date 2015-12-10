@@ -10,12 +10,14 @@ blog.importUrl = 'data/hackerIpsumMin.json';
 blog.loadTemplate = function() {
   $.get('template/post-template.handlebars', function(data) {
     Article.prototype.template = Handlebars.compile(data);
-  }).done(function() {
-    $.ajax({
-      type: 'HEAD',
-      url: blog.importUrl,
-      success: blog.fetchArticles
-    });
+  }).done(blog.loadArticles);
+};
+
+blog.loadArticles = function() {
+  $.ajax({
+    type: 'HEAD',
+    url: blog.importUrl,
+    success: blog.fetchArticles
   });
 };
 
@@ -77,10 +79,16 @@ blog.insertArticleToDB = function(article) {
 
 blog.init = function() {
   blog.sortArticles();
-  blog.populate();
-  blog.previewArticles();
   blog.showFilters();
   blog.handleAdmin();
+  var path = $(location).attr('pathname');
+  console.log(path);
+  if (path === '/' || path === '/index.html') {
+    blog.populate();
+    blog.previewArticles();
+  } else if (path === '/stats.html') {
+    stats.displayStats();
+  }
 };
 
 blog.handleAdmin = function() {
