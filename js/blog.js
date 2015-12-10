@@ -95,7 +95,7 @@ blog.handleAdmin = function() {
   $('#home').on('click', '.post-edit', function(event) {
     event.preventDefault();
     var dbId = $(this).data('dbid');
-    console.log(dbId);
+    $(location).attr('href', $(location).attr('origin') + '/editor.html?id=' + dbId);
   });
 };
 

@@ -27,6 +27,7 @@ editor.autofill = function(article) {
   $('#article-category').val(article.category);
   editor.post = article;
   $('form').trigger('mouseup');
+  editor.determinePubDate();
 };
 
 editor.livePreview = function() {
@@ -36,10 +37,10 @@ editor.livePreview = function() {
     editor.post.title = $('#article-title').val();
     editor.post.author = $('#article-author').val();
     editor.post.authorUrl = $('#article-author-url').val();
-    editor.post.publishedOn = new Date();
     editor.post.markdown = $('#article-markdown').val();
     editor.post.body = marked(editor.post.markdown);
     editor.post.category = $('#article-category').val();
+
 
     // generate article preview in right-hand module
     $('#home').children().remove();
@@ -58,6 +59,20 @@ editor.livePreview = function() {
   });
 };
 
+editor.determinePubDate = function() {
+  // display default value for published articles
+  $('#article-sch-date').val(editor.post.publishedOn).parent().hide();
+
+  $('#article-published').on('change', function() {
+    $('#article-sch-date').parent().fadeToggle();
+    if (!$('#article-published').attr('checked')) {
+      editor.post.publishedOn = $('#article-sch-date').val();
+    }
+    //   // format day to ISO 8601 format (YYYY-MM-DD)
+    //   editor.post.publishedOn = new Date().toISOString().substring(0, 10);
+  });
+};
+
 editor.backToHome = function() {
   $('#back-home-button').on('click', function() {
     $(location).attr('href', '/index.html');
@@ -70,6 +85,8 @@ editor.saveChanges = function() {
       'sql': 'UPDATE articles SET title = ?, author = ?, authorUrl = ?, publishedOn = ?, markdown = ?, category = ? WHERE id = ?',
       'data': [editor.post.title, editor.post.author, editor.post.authorUrl, editor.post.publishedOn, editor.post.markdown, editor.post.category, editor.post.id]
     }]);
+
+    
   });
 };
 
@@ -93,4 +110,5 @@ $(function() {
   editor.saveChanges();
   editor.deletePost();
   editor.backToHome();
+  // editor.determinePubDate();
 });
