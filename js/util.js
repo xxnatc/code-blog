@@ -22,7 +22,7 @@ util.handleNav = function() {
     $('#primary-nav').slideToggle();
     console.log('click');
   });
-  // set nav tab 
+  // set nav tab
   var tabCache = localStorage.getItem('tab-position');
   if (!tabCache) {
     $('.nav-tabs li[data-content=home]').trigger('click');
@@ -43,9 +43,39 @@ helper.clearCache = function() {
     'DROP TABLE articles;',
     function() {
       localStorage.removeItem('etag');
+      localStorage.removeItem('draft');
+      localStorage.removeItem('tab-position');
       console.log('Cache all cleared');
     }
   );
+};
+
+// redirect to different pages
+helper.rd = function(shortcut) {
+  var goTo = function(path) {
+    $(location).attr('href', $(location).attr('origin') + path);
+  };
+
+  switch (shortcut) {
+  case 'i':
+    goTo('/');
+    break;
+  case 'a':
+    goTo('?admin=true');
+    break;
+  case 'e':
+    goTo('/editor.html');
+    break;
+  case 'st':
+    goTo('/stats.html');
+    break;
+  case 'se':
+    goTo('/secret.html');
+    break;
+  default:
+    console.log('Redirect shortcut invalid.');
+    break;
+  }
 };
 
 Handlebars.registerHelper('if_admin', function (block) {
