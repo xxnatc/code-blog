@@ -62,12 +62,6 @@ blog.fetchFromDB = function() {
   );
 };
 
-blog.init = function() {
-  blog.sortArticles();
-  blog.populate();
-  blog.previewArticles();
-};
-
 blog.loadIntoBlogObj = function(element) {
   blog.articles.push(new Article(element));
 };
@@ -79,6 +73,13 @@ blog.insertArticleToDB = function(article) {
       'data': [article.title, article.author, article.authorUrl, article.category, article.publishedOn, article.markdown]
     }]
   );
+};
+
+blog.init = function() {
+  blog.sortArticles();
+  blog.populate();
+  blog.previewArticles();
+  blog.showFilters();
 };
 
 
