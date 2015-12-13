@@ -32,9 +32,14 @@ util.handleNav = function() {
 };
 
 // return a value stored in a given key from browser query string
-util.getQuery = function (key) {
+util.getQuery = function(key) {
   var match = RegExp('[?&]' + key + '=([^&]*)').exec(window.location.search);
   return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+};
+
+// redirect page to specific path
+util.redirectTo = function(path) {
+  $(location).attr('href', $(location).attr('origin') + path);
 };
 
 var helper = {};
@@ -50,27 +55,23 @@ helper.clearCache = function() {
   );
 };
 
-// redirect to different pages
+// provide shortcut for redirecting
 helper.rd = function(shortcut) {
-  var goTo = function(path) {
-    $(location).attr('href', $(location).attr('origin') + path);
-  };
-
   switch (shortcut) {
   case 'i':
-    goTo('/');
+    util.redirectTo('/');
     break;
   case 'a':
-    goTo('?admin=true');
+    util.redirectTo('?admin=true');
     break;
   case 'e':
-    goTo('/editor.html?id=');
+    util.redirectTo('/editor.html?id=');
     break;
   case 'st':
-    goTo('/stats.html');
+    util.redirectTo('/stats.html');
     break;
   case 'se':
-    goTo('/secret.html');
+    util.redirectTo('/secret.html');
     break;
   default:
     console.log('Redirect shortcut invalid.');

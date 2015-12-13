@@ -38,60 +38,65 @@
       <h1>The Inevitable Oxford Comma</h1>
     </header>
 
-    <nav>
+    <nav class="first-row">
       <button id="back-home-button" class="btn btn-default">Back to home</button>
     </nav>
 
     <div class="row row-editor">
       <!-- left module -->
-      <section id="form-area" class="col-md-5 well">
-        <h2 class="text-center">
-          <span class="glyphicon glyphicon-pencil"></span> Edit post
-        </h2>
-        <form>
-          <div class="form-group">
-            <label for="article-title">Article Title</label>
-            <input type="text" id="article-title" class="form-control" placeholder="Title" required>
-          </div>
-          <div class="form-group">
-            <label for="article-author">Author Name</label>
-            <input type="text" id="article-author" class="form-control" placeholder="Author" required>
-          </div>
-          <div class="form-group">
-            <label for="article-author-url">Author Link</label>
-            <input type="text" id="article-author-url" class="form-control" placeholder="URL" required>
-          </div>
-          <div class="form-group">
-            <label for="article-markdown">Content</label>
-            <textarea id="article-markdown" class="form-control" rows="15"></textarea>
-            <p class="help-block">Markdown styling is supported.</p>
-          </div>
-          <div class="form-group">
-            <label for="article-category">Blog category</label>
-            <input type="text" id="article-category" class="form-control" placeholder="Category" required>
-          </div>
-          <div class="checkbox form-inline" id="article-date">
-            <label>
-              <input type="checkbox" id="article-published" checked="true"> Use original publish date:
-            </label>
-            <input type="date" id="article-sch-date" class="form-control" disabled>
+      <section id="form-area" class="col-md-5">
+        <div class="well">
+          <h2 class="text-center">
+            <span class="glyphicon glyphicon-pencil"></span> Edit post
+          </h2>
 
-          </div>
+          <form>
+            <div class="form-group">
+              <label for="article-title">Article Title</label>
+              <input type="text" id="article-title" class="form-control" placeholder="Title" required>
+            </div>
+            <div class="form-group">
+              <label for="article-author">Author Name</label>
+              <input type="text" id="article-author" class="form-control" placeholder="Author" required>
+            </div>
+            <div class="form-group">
+              <label for="article-author-url">Author Link</label>
+              <input type="text" id="article-author-url" class="form-control" placeholder="URL" required>
+            </div>
+            <div class="form-group">
+              <label for="article-markdown">Content</label>
+              <textarea id="article-markdown" class="form-control" rows="15"></textarea>
+              <p class="help-block">Markdown styling is supported.</p>
+            </div>
+            <div class="form-group">
+              <label for="article-category">Blog category</label>
+              <input type="text" id="article-category" class="form-control" placeholder="Category" required>
+            </div>
+            <div class="checkbox form-inline" id="article-date">
+              <label>
+                <input type="checkbox" id="article-published" checked="true"> Use original publish date:
+              </label>
+              <input type="date" id="article-sch-date" class="form-control" disabled>
+            </div>
 
-          <button id="save-button" class="btn btn-success">Save changes</button>
-          <button id="delete-button" class="btn btn-danger pull-right">Delete article</button>
-        </form>
+            <button id="save-button" class="btn btn-success">Save changes</button>
+            <button id="delete-button" class="btn btn-danger pull-right">Delete article</button>
+          </form>
+        </div>
       </section>
 
-      <section id="json-area" class="col-md-5 non-default well">
-        <h2 class="text-center">
-          <span class="glyphicon glyphicon-bullhorn"></span> Update your JSON
-        </h2>
-        <p>Your raw data is ready to be posted! Copy and the following code and paste it into your JSON.</p>
-        <button id="return-button" class="btn btn-default">
-          <span class="glyphicon glyphicon-triangle-left"></span>  Back to editor
-        </button><br /><br />
-        <pre id="article-json" class="pre-scrollable"></pre>
+      <section id="json-area" class="col-md-5 non-default">
+        <div class="well">
+          <h2 class="text-center">
+            <span class="glyphicon glyphicon-bullhorn"></span> Update your JSON
+          </h2>
+          <p id="json-msg"></p>
+          <p>To update your raw data file, copy the following code and paste it into your JSON file.</p>
+          <button id="return-button" class="btn btn-default">
+            <span class="glyphicon glyphicon-triangle-left"></span>  Back to editor
+          </button>
+          <pre id="article-json" class="pre-scrollable"></pre>
+        </div>
       </section>
       <!-- end left module -->
 

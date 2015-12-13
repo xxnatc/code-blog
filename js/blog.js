@@ -45,8 +45,7 @@ blog.fetchArticles = function(data, textStatus, xhr) {
 blog.fetchFromJSON = function() {
   $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
     data.forEach(function(element, index, array) {
-      blog.insertArticleToDB(element);
-      // blog.loadIntoBlogObj(element);
+      (new Article(element)).insertArticleToDB();
     });
   }).done(function() {
     blog.fetchFromDB();
@@ -55,26 +54,14 @@ blog.fetchFromJSON = function() {
 
 // load data from DB
 blog.fetchFromDB = function() {
-  webDB.execute(
-    'SELECT * FROM articles',
-    function(result) {
-      result.forEach(blog.loadIntoBlogObj);
-      blog.init();
-    }
-  );
+  Article.loadAll(function(result) {
+    result.forEach(blog.loadIntoBlogObj);
+    blog.init();
+  });
 };
 
 blog.loadIntoBlogObj = function(element) {
   blog.articles.push(new Article(element));
-};
-
-blog.insertArticleToDB = function(article) {
-  webDB.execute(
-    [{
-      'sql': 'INSERT INTO articles (title, author, authorUrl, category, publishedOn, markdown) VALUES (?, ?, ?, ?, ?, ?);',
-      'data': [article.title, article.author, article.authorUrl, article.category, article.publishedOn, article.markdown]
-    }]
-  );
 };
 
 blog.init = function() {
@@ -82,7 +69,6 @@ blog.init = function() {
   blog.showFilters();
   blog.handleAdmin();
   var path = $(location).attr('pathname');
-  console.log(path);
   if (path === '/' || path === '/index.html') {
     blog.populate();
     blog.previewArticles();
@@ -95,8 +81,15 @@ blog.handleAdmin = function() {
   $('#home').on('click', '.post-edit', function(event) {
     event.preventDefault();
     var dbId = $(this).data('dbid');
-    $(location).attr('href', $(location).attr('origin') + '/editor.html?id=' + dbId);
+    util.redirectTo('/editor.html?id=' + dbId);
   });
+  if (util.getQuery('admin')) {
+
+    $('#exit-admin').show().on('click', function(event) {
+      event.preventDefault();
+      util.redirectTo('/');
+    });
+  }
 };
 
 // write blog posts to DOM by calling .toHTML() on each article
