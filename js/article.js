@@ -1,11 +1,4 @@
 var Article = function(raw) {
-  // this.dbId = raw.id;
-  // this.title = raw.title;
-  // this.category = raw.category;
-  // this.author = raw.author;
-  // this.authorUrl = raw.authorUrl;
-  // this.publishedOn = raw.publishedOn;
-  // this.markdown = raw.markdown;
   Object.keys(raw).forEach(function(el, index, array) {
     this[el] = raw[el];
   }, this);
@@ -76,6 +69,28 @@ Article.saveChanges = function(edits, callback) {
   );
 };
 
+/*
+Article.prototype.deleteRecord = function(callback) {
+  callback = callback || function() {};
+  webDB.execute([{
+    'sql': 'DELETE FROM articles WHERE id = ?',
+    'data': [this.id]
+  }],
+    callback
+  );
+};
+
+Article.prototype.updateRecord = function(edits, callback) {
+  callback = callback || function() {};
+  webDB.execute([{
+    'sql': 'UPDATE articles SET title = ?, author = ?, authorUrl = ?, publishedOn = ?, markdown = ?, category = ? WHERE id = ?',
+    'data': [edits.title, edits.author, edits.authorUrl, edits.publishedOn, edits.markdown, edits.category, this.id]
+  }],
+    callback
+  );
+};
+*/
+
 Article.fetchArticle = function(dbId, callback) {
   callback = callback || function() {};
   webDB.execute([{
@@ -86,7 +101,51 @@ Article.fetchArticle = function(dbId, callback) {
   );
 };
 
+
+Article.all = [];
+
+Article.importUrl = '/data/hackerIpsumMin.json';
+
+Article.requestAll = function(callback, callback2) {
+  $.getJSON(Article.importUrl, function(data) {
+    data.forEach(function(el) {
+      (new Article(el)).insertArticleToDB();
+    });
+    callback(callback2);
+  });
+};
+
+// load all data from DB
 Article.loadAll = function(callback) {
   callback = callback || function() {};
-  webDB.execute('SELECT * FROM articles', callback);
+  console.log('loadAll');
+  if (!Article.all.length) {
+    console.log('loadAll if');
+
+    webDB.execute(
+      'SELECT * FROM articles ORDER BY publishedOn;',
+      function(data) {
+        if (!data.length) {
+          Article.requestAll(Article.loadAll, callback);
+        } else {
+          data.forEach(function(el) {
+            Article.all.push(new Article(el));
+          });
+          callback();
+        }
+      }
+    );
+
+
+  } else {
+    console.log('loadAll else');
+
+    callback();
+  }
+};
+
+// delete all records from given table
+Article.truncateTable = function(callback) {
+  callback = callback || function() {};
+  webDB.execute('DELETE FROM articles;', callback);
 };

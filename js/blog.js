@@ -7,11 +7,11 @@ blog.listCategoryIndex = [];
 blog.importUrl = 'data/hackerIpsum.json';
 
 // grab blog post template and call function to load article data
-blog.loadTemplate = function() {
-  $.get('template/post-template.handlebars', function(data) {
-    Article.prototype.template = Handlebars.compile(data);
-  }).done(blog.loadArticles);
-};
+// blog.loadTemplate = function() {
+//   $.get('template/post-template.handlebars', function(data) {
+//     Article.prototype.template = Handlebars.compile(data);
+//   }).done(blog.loadArticles);
+// };
 
 blog.loadArticles = function() {
   $.ajax({
@@ -42,30 +42,30 @@ blog.fetchArticles = function(data, textStatus, xhr) {
 };
 
 // import data from remote server
-blog.fetchFromJSON = function() {
-  $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
-    data.forEach(function(element, index, array) {
-      (new Article(element)).insertArticleToDB();
-    });
-  }).done(function() {
-    blog.fetchFromDB();
-  });
-};
+// blog.fetchFromJSON = function() {
+//   $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
+//     data.forEach(function(element, index, array) {
+//       (new Article(element)).insertArticleToDB();
+//     });
+//   }).done(function() {
+//     blog.fetchFromDB();
+//   });
+// };
 
 // load data from DB
-blog.fetchFromDB = function() {
-  Article.loadAll(function(result) {
-    result.forEach(blog.loadIntoBlogObj);
-    blog.init();
-  });
-};
+// blog.fetchFromDB = function() {
+//   Article.loadAll(function(result) {
+//     result.forEach(blog.loadIntoBlogObj);
+//     blog.init();
+//   });
+// };
 
-blog.loadIntoBlogObj = function(element) {
-  blog.articles.push(new Article(element));
-};
+// blog.loadIntoBlogObj = function(element) {
+//   blog.articles.push(new Article(element));
+// };
 
 blog.init = function() {
-  $('#loading-div').hide();
+  // $('#loading-div').hide();
   blog.sortArticles();
   blog.showFilters();
   blog.handleAdmin();
