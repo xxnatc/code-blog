@@ -4,7 +4,7 @@ blog.listAuthor = [];
 blog.listCategory = [];
 blog.listAuthorIndex = [];
 blog.listCategoryIndex = [];
-blog.importUrl = 'data/hackerIpsumMin.json';
+blog.importUrl = 'data/hackerIpsum.json';
 
 // grab blog post template and call function to load article data
 blog.loadTemplate = function() {
@@ -65,6 +65,7 @@ blog.loadIntoBlogObj = function(element) {
 };
 
 blog.init = function() {
+  $('#loading-div').hide();
   blog.sortArticles();
   blog.showFilters();
   blog.handleAdmin();

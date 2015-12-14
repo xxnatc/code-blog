@@ -116,6 +116,7 @@
   font-size: 0.8em;
 }
 
+/* ========== EDITOR PAGE ========== */
 #form-area .well, #json-area .well {
   padding-top: 0px;
 }
@@ -126,4 +127,20 @@
 
 #return-button {
   margin-bottom: 12px;
+}
+
+/* ========== LOADING ========== */
+#loading-div {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+#loading-div img {
+  width: 80px;
+}
+
+#loading-div h3 {
+  font-size: 1em;
+  margin: 0px;
+  color: #337ab7;
 }

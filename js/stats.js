@@ -2,6 +2,7 @@ var stats = {};
 
 stats.displayStats = function() {
   console.log('Initiatizing stats');
+  $('#loading-div').hide();
   stats.showTotalArticles();
   stats.showTotalAuthors();
   // execute word count
