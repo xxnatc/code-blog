@@ -24,7 +24,7 @@
   #site-header h1 {
     margin: 20px 0px 0px 0px;
   }
-}  
+}
 
 /* ========== HAMBURGER NAV ========== */
 #ham-menu {
@@ -72,7 +72,7 @@
   }
   #primary-nav .primary-nav-tabs {
     padding: 12px 0px 6px 0px;
-  }  
+  }
   .primary-nav-tabs .glyphicon {
     display: block;
     margin: 0px auto 3px auto;
@@ -81,15 +81,9 @@
 
 /* ========== BLOG POST FILTER NAV ========== */
 #blog-filter {
-  text-align: center;
+  text-align: right;
   padding-top: 18px;
   line-height: 1.8em;
-}
-
-@media (min-width: 992px) {
-  #blog-filter {
-    text-align: right;
-  }
 }
 
 /* ========== IMAGES ========== */
@@ -113,7 +107,7 @@
   .post-body .pull-right {
     margin: 12px 0px 12px 12px;
   }
-  .post-body .pull-left { 
+  .post-body .pull-left {
     margin: 12px 12px 12px 0px;
   }
 }
@@ -122,9 +116,31 @@
   font-size: 0.8em;
 }
 
-#form-area, #json-area {
+/* ========== EDITOR PAGE ========== */
+#form-area .well, #json-area .well {
   padding-top: 0px;
 }
-.row-editor {
-  margin-top: 24px;
+
+.row-editor, .first-row {
+  margin-top: 16px;
+}
+
+#return-button {
+  margin-bottom: 12px;
+}
+
+/* ========== LOADING ========== */
+#loading-div {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+#loading-div img {
+  width: 80px;
+}
+
+#loading-div h3 {
+  font-size: 1em;
+  margin: 0px;
+  color: #337ab7;
 }

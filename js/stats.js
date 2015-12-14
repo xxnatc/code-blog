@@ -2,6 +2,7 @@ var stats = {};
 
 stats.displayStats = function() {
   console.log('Initiatizing stats');
+  $('#loading-div').hide();
   stats.showTotalArticles();
   stats.showTotalAuthors();
   // execute word count
@@ -55,7 +56,7 @@ stats.countAll = function() {
 };
 
 stats.countArticle = function(article) {
-  return article.body.split(/\s+/).filter(stats.excludeAttr).length;
+  return marked(article.markdown).split(/\s+/).filter(stats.excludeAttr).length;
 };
 
 // account for extra word caused by counting an attribute
@@ -93,6 +94,6 @@ stats.sum = function(acc, num) {
 
 
 $(function() {
-  blog.importArticles();
-  $(document).ajaxComplete(stats.displayStats);
+  webDB.init();
+  blog.loadArticles();
 });

@@ -1,7 +1,12 @@
 <article>
   <hr />
   <h1 class="post-title">{{{title}}}</h1>
-  <h4 class="post-subtitle">By <a href="{{{authorUrl}}}">{{author}}</a>{{daysPub}}</h4>
+  <h4 class="post-subtitle">
+    By <a href="{{{authorUrl}}}">{{author}}</a>{{daysPub}}
+    {{#if_admin}}
+      <button class="post-edit btn btn-primary" data-dbId="{{id}}">Edit post</button>
+    {{/if_admin}}
+  </h4>
   <div class="post-body">{{{body}}}</div>
   <button class="post-read-on btn btn-default">
     Read on <span class="glyphicon glyphicon-triangle-right"></span>

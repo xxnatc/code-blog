@@ -4,88 +4,93 @@ blog.listAuthor = [];
 blog.listCategory = [];
 blog.listAuthorIndex = [];
 blog.listCategoryIndex = [];
+blog.importUrl = 'data/hackerIpsum.json';
 
-// import content from remote server or cache in local storage
-blog.importArticles = function() {
-  var rawDataCache = localStorage.getItem('raw-data');
-  if (!rawDataCache) {
-    // no cache in local storage
-    blog.importFromRemote();
-    console.log('Import raw data: Cache miss, no cache found.');
-  } else {
-    var eTagCache = localStorage.getItem('etag');
-    var eTagRemote = '';
-    $.getJSON('js/hackerIpsum.json', function(data, textStatus, xhr) {
-      eTagRemote = xhr.getResponseHeader('etag');
-      console.log('eTag from cache: ' + eTagCache);
-      console.log('eTag from server: ' + eTagRemote);
-    }).done(function() {
-      if (eTagCache == eTagRemote) {
-        // cache is up to date
-        blog.loadFromCache(rawDataCache);
-        console.log('Import raw data: Cache hit, data loading from cache.');
-      } else {
-        // cache is outdated
-        blog.importFromRemote();
-        console.log('Import raw data: Cache outdated, loading from server');
-      }
-    });
-  }
+// grab blog post template and call function to load article data
+blog.loadTemplate = function() {
+  $.get('template/post-template.handlebars', function(data) {
+    Article.prototype.template = Handlebars.compile(data);
+  }).done(blog.loadArticles);
 };
 
-// create instances of article object from raw data
-blog.processRawData = function(data) {
-  for (var i = 0; i < data.length; i++) {
-    if (!data[i].body) {
-      data[i].body = marked(data[i].markdown);
-    }
-    var post = new Article(data[i]);
-    blog.articles.push(post);
-  }
-};
-
-// import raw data from server, then start building blog
-blog.importFromRemote = function() {
-  $.getJSON('js/hackerIpsum.json', function(data, textStatus, xhr) {
-    blog.processRawData(data);
-    // update local storage with updated data
-    localStorage.setItem('raw-data', JSON.stringify(blog.articles));
-    localStorage.setItem('etag', xhr.getResponseHeader('etag'));
-  })
-  .done(function() {
-    blog.sortArticles();
-    blog.showFilters();
-    console.log('Import from server completed.');
-    // initiate blog
-    if ($(location).attr('pathname') == '/') {
-      blog.getTemplate();
-    }
+blog.loadArticles = function() {
+  $.ajax({
+    type: 'HEAD',
+    url: blog.importUrl,
+    success: blog.fetchArticles
   });
 };
 
-// import raw data from local storage
-blog.loadFromCache = function(rawDataCache) {
-  var data = JSON.parse(rawDataCache);
-  blog.processRawData(data);
-  // initiate blog
+// process eTag
+blog.fetchArticles = function(data, textStatus, xhr) {
+  var eTagCache = localStorage.getItem('etag');
+  var eTagRemote = xhr.getResponseHeader('etag');
+  console.log('eTag from cache: ' + eTagCache);
+  console.log('eTag from server: ' + eTagRemote);
+
+  if (eTagCache != eTagRemote) {
+    console.log('Import raw data: Cache miss');
+    // update etag in localStorage
+    localStorage.setItem('etag', eTagRemote);
+    // remove cached article data from DB
+    webDB.execute('DELETE FROM articles;');
+    blog.fetchFromJSON();
+  } else {
+    console.log('Import raw data: Cache hit!');
+    blog.fetchFromDB();
+  }
+};
+
+// import data from remote server
+blog.fetchFromJSON = function() {
+  $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
+    data.forEach(function(element, index, array) {
+      (new Article(element)).insertArticleToDB();
+    });
+  }).done(function() {
+    blog.fetchFromDB();
+  });
+};
+
+// load data from DB
+blog.fetchFromDB = function() {
+  Article.loadAll(function(result) {
+    result.forEach(blog.loadIntoBlogObj);
+    blog.init();
+  });
+};
+
+blog.loadIntoBlogObj = function(element) {
+  blog.articles.push(new Article(element));
+};
+
+blog.init = function() {
+  $('#loading-div').hide();
   blog.sortArticles();
   blog.showFilters();
-  console.log('Loading from cache completed.');
-  if ($(location).attr('pathname') == '/') {
-    blog.getTemplate();
+  blog.handleAdmin();
+  var path = $(location).attr('pathname');
+  if (path === '/' || path === '/index.html') {
+    blog.populate();
+    blog.previewArticles();
+  } else if (path === '/stats.html') {
+    stats.displayStats();
   }
 };
 
-// grab blog post template and call function to print articles to page
-blog.getTemplate = function() {
-  $.get('../template/post-template.handlebars', function(data) {
-    Article.prototype.template = Handlebars.compile(data);
-  }).done(function() {
-    // print to page
-    blog.populate();
-    // truncate posts to the first paragraph
-    blog.previewArticles();
+blog.handleAdmin = function() {
+  $('#home').on('click', '.post-edit', function(event) {
+    event.preventDefault();
+    var dbId = $(this).data('dbid');
+    util.redirectTo('/editor.html?id=' + dbId);
   });
+  if (util.getQuery('admin')) {
+
+    $('#exit-admin').show().on('click', function(event) {
+      event.preventDefault();
+      util.redirectTo('/');
+    });
+  }
 };
 
 // write blog posts to DOM by calling .toHTML() on each article
@@ -180,7 +185,3 @@ blog.showFilters = function() {
     $('select:first-child').find('option[value=reset]').attr('selected', true);
   });
 };
-//
-// $(function() {
-//   blog.importArticles();
-// });

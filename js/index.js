@@ -1,5 +1,6 @@
 $(function() {
-  blog.importArticles();
-  util.navigate();
-  util.navigateHam();
+  webDB.init();
+
+  blog.loadTemplate();
+  util.handleNav();
 });
