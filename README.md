@@ -27,6 +27,11 @@ This function redirects the page to a specified page.
 - `'st'` redirects to vanity metrics page (`stats.html`)
 - `'se'` redirects to new article editor page (`secret.html`)
 
+#### Room for Improvement
+Here's a list of implementation details I wish to improve on:
+- modify dependency to rely on SQL database on every requests, including sorting on load, filtering, retrieving article for edit
+
+
 ## Credits
 ##### Individuals
 [Kenneth Suk](https://github.com/suhk) helped with the content editor and preview page. (Pair programming on 12/4/2015 - Driver: Kenneth, Navigator: Natalie)
