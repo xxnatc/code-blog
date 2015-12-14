@@ -1,3 +1,4 @@
+/* ==================== utility functions ==================== */
 var util = {};
 
 // reset tabs to inactive and hide all sections
@@ -42,6 +43,16 @@ util.redirectTo = function(path) {
   $(location).attr('href', $(location).attr('origin') + path);
 };
 
+/* ==================== Handlebars helper ==================== */
+Handlebars.registerHelper('if_admin', function (block) {
+  if (util.getQuery('admin')) {
+    return block.fn(this);
+  } else {
+    return block.inverse(this);
+  }
+});
+
+/* ==================== testing helper ==================== */
 var helper = {};
 helper.clearCache = function() {
   webDB.execute(
@@ -78,11 +89,3 @@ helper.rd = function(shortcut) {
     break;
   }
 };
-
-Handlebars.registerHelper('if_admin', function (block) {
-  if (util.getQuery('admin')) {
-    return block.fn(this);
-  } else {
-    return block.inverse(this);
-  }
-});

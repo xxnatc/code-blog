@@ -84,16 +84,8 @@ editor.saveChanges = function() {
 
 // generate JSON string with info of all articles
 editor.generateJSON = function(msg, returnToEdit) {
-  // webDB.execute(
-  //   'SELECT * FROM articles;',
-  //   function(result) {
-  //     $('#article-json').text(JSON.stringify(result));
-  //   }
-  // );
-
   Article.loadAll(function(result) {
     $('#article-json').text(JSON.stringify(result));
-
   });
   // option to display 'Back to Editor' button
   if (returnToEdit) {

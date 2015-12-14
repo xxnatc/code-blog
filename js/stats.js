@@ -94,9 +94,5 @@ stats.sum = function(acc, num) {
 
 $(function() {
   webDB.init();
-  // var importData = $.Deferred();
-  // importData.done(blog.loadArticles).done(stats.displayStats);
-  // importData.resolve();
   blog.loadArticles();
-  // $(document).ajaxComplete(stats.displayStats);
 });
