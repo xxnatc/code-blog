@@ -30,6 +30,7 @@ This function redirects the page to a specified page.
 #### Room for Improvement
 Here's a list of implementation details I wish to improve on:
 - modify dependency to rely on SQL database on every requests, including sorting on load, filtering, retrieving article for edit
+- add option to create article in admin mode (combine secret page with editor page)
 
 
 ## Credits
