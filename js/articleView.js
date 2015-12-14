@@ -7,9 +7,9 @@ var articleView = {};
 // };
 
 articleView.renderAll = function() {
-  $('#home').show();
-  $('#loading-div').hide();
   $('section:not(#home)').hide();
+  $('#home').fadeIn();
+  $('#loading-div').hide();
   Article.all.forEach(function(el) {
     el.toHTML();
     // $('#home').append(el.toHTML);
@@ -31,4 +31,5 @@ articleView.index = function() {
     Article.prototype.template = Handlebars.compile(data);
     articleView.renderAll();
   });
+  util.setActiveNav('home');
 };

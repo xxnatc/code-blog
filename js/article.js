@@ -120,10 +120,8 @@ Article.loadAll = function(callback) {
   callback = callback || function() {};
   console.log('loadAll');
   if (!Article.all.length) {
-    console.log('loadAll if');
-
     webDB.execute(
-      'SELECT * FROM articles ORDER BY publishedOn;',
+      'SELECT * FROM articles ORDER BY publishedOn DESC;',
       function(data) {
         if (!data.length) {
           Article.requestAll(Article.loadAll, callback);
@@ -135,11 +133,7 @@ Article.loadAll = function(callback) {
         }
       }
     );
-
-
   } else {
-    console.log('loadAll else');
-
     callback();
   }
 };
