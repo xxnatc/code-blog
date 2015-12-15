@@ -8,20 +8,17 @@ var articleView = {};
 
 articleView.showSection = function() {
   $('section:not(#home)').hide();
-  $('#home').fadeIn();
+  $('#articles').empty();
   $('#loading-div').hide();
+  $('#home').fadeIn();
 };
-  // articleView.showSection();
-  // $('#articles').empty();
 
 articleView.render = function(article) {
-  console.log(article);
   var compiledHTML = article.toHTML();
   $('#articles').append(compiledHTML);
 };
 
 articleView.renderAll = function() {
-  articleView.showSection();
   Article.all.forEach(articleView.render);
 };
 
@@ -39,21 +36,16 @@ articleView.getTemplate = function(callback) {
   }
 };
 
-articleView.individual = function(id) {
-  Article.fetchArticle(id, function(data) {
-    if (data.length === 1) {
-      articleView.getTemplate(function() {
-        articleView.render(new Article(data[0]));
-      });
-    }
-  });
+articleView.selection = function(data) {
   this.showSection();
-
-
+  this.getTemplate(function() {
+    data.forEach(articleView.render);
+  });
 };
 
 
 articleView.index = function() {
+  this.showSection();
   this.getTemplate(this.renderAll);
   util.setActiveNav('home');
 };

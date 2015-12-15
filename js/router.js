@@ -16,7 +16,12 @@ page('/contact', function() {
 
 page('/articles/:id', function(ctx, next) {
   console.log('called /articles/' + ctx.params.id);
-  articleController.showIndividual(ctx, next);
+  articleController.selectId(ctx);
+});
+
+page('/authors/:author', function(ctx, next) {
+  console.log('called /authors/' + ctx.params.author);
+  articleController.selectAuthor(ctx);
 });
 
 page.start();

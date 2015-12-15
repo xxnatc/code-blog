@@ -90,14 +90,43 @@ Article.prototype.updateRecord = function(edits, callback) {
 };
 */
 
-Article.fetchArticle = function(dbId, callback) {
+Article.convertResult = function(array) {
+  return array.map(function(obj) {
+    return new Article(obj);
+  });
+};
+
+Article.findById = function(id, callback) {
   callback = callback || function() {};
   webDB.execute([{
-    'sql': 'SELECT * FROM articles WHERE id = ?',
-    'data': [dbId]
-  }],
-    callback
-  );
+    'sql': 'SELECT * FROM articles WHERE id = ?;',
+    'data': [id]
+  }], function(data) {
+    var articleArray = Article.convertResult(data);
+    callback(articleArray);
+  });
+};
+
+Article.findByAuthor = function(author, callback) {
+  callback = callback || function() {};
+  webDB.execute([{
+    'sql': 'SELECT * FROM articles WHERE author LIKE ?;',
+    'data': [author]
+  }], function(data) {
+    var articleArray = Article.convertResult(data);
+    callback(articleArray);
+  });
+};
+
+Article.findByCategory = function(cat, callback) {
+  callback = callback || function() {};
+  webDB.execute([{
+    'sql': 'SELECT * FROM articles WHERE category LIKE ?;',
+    'data': [cat]
+  }], function(data) {
+    var articleArray = Article.convertResult(data);
+    callback(articleArray);
+  });
 };
 
 
