@@ -32,6 +32,12 @@ util.handleNav = function() {
   }
 };
 
+util.setActiveNav = function(content) {
+  $('.nav-tabs li').removeAttr('class');
+  $('.nav-tabs li[data-content=' + content + ']').attr('class', 'active');
+};
+
+
 // return a value stored in a given key from browser query string
 util.getQuery = function(key) {
   var match = RegExp('[?&]' + key + '=([^&]*)').exec(window.location.search);

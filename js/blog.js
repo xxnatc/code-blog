@@ -7,65 +7,65 @@ blog.listCategoryIndex = [];
 blog.importUrl = 'data/hackerIpsum.json';
 
 // grab blog post template and call function to load article data
-blog.loadTemplate = function() {
-  $.get('template/post-template.handlebars', function(data) {
-    Article.prototype.template = Handlebars.compile(data);
-  }).done(blog.loadArticles);
-};
+// blog.loadTemplate = function() {
+//   $.get('template/post-template.handlebars', function(data) {
+//     Article.prototype.template = Handlebars.compile(data);
+//   }).done(blog.loadArticles);
+// };
 
-blog.loadArticles = function() {
-  $.ajax({
-    type: 'HEAD',
-    url: blog.importUrl,
-    success: blog.fetchArticles
-  });
-};
+// blog.loadArticles = function() {
+//   $.ajax({
+//     type: 'HEAD',
+//     url: blog.importUrl,
+//     success: blog.fetchArticles
+//   });
+// };
 
 // process eTag
-blog.fetchArticles = function(data, textStatus, xhr) {
-  var eTagCache = localStorage.getItem('etag');
-  var eTagRemote = xhr.getResponseHeader('etag');
-  console.log('eTag from cache: ' + eTagCache);
-  console.log('eTag from server: ' + eTagRemote);
-
-  if (eTagCache != eTagRemote) {
-    console.log('Import raw data: Cache miss');
-    // update etag in localStorage
-    localStorage.setItem('etag', eTagRemote);
-    // remove cached article data from DB
-    webDB.execute('DELETE FROM articles;');
-    blog.fetchFromJSON();
-  } else {
-    console.log('Import raw data: Cache hit!');
-    blog.fetchFromDB();
-  }
-};
+// blog.fetchArticles = function(data, textStatus, xhr) {
+//   var eTagCache = localStorage.getItem('etag');
+//   var eTagRemote = xhr.getResponseHeader('etag');
+//   console.log('eTag from cache: ' + eTagCache);
+//   console.log('eTag from server: ' + eTagRemote);
+//
+//   if (eTagCache != eTagRemote) {
+//     console.log('Import raw data: Cache miss');
+//     // update etag in localStorage
+//     localStorage.setItem('etag', eTagRemote);
+//     // remove cached article data from DB
+//     webDB.execute('DELETE FROM articles;');
+//     blog.fetchFromJSON();
+//   } else {
+//     console.log('Import raw data: Cache hit!');
+//     blog.fetchFromDB();
+//   }
+// };
 
 // import data from remote server
-blog.fetchFromJSON = function() {
-  $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
-    data.forEach(function(element, index, array) {
-      (new Article(element)).insertArticleToDB();
-    });
-  }).done(function() {
-    blog.fetchFromDB();
-  });
-};
+// blog.fetchFromJSON = function() {
+//   $.getJSON(blog.importUrl, function(data, textStatus, xhr) {
+//     data.forEach(function(element, index, array) {
+//       (new Article(element)).insertArticleToDB();
+//     });
+//   }).done(function() {
+//     blog.fetchFromDB();
+//   });
+// };
 
 // load data from DB
-blog.fetchFromDB = function() {
-  Article.loadAll(function(result) {
-    result.forEach(blog.loadIntoBlogObj);
-    blog.init();
-  });
-};
+// blog.fetchFromDB = function() {
+//   Article.loadAll(function(result) {
+//     result.forEach(blog.loadIntoBlogObj);
+//     blog.init();
+//   });
+// };
 
-blog.loadIntoBlogObj = function(element) {
-  blog.articles.push(new Article(element));
-};
+// blog.loadIntoBlogObj = function(element) {
+//   blog.articles.push(new Article(element));
+// };
 
 blog.init = function() {
-  $('#loading-div').hide();
+  // $('#loading-div').hide();
   blog.sortArticles();
   blog.showFilters();
   blog.handleAdmin();
@@ -78,55 +78,55 @@ blog.init = function() {
   }
 };
 
-blog.handleAdmin = function() {
-  $('#home').on('click', '.post-edit', function(event) {
-    event.preventDefault();
-    var dbId = $(this).data('dbid');
-    util.redirectTo('/editor.html?id=' + dbId);
-  });
-  if (util.getQuery('admin')) {
-
-    $('#exit-admin').show().on('click', function(event) {
-      event.preventDefault();
-      util.redirectTo('/');
-    });
-  }
-};
+// blog.handleAdmin = function() {
+//   $('#home').on('click', '.post-edit', function(event) {
+//     event.preventDefault();
+//     var dbId = $(this).data('dbid');
+//     util.redirectTo('/editor.html?id=' + dbId);
+//   });
+//   if (util.getQuery('admin')) {
+//
+//     $('#exit-admin').show().on('click', function(event) {
+//       event.preventDefault();
+//       util.redirectTo('/');
+//     });
+//   }
+// };
 
 // write blog posts to DOM by calling .toHTML() on each article
-blog.populate = function() {
-  for (var i = 0; i < blog.articles.length; i++) {
-    blog.articles[i].toHTML();
-  };
-};
+// blog.populate = function() {
+//   for (var i = 0; i < blog.articles.length; i++) {
+//     blog.articles[i].toHTML();
+//   };
+// };
 
 // display up to the first paragraph of each post,
 // toggle the rest when 'Read on' or 'Collpase' button is clicked
-blog.previewArticles = function() {
-  $('.post-body').children().not('p:first-of-type, :header:first-of-type').hide();
-  $('.post-collapse').hide();
-
-  $('#home').on('click', '.post-read-on', function(event) {
-    event.preventDefault();
-    $(this).hide();
-    $(this).siblings('.post-body').children().slideDown();
-    $(this).siblings('button').show();
-  });
-
-  $('#home').on('click', '.post-collapse', function(event) {
-    event.preventDefault();
-    $(this).hide();
-    $(this).siblings('.post-body').children().not('p:first-of-type, :header:first-of-type').slideUp();
-    $(this).siblings('button').show();
-  });
-};
+// blog.previewArticles = function() {
+//   $('.post-body').children().not('p:first-of-type, :header:first-of-type').hide();
+//   $('.post-collapse').hide();
+//
+//   $('#home').on('click', '.post-read-on', function(event) {
+//     event.preventDefault();
+//     $(this).hide();
+//     $(this).siblings('.post-body').children().slideDown();
+//     $(this).siblings('button').show();
+//   });
+//
+//   $('#home').on('click', '.post-collapse', function(event) {
+//     event.preventDefault();
+//     $(this).hide();
+//     $(this).siblings('.post-body').children().not('p:first-of-type, :header:first-of-type').slideUp();
+//     $(this).siblings('button').show();
+//   });
+// };
 
 // sorting all posts such that latest post appears on top
-blog.sortArticles = function() {
-  blog.articles.sort(function(a, b) {
-    return b.published - a.published;
-  });
-};
+// blog.sortArticles = function() {
+//   blog.articles.sort(function(a, b) {
+//     return b.published - a.published;
+//   });
+// };
 
 // generate a list of filter options, then populate dropdown menu
 blog.createFilters = function(list, listIndex, selectId, prop) {

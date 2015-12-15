@@ -9,10 +9,10 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/atelier-cave-light.min.css">
-  <link rel="stylesheet" type="text/css" href="css/layout.css">
-  <link rel="stylesheet" type="text/css" href="css/module.css">
-  <link rel="stylesheet" type="text/css" href="css/state.css">
-  <link rel="stylesheet" type="text/css" href="css/theme.css">
+  <link rel="stylesheet" type="text/css" href="/css/layout.css">
+  <link rel="stylesheet" type="text/css" href="/css/module.css">
+  <link rel="stylesheet" type="text/css" href="/css/state.css">
+  <link rel="stylesheet" type="text/css" href="/css/theme.css">
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
@@ -41,13 +41,13 @@
     <nav role="navigation" id="primary-nav">
       <ul class="nav nav-tabs nav-justified">
         <li role="presentation" data-content="home">
-          <a href="#" class="primary-nav-tabs"><span class="glyphicon glyphicon-home"></span>Home</a>
+          <a href="/" class="primary-nav-tabs"><span class="glyphicon glyphicon-home"></span>Home</a>
         </li>
         <li role="presentation" data-content="about">
-          <a href="#" class="primary-nav-tabs"><span class="glyphicon glyphicon-user"></span>About</a>
+          <a href="/about" class="primary-nav-tabs"><span class="glyphicon glyphicon-user"></span>About</a>
         </li>
         <li role="presentation" data-content="contact">
-          <a href="#" class="primary-nav-tabs"><span class="glyphicon glyphicon-briefcase"></span>Contact</a>
+          <a href="/contact" class="primary-nav-tabs"><span class="glyphicon glyphicon-briefcase"></span>Contact</a>
         </li>
       </ul>
     </nav>
@@ -66,9 +66,13 @@
       <!-- loading gif -->
       <div id="loading-div" class="row">
         <div class="col-md-6 col-md-offset-3">
-          <img src="img/dashinfinity.gif" />
+          <img src="/img/dashinfinity.gif" />
           <h3>Fetching the freshest blog posts just for you...</h3>
         </div>
+      </div>
+
+      <div id="articles">
+
       </div>
 
     </section>
@@ -91,13 +95,20 @@
   </footer>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
-  <script type="text/javascript" src="vendor/js/html5sql.js"></script>
-  <script type="text/javascript" src="js/webdb.js"></script>
-  <script type="text/javascript" src="js/article.js"></script>
-  <script type="text/javascript" src="js/blog.js"></script>
-  <script type="text/javascript" src="js/util.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" src="/vendor/js/html5sql.js"></script>
+  <script type="text/javascript" src="/js/webdb.js"></script>
+  <script type="text/javascript" src="/vendor/js/page.js"></script>
+
+  <script type="text/javascript" src="/js/util.js"></script>
+  <script type="text/javascript" src="/js/article.js"></script>
+  <script type="text/javascript" src="/js/articleView.js"></script>
+  <script type="text/javascript" src="/js/articleController.js"></script>
+  <script type="text/javascript" src="/js/navController.js"></script>
+
+  <!-- Router -->
+  <script type="text/javascript" src="/js/router.js"></script>
+
 </body>
 </html>

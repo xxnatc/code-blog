@@ -29,9 +29,8 @@ This function redirects the page to a specified page.
 
 #### Room for Improvement
 Here's a list of implementation details I wish to improve on:
-- modify dependency to rely on SQL database on every requests, including sorting on load, filtering, retrieving article for edit
 - add option to create article in admin mode (combine secret page with editor page)
-
+- right now, the `editor.html` and `stats.html` pages are not fully functional as the site is undergoing MVC restructuring
 
 ## Credits
 ##### Individuals
@@ -45,3 +44,4 @@ Here's a list of implementation details I wish to improve on:
 - [Handlebars.js](http://handlebarsjs.com/)
 - [Marked](https://github.com/chjj/marked)
 - [Highlight.js](https://highlightjs.org/)
+- [page.js](https://github.com/visionmedia/page.js)
