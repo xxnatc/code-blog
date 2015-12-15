@@ -7,6 +7,8 @@ var Article = function(raw) {
   this.msDiff = Date.parse(new Date()) - this.published;
 };
 
+/* ==================== PROTOYPE METHODS ==================== */
+
 // calculate and determine the string for displaying relative timestamp
 Article.prototype.daysPub = function() {
   var dayDiff = Math.round(this.msDiff / 8.64e7);
@@ -32,6 +34,7 @@ Article.prototype.daysPub = function() {
   }
 };
 
+// return a string of compiled HTML to be appended
 Article.prototype.toHTML = function() {
   if (this.msDiff >= 0 || util.getQuery('admin') || $(location).attr('pathname') === '/editor.html') {
     this.body = marked(this.markdown);
@@ -68,49 +71,9 @@ Article.prototype.updateRecord = function(edits, callback) {
   );
 };
 
-
-Article.convertResult = function(array) {
-  return array.map(function(obj) {
-    return new Article(obj);
-  });
-};
-
-Article.findById = function(id, callback) {
-  callback = callback || function() {};
-  webDB.execute([{
-    'sql': 'SELECT * FROM articles WHERE id = ?;',
-    'data': [id]
-  }], function(data) {
-    var articleArray = Article.convertResult(data);
-    callback(articleArray);
-  });
-};
-
-Article.findByAuthor = function(author, callback) {
-  callback = callback || function() {};
-  webDB.execute([{
-    'sql': 'SELECT * FROM articles WHERE author LIKE ?;',
-    'data': [author]
-  }], function(data) {
-    var articleArray = Article.convertResult(data);
-    callback(articleArray);
-  });
-};
-
-Article.findByCategory = function(cat, callback) {
-  callback = callback || function() {};
-  webDB.execute([{
-    'sql': 'SELECT * FROM articles WHERE category LIKE ?;',
-    'data': [cat]
-  }], function(data) {
-    var articleArray = Article.convertResult(data);
-    callback(articleArray);
-  });
-};
-
+/* ==================== CLASS: IMPORT DATA ==================== */
 
 Article.all = [];
-
 Article.importUrl = '/data/hackerIpsum.json';
 
 Article.importAll = function(callback, callback2) {
@@ -181,4 +144,47 @@ Article.checkETag = function(data, callback) {
 Article.truncateTable = function(callback) {
   callback = callback || function() {};
   webDB.execute('DELETE FROM articles;', callback);
+};
+
+/* ==================== CLASS: SEARCH BY COLUMN ==================== */
+
+// instantiate SQL search result of an array of plain objects into article objects
+Article.convertResult = function(array) {
+  return array.map(function(obj) {
+    return new Article(obj);
+  });
+};
+
+// these find methods each allows a callback function to work with the returned results, which are being passed through an array of article objects
+Article.findById = function(id, callback) {
+  callback = callback || function() {};
+  webDB.execute([{
+    'sql': 'SELECT * FROM articles WHERE id = ?;',
+    'data': [id]
+  }], function(data) {
+    var articleArray = Article.convertResult(data);
+    callback(articleArray);
+  });
+};
+
+Article.findByAuthor = function(author, callback) {
+  callback = callback || function() {};
+  webDB.execute([{
+    'sql': 'SELECT * FROM articles WHERE author LIKE ?;',
+    'data': [author]
+  }], function(data) {
+    var articleArray = Article.convertResult(data);
+    callback(articleArray);
+  });
+};
+
+Article.findByCategory = function(cat, callback) {
+  callback = callback || function() {};
+  webDB.execute([{
+    'sql': 'SELECT * FROM articles WHERE category LIKE ?;',
+    'data': [cat]
+  }], function(data) {
+    var articleArray = Article.convertResult(data);
+    callback(articleArray);
+  });
 };

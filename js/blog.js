@@ -13,33 +13,33 @@ blog.importUrl = 'data/hackerIpsum.json';
 //   }).done(blog.loadArticles);
 // };
 
-blog.loadArticles = function() {
-  $.ajax({
-    type: 'HEAD',
-    url: blog.importUrl,
-    success: blog.fetchArticles
-  });
-};
+// blog.loadArticles = function() {
+//   $.ajax({
+//     type: 'HEAD',
+//     url: blog.importUrl,
+//     success: blog.fetchArticles
+//   });
+// };
 
 // process eTag
-blog.fetchArticles = function(data, textStatus, xhr) {
-  var eTagCache = localStorage.getItem('etag');
-  var eTagRemote = xhr.getResponseHeader('etag');
-  console.log('eTag from cache: ' + eTagCache);
-  console.log('eTag from server: ' + eTagRemote);
-
-  if (eTagCache != eTagRemote) {
-    console.log('Import raw data: Cache miss');
-    // update etag in localStorage
-    localStorage.setItem('etag', eTagRemote);
-    // remove cached article data from DB
-    webDB.execute('DELETE FROM articles;');
-    blog.fetchFromJSON();
-  } else {
-    console.log('Import raw data: Cache hit!');
-    blog.fetchFromDB();
-  }
-};
+// blog.fetchArticles = function(data, textStatus, xhr) {
+//   var eTagCache = localStorage.getItem('etag');
+//   var eTagRemote = xhr.getResponseHeader('etag');
+//   console.log('eTag from cache: ' + eTagCache);
+//   console.log('eTag from server: ' + eTagRemote);
+//
+//   if (eTagCache != eTagRemote) {
+//     console.log('Import raw data: Cache miss');
+//     // update etag in localStorage
+//     localStorage.setItem('etag', eTagRemote);
+//     // remove cached article data from DB
+//     webDB.execute('DELETE FROM articles;');
+//     blog.fetchFromJSON();
+//   } else {
+//     console.log('Import raw data: Cache hit!');
+//     blog.fetchFromDB();
+//   }
+// };
 
 // import data from remote server
 // blog.fetchFromJSON = function() {
@@ -78,20 +78,20 @@ blog.init = function() {
   }
 };
 
-blog.handleAdmin = function() {
-  $('#home').on('click', '.post-edit', function(event) {
-    event.preventDefault();
-    var dbId = $(this).data('dbid');
-    util.redirectTo('/editor.html?id=' + dbId);
-  });
-  if (util.getQuery('admin')) {
-
-    $('#exit-admin').show().on('click', function(event) {
-      event.preventDefault();
-      util.redirectTo('/');
-    });
-  }
-};
+// blog.handleAdmin = function() {
+//   $('#home').on('click', '.post-edit', function(event) {
+//     event.preventDefault();
+//     var dbId = $(this).data('dbid');
+//     util.redirectTo('/editor.html?id=' + dbId);
+//   });
+//   if (util.getQuery('admin')) {
+//
+//     $('#exit-admin').show().on('click', function(event) {
+//       event.preventDefault();
+//       util.redirectTo('/');
+//     });
+//   }
+// };
 
 // write blog posts to DOM by calling .toHTML() on each article
 // blog.populate = function() {
@@ -122,11 +122,11 @@ blog.handleAdmin = function() {
 // };
 
 // sorting all posts such that latest post appears on top
-blog.sortArticles = function() {
-  blog.articles.sort(function(a, b) {
-    return b.published - a.published;
-  });
-};
+// blog.sortArticles = function() {
+//   blog.articles.sort(function(a, b) {
+//     return b.published - a.published;
+//   });
+// };
 
 // generate a list of filter options, then populate dropdown menu
 blog.createFilters = function(list, listIndex, selectId, prop) {
