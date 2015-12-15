@@ -39,7 +39,7 @@ Article.prototype.toHTML = function() {
   }
 };
 
-Article.prototype.insertArticleToDB = function() {
+Article.prototype.insertRecord = function() {
   webDB.execute(
     [{
       'sql': 'INSERT INTO articles (title, author, authorUrl, category, publishedOn, markdown) VALUES (?, ?, ?, ?, ?, ?);',
@@ -47,27 +47,6 @@ Article.prototype.insertArticleToDB = function() {
     }]
   );
 };
-
-Article.deletePost = function(dbId, callback) {
-  callback = callback || function() {};
-  webDB.execute([{
-    'sql': 'DELETE FROM articles WHERE id = ?',
-    'data': [dbId]
-  }],
-    callback
-  );
-};
-
-Article.saveChanges = function(edits, callback) {
-  callback = callback || function() {};
-  webDB.execute([{
-    'sql': 'UPDATE articles SET title = ?, author = ?, authorUrl = ?, publishedOn = ?, markdown = ?, category = ? WHERE id = ?',
-    'data': [edits.title, edits.author, edits.authorUrl, edits.publishedOn, edits.markdown, edits.category, edits.id]
-  }],
-    callback
-  );
-};
-
 
 Article.prototype.deleteRecord = function(callback) {
   callback = callback || function() {};
@@ -137,7 +116,7 @@ Article.importUrl = '/data/hackerIpsumMin.json';
 Article.importAll = function(callback, callback2) {
   $.getJSON(Article.importUrl, function(data) {
     data.forEach(function(el) {
-      (new Article(el)).insertArticleToDB();
+      (new Article(el)).insertRecord();
     });
     callback(callback2);
   });
