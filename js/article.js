@@ -133,16 +133,48 @@ Article.loadAll = function(callback) {
         if (!data.length) {
           Article.importAll(Article.loadAll, callback);
         } else {
-          data.forEach(function(el) {
-            Article.all.push(new Article(el));
-          });
-          callback();
+          // check etag: make sure the stored data is most updated
+          Article.checkETag(data, callback);
+
+          // data.forEach(function(el) {
+          //   Article.all.push(new Article(el));
+          // });
+          // callback();
         }
       }
     );
   } else {
     callback();
   }
+};
+
+Article.checkETag = function(data, callback) {
+  $.ajax({
+    type: 'HEAD',
+    url: Article.importUrl,
+    success: function(result, msg, xhr) {
+      var eTagCache = localStorage.getItem('etag');
+      var eTagRemote = xhr.getResponseHeader('etag');
+      console.log('eTag from cache: ' + eTagCache);
+      console.log('eTag from server: ' + eTagRemote);
+
+      if (eTagCache === eTagRemote) {
+        // etag matches
+        console.log('Cache hit!');
+        data.forEach(function(el) {
+          Article.all.push(new Article(el));
+        });
+        callback();
+      } else {
+        // etag mismatch
+        Article.truncateTable(function() {
+          console.log('Cache miss');
+          localStorage.setItem('etag', eTagRemote);
+          Article.importAll(Article.loadAll, callback);
+        });
+      }
+    }
+  });
 };
 
 // delete all records from given table
