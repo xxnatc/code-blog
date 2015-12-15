@@ -79,5 +79,7 @@ articleView.handleAdmin = function() {
       event.preventDefault();
       util.redirectTo('/');
     });
+  } else {
+    $('#exit-admin').hide();
   }
 };
