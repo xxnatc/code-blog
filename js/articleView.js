@@ -40,12 +40,51 @@ articleView.selection = function(data) {
   this.showSection();
   this.getTemplate(function() {
     data.forEach(articleView.render);
+    articleView.teaser();
+    articleView.handleAdmin();
   });
 };
 
-
 articleView.index = function() {
   this.showSection();
-  this.getTemplate(this.renderAll);
+  this.getTemplate(function() {
+    articleView.renderAll();
+    articleView.teaser();
+    articleView.handleAdmin();
+  });
   util.setActiveNav('home');
+};
+
+articleView.teaser = function() {
+  $('.post-body').children().not('p:first-of-type, :header:first-of-type:first-child').hide();
+  $('.post-collapse').hide();
+
+  $('#articles').on('click', '.post-read-on', function(event) {
+    event.preventDefault();
+    $(this).hide().siblings('button').show();
+    $(this).siblings('.post-body').children().slideDown();
+  });
+
+  $('#articles').on('click', '.post-collapse', function(event) {
+    event.preventDefault();
+    $(this).hide().siblings('button').show();;
+    $(this).siblings('.post-body').children().not('p:first-of-type, :header:first-of-type:first-child').slideUp();
+  });
+};
+
+articleView.handleAdmin = function() {
+  if (util.getQuery('admin')) {
+    console.log('admin mode!');
+    $('#articles').on('click', '.post-edit', function(event) {
+      event.preventDefault();
+      var dbId = $(this).data('dbid');
+      console.log(dbId);
+      // util.redirectTo('/editor.html?id=' + dbId);
+    });
+
+    $('#exit-admin').show().on('click', function(event) {
+      event.preventDefault();
+      util.redirectTo('/');
+    });
+  }
 };

@@ -24,4 +24,9 @@ page('/authors/:author', function(ctx, next) {
   articleController.selectAuthor(ctx);
 });
 
+// page('/edit/:id', function(ctx, next) {
+//   console.log('called /edit/' + ctx.params.id);
+//   page.redirect('/editor.html');
+// });
+
 page.start();

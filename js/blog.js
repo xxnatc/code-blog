@@ -102,24 +102,24 @@ blog.handleAdmin = function() {
 
 // display up to the first paragraph of each post,
 // toggle the rest when 'Read on' or 'Collpase' button is clicked
-blog.previewArticles = function() {
-  $('.post-body').children().not('p:first-of-type, :header:first-of-type').hide();
-  $('.post-collapse').hide();
-
-  $('#home').on('click', '.post-read-on', function(event) {
-    event.preventDefault();
-    $(this).hide();
-    $(this).siblings('.post-body').children().slideDown();
-    $(this).siblings('button').show();
-  });
-
-  $('#home').on('click', '.post-collapse', function(event) {
-    event.preventDefault();
-    $(this).hide();
-    $(this).siblings('.post-body').children().not('p:first-of-type, :header:first-of-type').slideUp();
-    $(this).siblings('button').show();
-  });
-};
+// blog.previewArticles = function() {
+//   $('.post-body').children().not('p:first-of-type, :header:first-of-type').hide();
+//   $('.post-collapse').hide();
+//
+//   $('#home').on('click', '.post-read-on', function(event) {
+//     event.preventDefault();
+//     $(this).hide();
+//     $(this).siblings('.post-body').children().slideDown();
+//     $(this).siblings('button').show();
+//   });
+//
+//   $('#home').on('click', '.post-collapse', function(event) {
+//     event.preventDefault();
+//     $(this).hide();
+//     $(this).siblings('.post-body').children().not('p:first-of-type, :header:first-of-type').slideUp();
+//     $(this).siblings('button').show();
+//   });
+// };
 
 // sorting all posts such that latest post appears on top
 blog.sortArticles = function() {
