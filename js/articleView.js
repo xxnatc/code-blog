@@ -6,30 +6,54 @@ var articleView = {};
 //   return articleView.template(article);
 // };
 
-articleView.renderAll = function() {
+articleView.showSection = function() {
   $('section:not(#home)').hide();
   $('#home').fadeIn();
   $('#loading-div').hide();
-  Article.all.forEach(function(el) {
-    el.toHTML();
-    // $('#home').append(el.toHTML);
-  });
+};
+  // articleView.showSection();
+  // $('#articles').empty();
+
+articleView.render = function(article) {
+  console.log(article);
+  var compiledHTML = article.toHTML();
+  $('#articles').append(compiledHTML);
 };
 
-articleView.index = function() {
-  // if (articleView.template) {
-  //   articleView.renderAll();
-  // } else {
-  //   $.get('/templates/post-template.handlebars', function(data) {
-  //     articleView.template = Handlebars.compile(data);
-  //     articleView.renderAll();
-  //   });
-  // }
+articleView.renderAll = function() {
+  articleView.showSection();
+  Article.all.forEach(articleView.render);
+};
 
-  $.get('/template/post-template.html', function(data) {
-    console.log('get template');
-    Article.prototype.template = Handlebars.compile(data);
-    articleView.renderAll();
+articleView.getTemplate = function(callback) {
+  callback = callback || function() {};
+  if (!Article.prototype.template) {
+    $.get('/template/post-template.html', function(data) {
+      console.log('get template');
+      Article.prototype.template = Handlebars.compile(data);
+      callback();
+    });
+  } else {
+    console.log('cache template');
+    callback();
+  }
+};
+
+articleView.individual = function(id) {
+  Article.fetchArticle(id, function(data) {
+    if (data.length === 1) {
+      articleView.getTemplate(function() {
+        articleView.render(new Article(data[0]));
+      });
+    }
   });
+  this.showSection();
+
+
+};
+
+
+articleView.index = function() {
+  this.getTemplate(this.renderAll);
   util.setActiveNav('home');
 };

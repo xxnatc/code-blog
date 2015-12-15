@@ -94,11 +94,11 @@ blog.handleAdmin = function() {
 };
 
 // write blog posts to DOM by calling .toHTML() on each article
-blog.populate = function() {
-  for (var i = 0; i < blog.articles.length; i++) {
-    blog.articles[i].toHTML();
-  };
-};
+// blog.populate = function() {
+//   for (var i = 0; i < blog.articles.length; i++) {
+//     blog.articles[i].toHTML();
+//   };
+// };
 
 // display up to the first paragraph of each post,
 // toggle the rest when 'Read on' or 'Collpase' button is clicked

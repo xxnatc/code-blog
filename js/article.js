@@ -35,8 +35,7 @@ Article.prototype.daysPub = function() {
 Article.prototype.toHTML = function() {
   if (this.msDiff >= 0 || util.getQuery('admin') || $(location).attr('pathname') === '/editor.html') {
     this.body = marked(this.markdown);
-    var compiledHTML = this.template(this);
-    $('#home').append(compiledHTML);
+    return this.template(this);
   }
 };
 

@@ -14,5 +14,9 @@ page('/contact', function() {
   contactController.index();
 });
 
+page('/articles/:id', function(ctx, next) {
+  console.log('called /articles/' + ctx.params.id);
+  articleController.showIndividual(ctx, next);
+});
 
 page.start();
