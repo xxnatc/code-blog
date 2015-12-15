@@ -1,10 +1,4 @@
-// this file contains all rendering components
-
 var articleView = {};
-
-// articleView.render = function(article) {
-//   return articleView.template(article);
-// };
 
 articleView.showSection = function() {
   $('section:not(#home)').hide();
@@ -78,8 +72,7 @@ articleView.handleAdmin = function() {
     $('#articles').on('click', '.post-edit', function(event) {
       event.preventDefault();
       var dbId = $(this).data('dbid');
-      console.log(dbId);
-      // util.redirectTo('/editor.html?id=' + dbId);
+      util.redirectTo('/editor.html?id=' + dbId);
     });
 
     $('#exit-admin').show().on('click', function(event) {

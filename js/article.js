@@ -68,7 +68,7 @@ Article.saveChanges = function(edits, callback) {
   );
 };
 
-/*
+
 Article.prototype.deleteRecord = function(callback) {
   callback = callback || function() {};
   webDB.execute([{
@@ -88,7 +88,7 @@ Article.prototype.updateRecord = function(edits, callback) {
     callback
   );
 };
-*/
+
 
 Article.convertResult = function(array) {
   return array.map(function(obj) {
@@ -134,7 +134,7 @@ Article.all = [];
 
 Article.importUrl = '/data/hackerIpsumMin.json';
 
-Article.requestAll = function(callback, callback2) {
+Article.importAll = function(callback, callback2) {
   $.getJSON(Article.importUrl, function(data) {
     data.forEach(function(el) {
       (new Article(el)).insertArticleToDB();
@@ -152,7 +152,7 @@ Article.loadAll = function(callback) {
       'SELECT * FROM articles ORDER BY publishedOn DESC;',
       function(data) {
         if (!data.length) {
-          Article.requestAll(Article.loadAll, callback);
+          Article.importAll(Article.loadAll, callback);
         } else {
           data.forEach(function(el) {
             Article.all.push(new Article(el));
