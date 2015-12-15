@@ -111,7 +111,7 @@ Article.findByCategory = function(cat, callback) {
 
 Article.all = [];
 
-Article.importUrl = '/data/hackerIpsumMin.json';
+Article.importUrl = '/data/hackerIpsum.json';
 
 Article.importAll = function(callback, callback2) {
   $.getJSON(Article.importUrl, function(data) {
