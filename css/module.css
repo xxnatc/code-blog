@@ -144,3 +144,8 @@
   margin: 0px;
   color: #337ab7;
 }
+
+#about .list-group a {
+  /*margin: 5px 0px;*/
+  font-weight: bold;
+}
