@@ -139,8 +139,35 @@
   width: 80px;
 }
 
-#loading-div h3 {
-  font-size: 1em;
-  margin: 0px;
-  color: #337ab7;
+#gh-bio img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+#bio-name {
+  margin: 14px 0px 0px 0px;
+}
+
+#bio-loc {
+  margin: 6px 0px 12px 0px;
+}
+
+#gh-bio hr {
+  margin: 8px 0px;
+}
+
+#bio-stats h3, #bio-stats h6 {
+  text-align: center;
+  margin: 4px 0px;
+}
+
+.rel-time {
+  display: block;
+  color: #BBB;
+  text-align: right;
+}
+
+.activity-sub {
+  display: block;
+  color: #777;
 }
