@@ -15,12 +15,6 @@ aboutView.renderRepo = function(repo) {
   $('#gh-repo').append($a);
 };
 
-// aboutView.index = function(data) {
-//   aboutView.showSection();
-//   data.forEach(aboutView.renderRepo);
-//   util.setActiveNav('about');
-// };
-
 aboutView.repo = function(data) {
   data.filter(function(repo) {
     return !repo.fork;
@@ -30,9 +24,9 @@ aboutView.repo = function(data) {
 
 aboutView.getTemplateBio = function (callback) {
   callback = callback || function() {};
-  if (!bio.template) {
+  if (!ghBio.template) {
     $.get('/template/bio-template.html', function(data) {
-      bio.template = Handlebars.compile(data);
+      ghBio.template = Handlebars.compile(data);
       callback();
     });
   } else {
@@ -41,7 +35,7 @@ aboutView.getTemplateBio = function (callback) {
 };
 
 aboutView.renderBio = function(obj) {
-  var compiledHTML = bio.template(obj);
+  var compiledHTML = ghBio.template(obj);
   $('#gh-bio').append(compiledHTML);
 };
 
@@ -51,83 +45,40 @@ aboutView.bio = function(obj) {
   });
 };
 
-aboutView.extractBranch = function(ref) {
-  return ref.split('/')[ref.split('/').length - 1];
-};
 
-aboutView.relTimestamp = function(created) {
-  var diff = new Date() - new Date(created);
-  var minDiff = diff / 1000 / 60;
-  if (minDiff < 60) {
-    return Math.round(minDiff) + ' minutes ago';
-  }
-  var hourDiff = minDiff / 60;
-  if (hourDiff < 24) {
-    if (hourDiff < 1.5) {
-      return 'an hour ago';
-    } else {
-      return Math.round(hourDiff) + ' hours ago';
-    }
-  }
-  var dayDiff = hourDiff / 24;
-  if (dayDiff < 30) {
-    if (dayDiff < 1.5) {
-      return 'a day ago';
-    } else {
-      return Math.round(dayDiff) + ' days ago';
-    }
-  }
-  var monthDiff = dayDiff / 30;
-  if (monthDiff < 1.5) {
-    return 'a month ago';
-  } else {
-    return Math.round(monthDiff) + ' months ago';
-  }
-};
-
-aboutView.msgPreview = function(msg, limit) {
-  if (msg.length > limit) {
-    return msg.substring(0, limit) + '...';
-  } else {
-    return msg.substring(0, limit);
-  }
-
-};
-
-
-aboutView.commitPref = '  <span class="glyphicon glyphicon-comment"></span>  ';
-
-aboutView.renderActivity = function(activity) {
+aboutView.renderActivity = function(obj) {
   var $li = $('<li class="list-group-item">');
   var listed = true;
-  var $time = $('<small class="rel-time">')
-    .html(aboutView.relTimestamp(activity.created_at));
+  var $time = $('<small class="rel-time">').html(ghActivity.relTimestamp(obj.created_at));
 
-  switch (activity.type) {
+  switch (obj.type) {
   case 'PushEvent':
-    var branch = aboutView.extractBranch(activity.payload.ref);
-    var msg = aboutView.msgPreview(activity.payload.commits[0].message, 80);
+    var branch = ghActivity.extractBranch(obj.payload.ref);
+    var lastMsg = ' <span class="glyphicon glyphicon-comment"></span> ' + ghActivity.msgPreview(obj.payload.commits[obj.payload.size - 1].message, 80);
     var $sub = $('<small class="activity-sub">');
-    if (activity.payload.size === 1) {
-      $sub.html('1 commit:' + aboutView.commitPref + msg);
+    if (obj.payload.size === 1) {
+      $sub.html('1 commit:' + lastMsg);
     } else {
-      $sub.html(activity.payload.size + ' commits:' + aboutView.commitPref + msg);
+      $sub.html(obj.payload.size + ' commits:' + lastMsg);
     }
-    $li.html('Pushed to <code>' + branch + '</code> at <code>' + activity.repo.name + '</code>').prepend($time).append($sub);
+    $li.html('Pushed to <code>' + branch + '</code> at <code>' + obj.repo.name + '</code>').prepend($time).append($sub);
     break;
+
   case 'CreateEvent':
-    var branch = aboutView.extractBranch(activity.payload.ref);
-    $li.html('Created branch <code>' + branch + '</code> at <code>' + activity.repo.name + '</code>').prepend($time);
+    var branch = ghActivity.extractBranch(obj.payload.ref);
+    $li.html('Created branch <code>' + branch + '</code> at <code>' + obj.repo.name + '</code>').prepend($time);
     break;
+
   case 'PullRequestEvent':
     var $sub = $('<small class="activity-sub">')
       .html('<span class="glyphicon glyphicon-saved"></span> '
-        + activity.payload.pull_request.commits + ' commits with '
-        + activity.payload.pull_request.additions + ' and '
-        + activity.payload.pull_request.deletions + ' deletions');
+        + obj.payload.pull_request.commits + ' commits with '
+        + obj.payload.pull_request.additions + ' and '
+        + obj.payload.pull_request.deletions + ' deletions');
 
-    $li.html('Merged pull request <code>' + activity.repo.name + '#' + activity.payload.number + '</code>').prepend($time).append($sub);
+    $li.html('Merged pull request <code>' + obj.repo.name + '#' + obj.payload.number + '</code>').prepend($time).append($sub);
     break;
+
   default:
     console.log('event not coded');
     listed = false;

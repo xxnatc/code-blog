@@ -6,7 +6,7 @@ aboutController.index = function() {
   util.setActiveNav('about');
 
   repo.requestAll(aboutView.repo);
-  bio.request(aboutView.bio);
-  activity.request(aboutView.activity);
+  ghBio.request(aboutView.bio);
+  ghActivity.request(aboutView.activity);
 
 };
