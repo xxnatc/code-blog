@@ -160,3 +160,14 @@
   text-align: center;
   margin: 4px 0px;
 }
+
+.rel-time {
+  display: block;
+  color: #BBB;
+  text-align: right;
+}
+
+.activity-sub {
+  display: block;
+  color: #777;
+}
