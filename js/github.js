@@ -1,8 +1,8 @@
 /* ==================== repositories ==================== */
-var repo = {};
-repo.all = [];
+var ghRepo = {};
+ghRepo.all = [];
 
-repo.requestAll = function(callback) {
+ghRepo.requestAll = function(callback) {
   $.ajax({
     type: 'GET',
     url: 'https://api.github.com/user/repos?sort=updated',
@@ -11,7 +11,7 @@ repo.requestAll = function(callback) {
     }
   }).done(function(data) {
     console.log(data);
-    repo.all = data;
+    ghRepo.all = data;
     callback(data);
   });
 };

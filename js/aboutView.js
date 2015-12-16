@@ -4,6 +4,7 @@ aboutView.showSection = function() {
   $('section:not(#about)').hide();
   $('#gh-bio, #gh-activity, #gh-repo').empty();
   $('#about').fadeIn();
+  util.setActiveNav('about');
 };
 
 /* ==================== repositories ==================== */
@@ -77,8 +78,12 @@ aboutView.renderActivity = function(obj) {
         + obj.payload.pull_request.commits + ' commits with '
         + obj.payload.pull_request.additions + ' and '
         + obj.payload.pull_request.deletions + ' deletions');
-
-    $li.html('Merged pull request <code>' + obj.repo.name + '#' + obj.payload.number + '</code>').prepend($time).append($sub);
+    if (obj.payload.action === 'closed' && obj.payload.pull_request.merged) {
+      var action = 'Merged';
+    } else {
+      var action = obj.payload.action[0].toUpperCase() + obj.payload.action.slice(1);
+    }
+    $li.html(action + ' pull request <code>' + obj.repo.name + '#' + obj.payload.number + '</code>').prepend($time).append($sub);
     break;
 
   default:
@@ -92,5 +97,5 @@ aboutView.renderActivity = function(obj) {
 };
 
 aboutView.activity = function(data) {
-  data.slice(0, 10).forEach(aboutView.renderActivity);
+  data.slice(0, 8).forEach(aboutView.renderActivity);
 };
