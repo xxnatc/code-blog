@@ -1,3 +1,4 @@
+/* ==================== repositories ==================== */
 var repo = {};
 repo.all = [];
 
@@ -15,6 +16,7 @@ repo.requestAll = function(callback) {
   });
 };
 
+/* ==================== profile ==================== */
 var ghBio = {};
 
 ghBio.request = function(callback) {
@@ -30,6 +32,7 @@ ghBio.request = function(callback) {
   });
 };
 
+/* ==================== activities (events) ==================== */
 var ghActivity = {};
 
 ghActivity.request = function(callback) {

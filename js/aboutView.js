@@ -6,6 +6,7 @@ aboutView.showSection = function() {
   $('#about').fadeIn();
 };
 
+/* ==================== repositories ==================== */
 aboutView.renderRepo = function(repo) {
   var $a = $('<a class="list-group-item">').attr('href', repo.html_url).attr('target', '_blank').text(repo.full_name);
   $a.append(
@@ -22,6 +23,7 @@ aboutView.repo = function(data) {
     .forEach(aboutView.renderRepo);
 };
 
+/* ==================== profile ==================== */
 aboutView.getTemplateBio = function (callback) {
   callback = callback || function() {};
   if (!ghBio.template) {
@@ -45,7 +47,7 @@ aboutView.bio = function(obj) {
   });
 };
 
-
+/* ==================== activities (events) ==================== */
 aboutView.renderActivity = function(obj) {
   var $li = $('<li class="list-group-item">');
   var listed = true;
