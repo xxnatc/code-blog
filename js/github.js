@@ -5,10 +5,7 @@ ghRepo.all = [];
 ghRepo.requestAll = function(callback) {
   $.ajax({
     type: 'GET',
-    url: 'https://api.github.com/user/repos?sort=updated',
-    headers: {
-      Authorization: 'token ' + githubToken
-    }
+    url: '/github/user/repos?sort=updated'
   }).done(function(data) {
     console.log(data);
     ghRepo.all = data;
@@ -22,10 +19,7 @@ var ghBio = {};
 ghBio.request = function(callback) {
   $.ajax({
     type: 'GET',
-    url: 'https://api.github.com/user',
-    headers: {
-      Authorization: 'token ' + githubToken
-    }
+    url: '/github/user'
   }).done(function(data) {
     console.log(data);
     callback(data);
@@ -38,10 +32,7 @@ var ghActivity = {};
 ghActivity.request = function(callback) {
   $.ajax({
     type: 'GET',
-    url: 'https://api.github.com/users/xxnatc/events',
-    headers: {
-      Authorization: 'token ' + githubToken
-    }
+    url: '/github/users/xxnatc/events'
   }).done(function(data) {
     console.log(data);
     callback(data);
