@@ -52,3 +52,22 @@
 .hljs {
   background-color: transparent;
 }
+
+#loading-div h3 {
+  font-size: 1em;
+  margin: 0px;
+  color: #337ab7;
+}
+
+#gh-repo a {
+  font-weight: bold;
+}
+
+#bio-name {
+  font-weight: bold;
+}
+
+#bio-stats h3 {
+  color: #337ab7;
+  font-weight: bold;
+}
