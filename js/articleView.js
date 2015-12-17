@@ -5,6 +5,10 @@ articleView.showSection = function() {
   $('#articles').empty();
   $('#loading-div').hide();
   $('#home').fadeIn();
+  if ($('#filter-by-author').length === 1 && $('#filter-by-category').length === 1) {
+    this.filter();
+  }
+  util.setActiveNav('home');
 };
 
 articleView.render = function(article) {
@@ -45,10 +49,6 @@ articleView.index = function() {
     articleView.teaser();
     articleView.handleAdmin();
   });
-  if ($('#filter-by-author').length === 1 && $('#filter-by-category').length === 1) {
-    this.filter();
-  }
-  util.setActiveNav('home');
 };
 
 articleView.teaser = function() {
@@ -104,5 +104,5 @@ articleView.filter = function() {
 };
 
 articleView.populateFilter = function(selectId, prop) {
-  $(selectId).append($('<option>').text(prop));
+  $(selectId).append($('<option>').text(prop).attr('value', prop.split(' ').join('-')));
 };

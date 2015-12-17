@@ -23,6 +23,11 @@ page('/authors/:author', function(ctx, next) {
   articleController.selectAuthor(ctx);
 });
 
+page('/categories/:category', function(ctx, next) {
+  console.log('called /categories/' + ctx.params.category);
+  articleController.selectCategory(ctx);
+});
+
 page('/edit/:id', function(ctx, next) {
   console.log('called /edit/' + ctx.params.id);
   util.redirectTo('/editor.html?id=' + ctx.params.id);

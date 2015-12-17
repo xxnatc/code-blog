@@ -23,6 +23,14 @@ articleController.selectAuthor = function(ctx) {
   });
 };
 
+articleController.selectCategory = function(ctx) {
+  var category = ctx.params.category;
+  console.log(category);
+  Article.findByCategory(category, function(data) {
+    articleView.selection(data);
+  });
+};
+
 articleController.handleFilters = function() {
   $('#filter-by-author').on('change', function(event) {
     event.preventDefault();
@@ -30,9 +38,7 @@ articleController.handleFilters = function() {
       $('#articles').fadeIn();
     } else {
       var author = $(this).find('option:selected').text();
-      Article.findByAuthor(author, function(data) {
-        articleView.selection(data);
-      });
+      page('/authors/' + author);
     }
     // reset the other dropdown to prevent multiple selections
     $('#filter-by-category').find('option[value=reset]').attr('selected', true);
@@ -44,9 +50,7 @@ articleController.handleFilters = function() {
       $('#articles').fadeIn();
     } else {
       var category = $(this).find('option:selected').text();
-      Article.findByCategory(category, function(data) {
-        articleView.selection(data);
-      });
+      page('/categories/' + category);
     }
     $('#filter-by-author').find('option[value=reset]').attr('selected', true);
   });
