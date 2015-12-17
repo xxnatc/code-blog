@@ -87,9 +87,6 @@ helper.rd = function(shortcut) {
   case 'st':
     util.redirectTo('/stats.html');
     break;
-  case 'se':
-    util.redirectTo('/secret.html');
-    break;
   default:
     console.log('Redirect shortcut invalid.');
     break;
