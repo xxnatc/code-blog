@@ -2,7 +2,7 @@
 _Assignment for Code Fellows 301_
 
 #### Deployment
-You can find this project is live at [blog.chownatalie.com](http://blog.chownatalie.com) or at [Heroku](https://xxnatc-blog.herokuapp.com).
+You can find this project is live at [www.blog.chownatalie.com](http://www.blog.chownatalie.com) or at [Heroku](https://xxnatc-blog.herokuapp.com).
 
 #### Description
 Code-blog is a single-page blog that imports its content from `data/hackerIpsum.json` and caches in Web SQL. Users can filter blog posts by authors or categories.
