@@ -1,15 +1,18 @@
 # code-blog
 _Assignment for Code Fellows 301_
 
+#### Deployment
+You can find this project is live at [blog.chownatalie.com](blog.chownatalie.com) or at [Heroku](xxnatc-blog.herokuapp.com).
+
 #### Description
-Code-blog is a single-page blog that imports its content from `js/hackerIpsum.json` and caches in Web SQL. Users can filter blog posts by authors or categories.
+Code-blog is a single-page blog that imports its content from `data/hackerIpsum.json` and caches in Web SQL. Users can filter blog posts by authors or categories.
 
 #### Pages
-There is a editor page (`secret.html`) for author to add content. The page takes styling in markdown format and displays a preview instantly. It can also convert the data to a JSON string for use in the raw data file.
-
 A page (`stats.html`) has been added to calculate vanity metrics. It displays numbers including total author, article, and word count.
 
 We've introduced an administrator mode which shows an edit option for each article. The links redirect the admin to an editor page (`editor.html`), and provides options to update or delete the article.
+
+There is a secret editor page (`secret.html`) for author to add content. The page takes styling in markdown format and displays a preview instantly. It can also convert the data to a JSON string for use in the raw data file. It will be retired and combined with `editor.html`.
 
 #### Helper function
 A helper object has been created in `util.js` to assist with testing during the coding process. It contains the following methods:
