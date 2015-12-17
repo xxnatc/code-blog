@@ -1,16 +1,11 @@
 /* ==================== repositories ==================== */
 var ghRepo = {};
-ghRepo.all = [];
 
 ghRepo.requestAll = function(callback) {
   $.ajax({
     type: 'GET',
     url: '/github/user/repos?sort=updated'
-  }).done(function(data) {
-    console.log(data);
-    ghRepo.all = data;
-    callback(data);
-  });
+  }).done(callback);
 };
 
 /* ==================== profile ==================== */
@@ -20,10 +15,7 @@ ghBio.request = function(callback) {
   $.ajax({
     type: 'GET',
     url: '/github/user'
-  }).done(function(data) {
-    console.log(data);
-    callback(data);
-  });
+  }).done(callback);
 };
 
 /* ==================== activities (events) ==================== */
@@ -33,10 +25,7 @@ ghActivity.request = function(callback) {
   $.ajax({
     type: 'GET',
     url: '/github/users/xxnatc/events'
-  }).done(function(data) {
-    console.log(data);
-    callback(data);
-  });
+  }).done(callback);
 };
 
 ghActivity.extractBranch = function(ref) {

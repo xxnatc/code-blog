@@ -170,7 +170,7 @@ Article.findById = function(id, callback) {
 Article.findByAuthor = function(author, callback) {
   callback = callback || function() {};
   webDB.execute([{
-    'sql': 'SELECT * FROM articles WHERE author LIKE ?;',
+    'sql': 'SELECT * FROM articles WHERE author LIKE ? ORDER BY publishedOn DESC;',
     'data': [author]
   }], function(data) {
     var articleArray = Article.convertResult(data);
@@ -181,10 +181,21 @@ Article.findByAuthor = function(author, callback) {
 Article.findByCategory = function(cat, callback) {
   callback = callback || function() {};
   webDB.execute([{
-    'sql': 'SELECT * FROM articles WHERE category LIKE ?;',
+    'sql': 'SELECT * FROM articles WHERE category LIKE ? ORDER BY publishedOn DESC;',
     'data': [cat]
   }], function(data) {
     var articleArray = Article.convertResult(data);
     callback(articleArray);
   });
+};
+
+/* ==================== CLASS: FILTER UNIQUE ==================== */
+Article.uniqueAuthor = function(callback) {
+  callback = callback || function() {};
+  webDB.execute('SELECT DISTINCT author FROM articles ORDER BY author;', callback);
+};
+
+Article.uniqueCategory = function(callback) {
+  callback = callback || function() {};
+  webDB.execute('SELECT DISTINCT category FROM articles ORDER BY category;', callback);
 };

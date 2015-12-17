@@ -20,7 +20,6 @@ articleView.getTemplate = function(callback) {
   callback = callback || function() {};
   if (!Article.prototype.template) {
     $.get('/template/post-template.html', function(data) {
-      console.log('get template');
       Article.prototype.template = Handlebars.compile(data);
       callback();
     });
@@ -46,6 +45,9 @@ articleView.index = function() {
     articleView.teaser();
     articleView.handleAdmin();
   });
+  if ($('#filter-by-author').length === 1 && $('#filter-by-category').length === 1) {
+    this.filter();
+  }
   util.setActiveNav('home');
 };
 
@@ -82,4 +84,25 @@ articleView.handleAdmin = function() {
   } else {
     $('#exit-admin').hide();
   }
+};
+
+
+articleView.filter = function() {
+  // $('#blog-filter').show();
+  $('#filter-by-author').children(':not(:first-child)').remove();
+  $('#filter-by-category').children(':not(:first-child)').remove();;
+  Article.uniqueAuthor(function(data) {
+    data.forEach(function(obj) {
+      articleView.populateFilter('#filter-by-author', obj.author);
+    });
+  });
+  Article.uniqueCategory(function(data) {
+    data.forEach(function(obj) {
+      articleView.populateFilter('#filter-by-category', obj.category);
+    });
+  });
+};
+
+articleView.populateFilter = function(selectId, prop) {
+  $(selectId).append($('<option>').text(prop));
 };

@@ -1,7 +1,6 @@
 page('/', function() {
   console.log('called /');
   articleController.index();
-
 });
 
 page('/about', function() {
@@ -24,9 +23,9 @@ page('/authors/:author', function(ctx, next) {
   articleController.selectAuthor(ctx);
 });
 
-// page('/edit/:id', function(ctx, next) {
-//   console.log('called /edit/' + ctx.params.id);
-//   page.redirect('/editor.html');
-// });
+page('/edit/:id', function(ctx, next) {
+  console.log('called /edit/' + ctx.params.id);
+  util.redirectTo('/editor.html?id=' + ctx.params.id);
+});
 
 page.start();
