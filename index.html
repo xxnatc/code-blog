@@ -55,6 +55,7 @@
     <section id="home">
       <nav id="blog-filter" class="form-inline">
         <button id="exit-admin" class="btn btn-default pull-left non-default">Exit admin mode</button>
+        <button id="article-to-home" class="btn btn-default pull-left non-default"><span class="glyphicon glyphicon-triangle-left"></span> Back</button>
         <select id="filter-by-author" class="form-control">
           <option value="reset">-- Filter by author --</option>
         </select>
@@ -64,7 +65,7 @@
       </nav>
 
       <!-- loading gif -->
-      <div id="loading-div" class="row">
+      <div id="loading-div-home" class="row spinner">
         <div class="col-md-6 col-md-offset-3">
           <img src="/img/dashinfinity.gif" />
           <h3>Fetching the freshest blog posts just for you...</h3>
@@ -80,6 +81,14 @@
 
     <section id="about" class="non-default">
       <h1>My GitHub Profile</h1>
+
+      <!-- loading gif -->
+      <div id="loading-div-about" class="row spinner">
+        <div class="col-md-6 col-md-offset-3">
+          <img src="/img/dashinfinity.gif" />
+          <h3>Catching the octocat just for you...</h3>
+        </div>
+      </div>
 
       <div class="row">
 

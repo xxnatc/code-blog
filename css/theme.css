@@ -53,7 +53,7 @@
   background-color: transparent;
 }
 
-#loading-div h3 {
+.spinner h3 {
   font-size: 1em;
   margin: 0px;
   color: #337ab7;

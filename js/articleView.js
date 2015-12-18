@@ -3,7 +3,7 @@ var articleView = {};
 articleView.showSection = function() {
   $('section:not(#home)').hide();
   $('#articles').empty();
-  $('#loading-div').hide();
+  $('#loading-div-home').hide();
   $('#home').fadeIn();
   if ($('#filter-by-author option').length === 1 && $('#filter-by-category option').length === 1) {
     this.filter();
@@ -103,4 +103,11 @@ articleView.filter = function() {
 
 articleView.populateFilter = function(selectId, prop) {
   $(selectId).append($('<option>').text(prop).attr('value', prop.split(' ').join('-')));
+};
+
+articleView.backToHome = function() {
+  $('#article-to-home').show().on('click', function(event) {
+    page.redirect('/');
+    $(this).hide();
+  });
 };
