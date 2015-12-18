@@ -5,7 +5,7 @@ articleView.showSection = function() {
   $('#articles').empty();
   $('#loading-div').hide();
   $('#home').fadeIn();
-  if ($('#filter-by-author').length === 1 && $('#filter-by-category').length === 1) {
+  if ($('#filter-by-author option').length === 1 && $('#filter-by-category option').length === 1) {
     this.filter();
   }
   util.setActiveNav('home');
@@ -28,14 +28,13 @@ articleView.getTemplate = function(callback) {
       callback();
     });
   } else {
-    console.log('cache template');
     callback();
   }
 };
 
 articleView.selection = function(data) {
-  this.showSection();
-  this.getTemplate(function() {
+  articleView.showSection();
+  articleView.getTemplate(function() {
     data.forEach(articleView.render);
     articleView.teaser();
     articleView.handleAdmin();
@@ -43,8 +42,8 @@ articleView.selection = function(data) {
 };
 
 articleView.index = function() {
-  this.showSection();
-  this.getTemplate(function() {
+  articleView.showSection();
+  articleView.getTemplate(function() {
     articleView.renderAll();
     articleView.teaser();
     articleView.handleAdmin();
@@ -88,7 +87,6 @@ articleView.handleAdmin = function() {
 
 
 articleView.filter = function() {
-  // $('#blog-filter').show();
   $('#filter-by-author').children(':not(:first-child)').remove();
   $('#filter-by-category').children(':not(:first-child)').remove();;
   Article.uniqueAuthor(function(data) {

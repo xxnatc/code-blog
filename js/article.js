@@ -76,33 +76,29 @@ Article.prototype.updateRecord = function(edits, callback) {
 Article.all = [];
 Article.importUrl = '/data/hackerIpsum.json';
 
-Article.importAll = function(callback, callback2) {
-  $.getJSON(Article.importUrl, function(data) {
+Article.importAll = function(next, callback) {
+  $.getJSON(Article.importUrl, function(data, msg, xhr) {
     data.forEach(function(el) {
       (new Article(el)).insertRecord();
     });
-    callback(callback2);
+    localStorage.setItem('etag', xhr.getResponseHeader('etag'));
+    next(callback);
   });
 };
 
 // load all data from DB
 Article.loadAll = function(callback) {
   callback = callback || function() {};
-  console.log('loadAll');
   if (!Article.all.length) {
     webDB.execute(
       'SELECT * FROM articles ORDER BY publishedOn DESC;',
       function(data) {
-        if (!data.length) {
-          Article.importAll(Article.loadAll, callback);
-        } else {
+        if (data.length) {
           // check etag: make sure the stored data is most updated
           Article.checkETag(data, callback);
-
-          // data.forEach(function(el) {
-          //   Article.all.push(new Article(el));
-          // });
-          // callback();
+        } else {
+          Article.importAll(Article.loadAll, callback);
+          console.log('No data in database, importing...');
         }
       }
     );
