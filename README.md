@@ -7,12 +7,12 @@ You can find this project live on [blog.chownatalie.com](http://blog.chownatalie
 ## Description
 Code-blog is a single-page blog that imports its content from `data/hackerIpsum.json` and caches in Web SQL. Users can filter blog posts by authors or categories.
 
-### Pages
+#### Pages
 A page (`stats.html`) has been added to calculate vanity metrics. It displays numbers including total author, article, and word count. The stats page is not currently functional.
 
 We've introduced an administrator mode which shows an edit option for each article. The links redirect the admin to an editor page (`editor.html`). The page takes styling in markdown format and displays a preview instantly. It also provides options to update or delete the article, which will then convert all data to a JSON string for use in the raw data file. More features will be added to the editor.
 
-### Helper functions
+#### Helper functions
 A helper object has been created in `util.js` to assist with testing during the coding process. It contains the following methods:
 
 ##### `helper.clearCache()`
@@ -27,7 +27,7 @@ This function redirects the page to a specified page.
 - `'e'` redirects to the editor page (`editor.html`) - make sure to specify id in address bar to access specific articles if you're using this shortcut
 - `'st'` redirects to vanity metrics page (`stats.html`)
 
-### Room for Improvement
+#### Room for Improvement
 Here's a list of implementation details I wish to improve on:
 - add option to create article in admin mode (utilizing `editor.html`)
 - right now, the `stats.html` pages are not fully functional as the site is undergoing MVC restructuring
