@@ -9,6 +9,9 @@ articleController.index = function() {
 articleController.selectId = function(ctx) {
   Article.findById(ctx.params.id, articleView.selection);
   articleController.handleFilters();
+  articleView.setIdentifier(ctx.params.id);
+  console.log(ctx.params.id);
+  $('#disqus_thread').show();
 };
 
 articleController.selectAuthor = function(ctx) {
