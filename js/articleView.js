@@ -3,10 +3,10 @@ var articleView = {};
 articleView.showSection = function() {
   $('section:not(#home)').hide();
   $('#articles').empty();
-  $('#loading-div-home').hide();
+  $('#loading-div-home, #article-to-home').hide();
   $('#home').fadeIn();
   if ($('#filter-by-author option').length === 1 && $('#filter-by-category option').length === 1) {
-    this.filter();
+    articleView.filter();
   }
   util.setActiveNav('home');
 };
