@@ -3,8 +3,12 @@ var articleView = {};
 articleView.showSection = function() {
   $('section:not(#home)').hide();
   $('#articles').empty();
-  $('#loading-div').hide();
+  $('#loading-div-home, #article-to-home').hide();
   $('#home').fadeIn();
+  if ($('#filter-by-author option').length === 1 && $('#filter-by-category option').length === 1) {
+    articleView.filter();
+  }
+  util.setActiveNav('home');
 };
 
 articleView.render = function(article) {
@@ -24,14 +28,13 @@ articleView.getTemplate = function(callback) {
       callback();
     });
   } else {
-    console.log('cache template');
     callback();
   }
 };
 
 articleView.selection = function(data) {
-  this.showSection();
-  this.getTemplate(function() {
+  articleView.showSection();
+  articleView.getTemplate(function() {
     data.forEach(articleView.render);
     articleView.teaser();
     articleView.handleAdmin();
@@ -39,16 +42,12 @@ articleView.selection = function(data) {
 };
 
 articleView.index = function() {
-  this.showSection();
-  this.getTemplate(function() {
+  articleView.showSection();
+  articleView.getTemplate(function() {
     articleView.renderAll();
     articleView.teaser();
     articleView.handleAdmin();
   });
-  if ($('#filter-by-author').length === 1 && $('#filter-by-category').length === 1) {
-    this.filter();
-  }
-  util.setActiveNav('home');
 };
 
 articleView.teaser = function() {
@@ -88,7 +87,6 @@ articleView.handleAdmin = function() {
 
 
 articleView.filter = function() {
-  // $('#blog-filter').show();
   $('#filter-by-author').children(':not(:first-child)').remove();
   $('#filter-by-category').children(':not(:first-child)').remove();;
   Article.uniqueAuthor(function(data) {
@@ -104,5 +102,12 @@ articleView.filter = function() {
 };
 
 articleView.populateFilter = function(selectId, prop) {
-  $(selectId).append($('<option>').text(prop));
+  $(selectId).append($('<option>').text(prop).attr('value', prop.split(' ').join('-')));
+};
+
+articleView.backToHome = function() {
+  $('#article-to-home').show().on('click', function(event) {
+    page.redirect('/');
+    $(this).hide();
+  });
 };

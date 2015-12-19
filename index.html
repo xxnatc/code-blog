@@ -55,6 +55,7 @@
     <section id="home">
       <nav id="blog-filter" class="form-inline">
         <button id="exit-admin" class="btn btn-default pull-left non-default">Exit admin mode</button>
+        <button id="article-to-home" class="btn btn-default pull-left non-default"><span class="glyphicon glyphicon-triangle-left"></span> Back</button>
         <select id="filter-by-author" class="form-control">
           <option value="reset">-- Filter by author --</option>
         </select>
@@ -64,7 +65,7 @@
       </nav>
 
       <!-- loading gif -->
-      <div id="loading-div" class="row">
+      <div id="loading-div-home" class="row spinner">
         <div class="col-md-6 col-md-offset-3">
           <img src="/img/dashinfinity.gif" />
           <h3>Fetching the freshest blog posts just for you...</h3>
@@ -75,13 +76,20 @@
 
       </div>
 
+      <div id="disqus_thread" class="non-default"></div>
     </section>
 
     <section id="about" class="non-default">
-      <h1>About me</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h1>My GitHub Profile</h1>
 
-      <h1>Check out my GitHub</h1>
+      <!-- loading gif -->
+      <div id="loading-div-about" class="row spinner">
+        <div class="col-md-6 col-md-offset-3">
+          <img src="/img/dashinfinity.gif" />
+          <h3>Catching the octocat just for you...</h3>
+        </div>
+      </div>
+
       <div class="row">
 
         <div id="gh-bio" class="col-md-3 col-sm-6">
@@ -106,7 +114,17 @@
 
     <section id="contact" class="non-default">
       <h1>My email and social</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <div class="row">
+
+        <div class="col-md-9 col-sm-8">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+
+        <div class="col-md-3 col-sm-4">
+          <a href="https://twitter.com/xxnatc" class="twitter-follow-button" data-show-count="true">Follow @xxnatc</a>
+          <a class="github-button" href="https://github.com/xxnatc" data-count-href="/xxnatc/followers" data-count-api="/users/xxnatc#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @xxnatc on GitHub">Follow @xxnatc</a>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -116,6 +134,11 @@
     </div>
   </footer>
 
+  <!-- scripts for social buttons -->
+  <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+  </script>
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
   <!-- Vendor Libraries -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
@@ -131,6 +154,10 @@
   <script type="text/javascript" src="/js/articleView.js"></script>
   <script type="text/javascript" src="/js/aboutView.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+
+  <script type="text/javascript" src="/js/disqusConfig.js"></script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
   <!-- Controller -->
   <script type="text/javascript" src="/js/articleController.js"></script>
   <script type="text/javascript" src="/js/aboutController.js"></script>
@@ -138,6 +165,5 @@
 
   <!-- Router -->
   <script type="text/javascript" src="/js/router.js"></script>
-
 </body>
 </html>

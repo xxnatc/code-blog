@@ -1,10 +1,15 @@
 var aboutView = {};
 
 aboutView.showSection = function() {
-  $('section:not(#about)').hide();
+  $('section:not(#about), #about .row').hide();
   $('#gh-bio, #gh-activity, #gh-repo').empty();
-  $('#about').fadeIn();
+  $('#about, #loading-div-about').fadeIn();
   util.setActiveNav('about');
+};
+
+aboutView.showContent = function() {
+  $('#about .row').show();
+  $('#loading-div-about').hide();
 };
 
 /* ==================== repositories ==================== */
@@ -18,6 +23,7 @@ aboutView.renderRepo = function(repo) {
 };
 
 aboutView.repo = function(data) {
+  aboutView.showContent();
   data.filter(function(repo) {
     return !repo.fork;
   }).slice(0, 5)
@@ -43,6 +49,7 @@ aboutView.renderBio = function(obj) {
 };
 
 aboutView.bio = function(obj) {
+  aboutView.showContent();
   aboutView.getTemplateBio(function() {
     aboutView.renderBio(obj);
   });
@@ -97,5 +104,6 @@ aboutView.renderActivity = function(obj) {
 };
 
 aboutView.activity = function(data) {
+  aboutView.showContent();
   data.slice(0, 8).forEach(aboutView.renderActivity);
 };

@@ -1,53 +1,55 @@
 var articleController = {};
+articleController.filterOn = false;
 
 articleController.index = function() {
-  Article.loadAll(function() {
-    articleView.index();
-  });
+  Article.loadAll(articleView.index);
   articleController.handleFilters();
 };
 
 articleController.selectId = function(ctx) {
-  var id = ctx.params.id;
-
-  Article.findById(id, function(data) {
-    articleView.selection(data);
+  Article.loadAll(function() {
+    Article.findById(ctx.params.id, articleView.selection);
   });
+  articleController.handleFilters();
+  articleView.backToHome();
+  articleView.setIdentifier(ctx.params.id);
+  $('#disqus_thread').show();
 };
 
 articleController.selectAuthor = function(ctx) {
-  var author = ctx.params.author;
-  console.log(author);
-  Article.findByAuthor(author, function(data) {
-    articleView.selection(data);
-  });
+  Article.findByAuthor(ctx.params.author, articleView.selection);
+  articleController.handleFilters();
+};
+
+articleController.selectCategory = function(ctx) {
+  Article.findByCategory(ctx.params.category, articleView.selection);
+  articleController.handleFilters();
 };
 
 articleController.handleFilters = function() {
-  $('#filter-by-author').on('change', function(event) {
-    event.preventDefault();
-    if ($(this).find('option:selected').attr('value') === 'reset') {
-      $('#articles').fadeIn();
-    } else {
-      var author = $(this).find('option:selected').text();
-      Article.findByAuthor(author, function(data) {
-        articleView.selection(data);
-      });
-    }
-    // reset the other dropdown to prevent multiple selections
-    $('#filter-by-category').find('option[value=reset]').attr('selected', true);
-  });
+  if (!articleController.filterOn) {
+    articleController.filterOn = true;
+    $('#filter-by-author').on('change', function(event) {
+      event.preventDefault();
+      if ($(this).find('option:selected').attr('value') === 'reset') {
+        page('/');
+      } else {
+        var author = $(this).find('option:selected').text();
+        page('/authors/' + author);
+      }
+      // reset the other dropdown to prevent multiple selections
+      $('#filter-by-category').find('option[value=reset]').attr('selected', true);
+    });
 
-  $('#filter-by-category').on('change', function(event) {
-    event.preventDefault();
-    if ($(this).find('option:selected').attr('value') === 'reset') {
-      $('#articles').fadeIn();
-    } else {
-      var category = $(this).find('option:selected').text();
-      Article.findByCategory(category, function(data) {
-        articleView.selection(data);
-      });
-    }
-    $('#filter-by-author').find('option[value=reset]').attr('selected', true);
-  });
+    $('#filter-by-category').on('change', function(event) {
+      event.preventDefault();
+      if ($(this).find('option:selected').attr('value') === 'reset') {
+        page('/');
+      } else {
+        var category = $(this).find('option:selected').text();
+        page('/categories/' + category);
+      }
+      $('#filter-by-author').find('option[value=reset]').attr('selected', true);
+    });
+  }
 };

@@ -53,7 +53,7 @@
   background-color: transparent;
 }
 
-#loading-div h3 {
+.spinner h3 {
   font-size: 1em;
   margin: 0px;
   color: #337ab7;
@@ -70,4 +70,19 @@
 #bio-stats h3 {
   color: #337ab7;
   font-weight: bold;
+}
+
+.post-category .label {
+  font-size: 0.9em;
+  padding: 0.3em 0.6em;
+  background-color: #337ab7;
+}
+
+.post-category .label:hover {
+  background-color: #34B7B3;
+}
+
+
+.post-category a:hover {
+  text-decoration: none;
 }

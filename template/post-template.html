@@ -9,10 +9,12 @@
   </h4>
   <div class="post-body">{{{body}}}</div>
   <button class="post-read-on btn btn-default">
-    Read on <span class="glyphicon glyphicon-triangle-right"></span>
+    Expand <span class="glyphicon glyphicon-triangle-right"></span>
   </button>
   <button class="post-collapse btn btn-default">
     Collapse <span class="glyphicon glyphicon-triangle-top"></span>
   </button>
-  <h6 class="post-category">Category: {{category}}</h6>
+  <h6 class="post-category">Category: {{category}}
+    <a href="/articles/{{id}}"><span class="label label-default pull-right"><span class="glyphicon glyphicon-comment"></span>  View comments</span></a>
+  </h6>
 </article>

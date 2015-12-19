@@ -1,18 +1,18 @@
 # code-blog
 _Assignment for Code Fellows 301_
 
-#### Deployment
+## Deployment
 You can find this project live on [blog.chownatalie.com](http://blog.chownatalie.com) or on [Heroku](https://xxnatc-blog.herokuapp.com).
 
-#### Description
+## Description
 Code-blog is a single-page blog that imports its content from `data/hackerIpsum.json` and caches in Web SQL. Users can filter blog posts by authors or categories.
 
 #### Pages
-A page (`stats.html`) has been added to calculate vanity metrics. It displays numbers including total author, article, and word count.
+A page (`stats.html`) has been added to calculate vanity metrics. It displays numbers including total author, article, and word count. The stats page is not currently functional.
 
-We've introduced an administrator mode which shows an edit option for each article. The links redirect the admin to an editor page (`editor.html`). The page takes styling in markdown format and displays a preview instantly. It also provides options to update or delete the article, which will then convert all data to a JSON string for use in the raw data file.
+We've introduced an administrator mode which shows an edit option for each article. The links redirect the admin to an editor page (`editor.html`). The page takes styling in markdown format and displays a preview instantly. It also provides options to update or delete the article, which will then convert all data to a JSON string for use in the raw data file. More features will be added to the editor.
 
-#### Helper function
+#### Helper functions
 A helper object has been created in `util.js` to assist with testing during the coding process. It contains the following methods:
 
 ##### `helper.clearCache()`
@@ -46,3 +46,4 @@ Here's a list of implementation details I wish to improve on:
 - [Highlight.js](https://highlightjs.org/)
 - [html5sql.js](http://html5sql.com/)
 - [page.js](https://github.com/visionmedia/page.js)
+- [Disqus](https://disqus.com)

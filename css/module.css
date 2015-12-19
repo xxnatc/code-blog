@@ -130,12 +130,12 @@
 }
 
 /* ========== LOADING ========== */
-#loading-div {
+.spinner {
   text-align: center;
   margin-bottom: 12px;
 }
 
-#loading-div img {
+.spinner img {
   width: 80px;
 }
 
